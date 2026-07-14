@@ -1,0 +1,912 @@
+[
+  {
+    "monthly_salary": "<=30",
+    "first_category": {
+      "employer_share": 0.4,
+      "employee_share_invalidity": 0.1,
+      "employee_share_non_employment_injury": 0.2,
+      "total": 0.7
+    },
+    "second_category": {
+      "employer_share": 0.3,
+      "employee_share_non_employment_injury": 0.2,
+      "total": 0.5
+    }
+  },
+  {
+    "monthly_salary": ">30;<50",
+    "first_category": {
+      "employer_share": 0.7,
+      "employee_share_invalidity": 0.2,
+      "employee_share_non_employment_injury": 0.3,
+      "total": 1.2
+    },
+    "second_category": {
+      "employer_share": 0.5,
+      "employee_share_non_employment_injury": 0.3,
+      "total": 0.8
+    }
+  },
+  {
+    "monthly_salary": ">50;<70",
+    "first_category": {
+      "employer_share": 1.1,
+      "employee_share_invalidity": 0.3,
+      "employee_share_non_employment_injury": 0.5,
+      "total": 1.9
+    },
+    "second_category": {
+      "employer_share": 0.8,
+      "employee_share_non_employment_injury": 0.5,
+      "total": 1.3
+    }
+  },
+  {
+    "monthly_salary": ">70;<100",
+    "first_category": {
+      "employer_share": 1.5,
+      "employee_share_invalidity": 0.4,
+      "employee_share_non_employment_injury": 0.65,
+      "total": 2.55
+    },
+    "second_category": {
+      "employer_share": 1.1,
+      "employee_share_non_employment_injury": 0.65,
+      "total": 1.75
+    }
+  },
+  {
+    "monthly_salary": ">100;<140",
+    "first_category": {
+      "employer_share": 2.1,
+      "employee_share_invalidity": 0.6,
+      "employee_share_non_employment_injury": 0.9,
+      "total": 3.6
+    },
+    "second_category": {
+      "employer_share": 1.5,
+      "employee_share_non_employment_injury": 0.9,
+      "total": 2.4
+    }
+  },
+  {
+    "monthly_salary": ">140;<200",
+    "first_category": {
+      "employer_share": 2.95,
+      "employee_share_invalidity": 0.85,
+      "employee_share_non_employment_injury": 1.25,
+      "total": 5.05
+    },
+    "second_category": {
+      "employer_share": 2.1,
+      "employee_share_non_employment_injury": 1.25,
+      "total": 3.35
+    }
+  },
+  {
+    "monthly_salary": ">200;<300",
+    "first_category": {
+      "employer_share": 4.35,
+      "employee_share_invalidity": 1.25,
+      "employee_share_non_employment_injury": 1.85,
+      "total": 7.45
+    },
+    "second_category": {
+      "employer_share": 3.1,
+      "employee_share_non_employment_injury": 1.85,
+      "total": 4.95
+    }
+  },
+  {
+    "monthly_salary": ">300;<400",
+    "first_category": {
+      "employer_share": 6.15,
+      "employee_share_invalidity": 1.75,
+      "employee_share_non_employment_injury": 2.65,
+      "total": 10.55
+    },
+    "second_category": {
+      "employer_share": 4.4,
+      "employee_share_non_employment_injury": 2.65,
+      "total": 7.05
+    }
+  },
+  {
+    "monthly_salary": ">400;<500",
+    "first_category": {
+      "employer_share": 7.85,
+      "employee_share_invalidity": 2.25,
+      "employee_share_non_employment_injury": 3.35,
+      "total": 13.45
+    },
+    "second_category": {
+      "employer_share": 5.6,
+      "employee_share_non_employment_injury": 3.35,
+      "total": 8.95
+    }
+  },
+  {
+    "monthly_salary": ">500;<600",
+    "first_category": {
+      "employer_share": 9.65,
+      "employee_share_invalidity": 2.75,
+      "employee_share_non_employment_injury": 4.15,
+      "total": 16.55
+    },
+    "second_category": {
+      "employer_share": 6.9,
+      "employee_share_non_employment_injury": 4.15,
+      "total": 11.05
+    }
+  },
+  {
+    "monthly_salary": ">600;<700",
+    "first_category": {
+      "employer_share": 11.35,
+      "employee_share_invalidity": 3.25,
+      "employee_share_non_employment_injury": 4.85,
+      "total": 19.45
+    },
+    "second_category": {
+      "employer_share": 8.1,
+      "employee_share_non_employment_injury": 4.85,
+      "total": 12.95
+    }
+  },
+  {
+    "monthly_salary": ">700;<800",
+    "first_category": {
+      "employer_share": 13.15,
+      "employee_share_invalidity": 3.75,
+      "employee_share_non_employment_injury": 5.65,
+      "total": 22.55
+    },
+    "second_category": {
+      "employer_share": 9.4,
+      "employee_share_non_employment_injury": 5.65,
+      "total": 15.05
+    }
+  },
+  {
+    "monthly_salary": ">800;<900",
+    "first_category": {
+      "employer_share": 14.85,
+      "employee_share_invalidity": 4.25,
+      "employee_share_non_employment_injury": 6.35,
+      "total": 25.45
+    },
+    "second_category": {
+      "employer_share": 10.6,
+      "employee_share_non_employment_injury": 6.35,
+      "total": 16.95
+    }
+  },
+  {
+    "monthly_salary": ">900;<1000",
+    "first_category": {
+      "employer_share": 16.65,
+      "employee_share_invalidity": 4.75,
+      "employee_share_non_employment_injury": 7.15,
+      "total": 28.55
+    },
+    "second_category": {
+      "employer_share": 11.9,
+      "employee_share_non_employment_injury": 7.15,
+      "total": 19.05
+    }
+  },
+  {
+    "monthly_salary": ">1000;<1100",
+    "first_category": {
+      "employer_share": 18.35,
+      "employee_share_invalidity": 5.25,
+      "employee_share_non_employment_injury": 7.85,
+      "total": 31.45
+    },
+    "second_category": {
+      "employer_share": 13.1,
+      "employee_share_non_employment_injury": 7.85,
+      "total": 20.95
+    }
+  },
+  {
+    "monthly_salary": ">1100;<1200",
+    "first_category": {
+      "employer_share": 20.15,
+      "employee_share_invalidity": 5.75,
+      "employee_share_non_employment_injury": 8.65,
+      "total": 34.55
+    },
+    "second_category": {
+      "employer_share": 14.4,
+      "employee_share_non_employment_injury": 8.65,
+      "total": 23.05
+    }
+  },
+  {
+    "monthly_salary": ">1200;<1300",
+    "first_category": {
+      "employer_share": 21.85,
+      "employee_share_invalidity": 6.25,
+      "employee_share_non_employment_injury": 9.35,
+      "total": 37.45
+    },
+    "second_category": {
+      "employer_share": 15.6,
+      "employee_share_non_employment_injury": 9.35,
+      "total": 24.95
+    }
+  },
+  {
+    "monthly_salary": ">1300;<1400",
+    "first_category": {
+      "employer_share": 23.65,
+      "employee_share_invalidity": 6.75,
+      "employee_share_non_employment_injury": 10.15,
+      "total": 40.55
+    },
+    "second_category": {
+      "employer_share": 16.9,
+      "employee_share_non_employment_injury": 10.15,
+      "total": 27.05
+    }
+  },
+  {
+    "monthly_salary": ">1400;<1500",
+    "first_category": {
+      "employer_share": 25.35,
+      "employee_share_invalidity": 7.25,
+      "employee_share_non_employment_injury": 10.85,
+      "total": 43.45
+    },
+    "second_category": {
+      "employer_share": 18.1,
+      "employee_share_non_employment_injury": 10.85,
+      "total": 28.95
+    }
+  },
+  {
+    "monthly_salary": ">1500;<1600",
+    "first_category": {
+      "employer_share": 27.15,
+      "employee_share_invalidity": 7.75,
+      "employee_share_non_employment_injury": 11.65,
+      "total": 46.55
+    },
+    "second_category": {
+      "employer_share": 19.4,
+      "employee_share_non_employment_injury": 11.65,
+      "total": 31.05
+    }
+  },
+  {
+    "monthly_salary": ">1600;<1700",
+    "first_category": {
+      "employer_share": 28.85,
+      "employee_share_invalidity": 8.25,
+      "employee_share_non_employment_injury": 12.35,
+      "total": 49.45
+    },
+    "second_category": {
+      "employer_share": 20.6,
+      "employee_share_non_employment_injury": 12.35,
+      "total": 32.95
+    }
+  },
+  {
+    "monthly_salary": ">1700;<1800",
+    "first_category": {
+      "employer_share": 30.65,
+      "employee_share_invalidity": 8.75,
+      "employee_share_non_employment_injury": 13.15,
+      "total": 52.55
+    },
+    "second_category": {
+      "employer_share": 21.9,
+      "employee_share_non_employment_injury": 13.15,
+      "total": 35.05
+    }
+  },
+  {
+    "monthly_salary": ">1800;<1900",
+    "first_category": {
+      "employer_share": 32.35,
+      "employee_share_invalidity": 9.25,
+      "employee_share_non_employment_injury": 13.85,
+      "total": 55.45
+    },
+    "second_category": {
+      "employer_share": 23.1,
+      "employee_share_non_employment_injury": 13.85,
+      "total": 36.95
+    }
+  },
+  {
+    "monthly_salary": ">1900;<2000",
+    "first_category": {
+      "employer_share": 34.15,
+      "employee_share_invalidity": 9.75,
+      "employee_share_non_employment_injury": 14.65,
+      "total": 58.55
+    },
+    "second_category": {
+      "employer_share": 24.4,
+      "employee_share_non_employment_injury": 14.65,
+      "total": 39.05
+    }
+  },
+  {
+    "monthly_salary": ">2000;<2100",
+    "first_category": {
+      "employer_share": 35.85,
+      "employee_share_invalidity": 10.25,
+      "employee_share_non_employment_injury": 15.35,
+      "total": 61.45
+    },
+    "second_category": {
+      "employer_share": 25.6,
+      "employee_share_non_employment_injury": 15.35,
+      "total": 40.95
+    }
+  },
+  {
+    "monthly_salary": ">2100;<2200",
+    "first_category": {
+      "employer_share": 37.65,
+      "employee_share_invalidity": 10.75,
+      "employee_share_non_employment_injury": 16.15,
+      "total": 64.55
+    },
+    "second_category": {
+      "employer_share": 26.9,
+      "employee_share_non_employment_injury": 16.15,
+      "total": 43.05
+    }
+  },
+  {
+    "monthly_salary": ">2200;<2300",
+    "first_category": {
+      "employer_share": 39.35,
+      "employee_share_invalidity": 11.25,
+      "employee_share_non_employment_injury": 16.85,
+      "total": 67.45
+    },
+    "second_category": {
+      "employer_share": 28.1,
+      "employee_share_non_employment_injury": 16.85,
+      "total": 44.95
+    }
+  },
+  {
+    "monthly_salary": ">2300;<2400",
+    "first_category": {
+      "employer_share": 41.15,
+      "employee_share_invalidity": 11.75,
+      "employee_share_non_employment_injury": 17.65,
+      "total": 70.55
+    },
+    "second_category": {
+      "employer_share": 29.4,
+      "employee_share_non_employment_injury": 17.65,
+      "total": 47.05
+    }
+  },
+  {
+    "monthly_salary": ">2400;<2500",
+    "first_category": {
+      "employer_share": 42.85,
+      "employee_share_invalidity": 12.25,
+      "employee_share_non_employment_injury": 18.35,
+      "total": 73.45
+    },
+    "second_category": {
+      "employer_share": 30.6,
+      "employee_share_non_employment_injury": 18.35,
+      "total": 48.95
+    }
+  },
+  {
+    "monthly_salary": ">2500;<2600",
+    "first_category": {
+      "employer_share": 44.65,
+      "employee_share_invalidity": 12.75,
+      "employee_share_non_employment_injury": 19.15,
+      "total": 76.55
+    },
+    "second_category": {
+      "employer_share": 31.9,
+      "employee_share_non_employment_injury": 19.15,
+      "total": 51.05
+    }
+  },
+  {
+    "monthly_salary": ">2600;<2700",
+    "first_category": {
+      "employer_share": 46.35,
+      "employee_share_invalidity": 13.25,
+      "employee_share_non_employment_injury": 19.85,
+      "total": 79.45
+    },
+    "second_category": {
+      "employer_share": 33.1,
+      "employee_share_non_employment_injury": 19.85,
+      "total": 52.95
+    }
+  },
+  {
+    "monthly_salary": ">2700;<2800",
+    "first_category": {
+      "employer_share": 48.15,
+      "employee_share_invalidity": 13.75,
+      "employee_share_non_employment_injury": 20.65,
+      "total": 82.55
+    },
+    "second_category": {
+      "employer_share": 34.4,
+      "employee_share_non_employment_injury": 20.65,
+      "total": 55.05
+    }
+  },
+  {
+    "monthly_salary": ">2800;<2900",
+    "first_category": {
+      "employer_share": 49.85,
+      "employee_share_invalidity": 14.25,
+      "employee_share_non_employment_injury": 21.35,
+      "total": 85.45
+    },
+    "second_category": {
+      "employer_share": 35.6,
+      "employee_share_non_employment_injury": 21.35,
+      "total": 56.95
+    }
+  },
+  {
+    "monthly_salary": ">2900;<3000",
+    "first_category": {
+      "employer_share": 51.65,
+      "employee_share_invalidity": 14.75,
+      "employee_share_non_employment_injury": 22.15,
+      "total": 88.55
+    },
+    "second_category": {
+      "employer_share": 36.9,
+      "employee_share_non_employment_injury": 22.15,
+      "total": 59.05
+    }
+  },
+  {
+    "monthly_salary": ">3000;<3100",
+    "first_category": {
+      "employer_share": 53.35,
+      "employee_share_invalidity": 15.25,
+      "employee_share_non_employment_injury": 22.85,
+      "total": 91.45
+    },
+    "second_category": {
+      "employer_share": 38.1,
+      "employee_share_non_employment_injury": 22.85,
+      "total": 60.95
+    }
+  },
+  {
+    "monthly_salary": ">3100;<3200",
+    "first_category": {
+      "employer_share": 55.15,
+      "employee_share_invalidity": 15.75,
+      "employee_share_non_employment_injury": 23.65,
+      "total": 94.55
+    },
+    "second_category": {
+      "employer_share": 39.4,
+      "employee_share_non_employment_injury": 23.65,
+      "total": 63.05
+    }
+  },
+  {
+    "monthly_salary": ">3200;<3300",
+    "first_category": {
+      "employer_share": 56.85,
+      "employee_share_invalidity": 16.25,
+      "employee_share_non_employment_injury": 24.35,
+      "total": 97.45
+    },
+    "second_category": {
+      "employer_share": 40.6,
+      "employee_share_non_employment_injury": 24.35,
+      "total": 64.95
+    }
+  },
+  {
+    "monthly_salary": ">3300;<3400",
+    "first_category": {
+      "employer_share": 58.65,
+      "employee_share_invalidity": 16.75,
+      "employee_share_non_employment_injury": 25.15,
+      "total": 100.55
+    },
+    "second_category": {
+      "employer_share": 41.9,
+      "employee_share_non_employment_injury": 25.15,
+      "total": 67.05
+    }
+  },
+  {
+    "monthly_salary": ">3400;<3500",
+    "first_category": {
+      "employer_share": 60.35,
+      "employee_share_invalidity": 17.25,
+      "employee_share_non_employment_injury": 25.85,
+      "total": 103.45
+    },
+    "second_category": {
+      "employer_share": 43.1,
+      "employee_share_non_employment_injury": 25.85,
+      "total": 68.95
+    }
+  },
+  {
+    "monthly_salary": ">3500;<3600",
+    "first_category": {
+      "employer_share": 62.15,
+      "employee_share_invalidity": 17.75,
+      "employee_share_non_employment_injury": 26.65,
+      "total": 106.55
+    },
+    "second_category": {
+      "employer_share": 44.4,
+      "employee_share_non_employment_injury": 26.65,
+      "total": 71.05
+    }
+  },
+  {
+    "monthly_salary": ">3600;<3700",
+    "first_category": {
+      "employer_share": 63.85,
+      "employee_share_invalidity": 18.25,
+      "employee_share_non_employment_injury": 27.35,
+      "total": 109.45
+    },
+    "second_category": {
+      "employer_share": 45.6,
+      "employee_share_non_employment_injury": 27.35,
+      "total": 72.95
+    }
+  },
+  {
+    "monthly_salary": ">3700;<3800",
+    "first_category": {
+      "employer_share": 65.65,
+      "employee_share_invalidity": 18.75,
+      "employee_share_non_employment_injury": 28.15,
+      "total": 112.55
+    },
+    "second_category": {
+      "employer_share": 46.9,
+      "employee_share_non_employment_injury": 28.15,
+      "total": 75.05
+    }
+  },
+  {
+    "monthly_salary": ">3800;<3900",
+    "first_category": {
+      "employer_share": 67.35,
+      "employee_share_invalidity": 19.25,
+      "employee_share_non_employment_injury": 28.85,
+      "total": 115.45
+    },
+    "second_category": {
+      "employer_share": 48.1,
+      "employee_share_non_employment_injury": 28.85,
+      "total": 76.95
+    }
+  },
+  {
+    "monthly_salary": ">3900;<4000",
+    "first_category": {
+      "employer_share": 69.15,
+      "employee_share_invalidity": 19.75,
+      "employee_share_non_employment_injury": 29.65,
+      "total": 118.55
+    },
+    "second_category": {
+      "employer_share": 49.4,
+      "employee_share_non_employment_injury": 29.65,
+      "total": 79.05
+    }
+  },
+  {
+    "monthly_salary": ">4000;<4100",
+    "first_category": {
+      "employer_share": 70.85,
+      "employee_share_invalidity": 20.25,
+      "employee_share_non_employment_injury": 30.35,
+      "total": 121.45
+    },
+    "second_category": {
+      "employer_share": 50.6,
+      "employee_share_non_employment_injury": 30.35,
+      "total": 80.95
+    }
+  },
+  {
+    "monthly_salary": ">4100;<4200",
+    "first_category": {
+      "employer_share": 72.65,
+      "employee_share_invalidity": 20.75,
+      "employee_share_non_employment_injury": 31.15,
+      "total": 124.55
+    },
+    "second_category": {
+      "employer_share": 51.9,
+      "employee_share_non_employment_injury": 31.15,
+      "total": 83.05
+    }
+  },
+  {
+    "monthly_salary": ">4200;<4300",
+    "first_category": {
+      "employer_share": 74.35,
+      "employee_share_invalidity": 21.25,
+      "employee_share_non_employment_injury": 31.85,
+      "total": 127.45
+    },
+    "second_category": {
+      "employer_share": 53.1,
+      "employee_share_non_employment_injury": 31.85,
+      "total": 84.95
+    }
+  },
+  {
+    "monthly_salary": ">4300;<4400",
+    "first_category": {
+      "employer_share": 76.15,
+      "employee_share_invalidity": 21.75,
+      "employee_share_non_employment_injury": 32.65,
+      "total": 130.55
+    },
+    "second_category": {
+      "employer_share": 54.4,
+      "employee_share_non_employment_injury": 32.65,
+      "total": 87.05
+    }
+  },
+  {
+    "monthly_salary": ">4400;<4500",
+    "first_category": {
+      "employer_share": 77.85,
+      "employee_share_invalidity": 22.25,
+      "employee_share_non_employment_injury": 33.35,
+      "total": 133.45
+    },
+    "second_category": {
+      "employer_share": 55.6,
+      "employee_share_non_employment_injury": 33.35,
+      "total": 88.95
+    }
+  },
+  {
+    "monthly_salary": ">4500;<4600",
+    "first_category": {
+      "employer_share": 79.65,
+      "employee_share_invalidity": 22.75,
+      "employee_share_non_employment_injury": 34.15,
+      "total": 136.55
+    },
+    "second_category": {
+      "employer_share": 56.9,
+      "employee_share_non_employment_injury": 34.15,
+      "total": 91.05
+    }
+  },
+  {
+    "monthly_salary": ">4600;<4700",
+    "first_category": {
+      "employer_share": 81.35,
+      "employee_share_invalidity": 23.25,
+      "employee_share_non_employment_injury": 34.85,
+      "total": 139.45
+    },
+    "second_category": {
+      "employer_share": 58.1,
+      "employee_share_non_employment_injury": 34.85,
+      "total": 92.95
+    }
+  },
+  {
+    "monthly_salary": ">4700;<4800",
+    "first_category": {
+      "employer_share": 83.15,
+      "employee_share_invalidity": 23.75,
+      "employee_share_non_employment_injury": 35.65,
+      "total": 142.55
+    },
+    "second_category": {
+      "employer_share": 59.4,
+      "employee_share_non_employment_injury": 35.65,
+      "total": 95.05
+    }
+  },
+  {
+    "monthly_salary": ">4800;<4900",
+    "first_category": {
+      "employer_share": 84.85,
+      "employee_share_invalidity": 24.25,
+      "employee_share_non_employment_injury": 36.35,
+      "total": 145.45
+    },
+    "second_category": {
+      "employer_share": 60.6,
+      "employee_share_non_employment_injury": 36.35,
+      "total": 96.95
+    }
+  },
+  {
+    "monthly_salary": ">4900;<5000",
+    "first_category": {
+      "employer_share": 86.65,
+      "employee_share_invalidity": 24.75,
+      "employee_share_non_employment_injury": 37.15,
+      "total": 148.55
+    },
+    "second_category": {
+      "employer_share": 61.9,
+      "employee_share_non_employment_injury": 37.15,
+      "total": 99.05
+    }
+  },
+  {
+    "monthly_salary": ">5000;<5100",
+    "first_category": {
+      "employer_share": 88.35,
+      "employee_share_invalidity": 25.25,
+      "employee_share_non_employment_injury": 37.85,
+      "total": 151.45
+    },
+    "second_category": {
+      "employer_share": 63.1,
+      "employee_share_non_employment_injury": 37.85,
+      "total": 100.95
+    }
+  },
+  {
+    "monthly_salary": ">5100;<5200",
+    "first_category": {
+      "employer_share": 90.15,
+      "employee_share_invalidity": 25.75,
+      "employee_share_non_employment_injury": 38.65,
+      "total": 154.55
+    },
+    "second_category": {
+      "employer_share": 64.4,
+      "employee_share_non_employment_injury": 38.65,
+      "total": 103.05
+    }
+  },
+  {
+    "monthly_salary": ">5200;<5300",
+    "first_category": {
+      "employer_share": 91.85,
+      "employee_share_invalidity": 26.25,
+      "employee_share_non_employment_injury": 39.35,
+      "total": 157.45
+    },
+    "second_category": {
+      "employer_share": 65.6,
+      "employee_share_non_employment_injury": 39.35,
+      "total": 104.95
+    }
+  },
+  {
+    "monthly_salary": ">5300;<5400",
+    "first_category": {
+      "employer_share": 93.65,
+      "employee_share_invalidity": 26.75,
+      "employee_share_non_employment_injury": 40.15,
+      "total": 160.55
+    },
+    "second_category": {
+      "employer_share": 66.9,
+      "employee_share_non_employment_injury": 40.15,
+      "total": 107.05
+    }
+  },
+  {
+    "monthly_salary": ">5400;<5500",
+    "first_category": {
+      "employer_share": 95.35,
+      "employee_share_invalidity": 27.25,
+      "employee_share_non_employment_injury": 40.85,
+      "total": 163.45
+    },
+    "second_category": {
+      "employer_share": 68.1,
+      "employee_share_non_employment_injury": 40.85,
+      "total": 108.95
+    }
+  },
+  {
+    "monthly_salary": ">5500;<5600",
+    "first_category": {
+      "employer_share": 97.15,
+      "employee_share_invalidity": 27.75,
+      "employee_share_non_employment_injury": 41.65,
+      "total": 166.55
+    },
+    "second_category": {
+      "employer_share": 69.4,
+      "employee_share_non_employment_injury": 41.65,
+      "total": 111.05
+    }
+  },
+  {
+    "monthly_salary": ">5600;<5700",
+    "first_category": {
+      "employer_share": 98.85,
+      "employee_share_invalidity": 28.25,
+      "employee_share_non_employment_injury": 42.35,
+      "total": 169.45
+    },
+    "second_category": {
+      "employer_share": 70.6,
+      "employee_share_non_employment_injury": 42.35,
+      "total": 112.95
+    }
+  },
+  {
+    "monthly_salary": ">5700;<5800",
+    "first_category": {
+      "employer_share": 100.65,
+      "employee_share_invalidity": 28.75,
+      "employee_share_non_employment_injury": 43.15,
+      "total": 172.55
+    },
+    "second_category": {
+      "employer_share": 71.9,
+      "employee_share_non_employment_injury": 43.15,
+      "total": 115.05
+    }
+  },
+  {
+    "monthly_salary": ">5800;<5900",
+    "first_category": {
+      "employer_share": 102.35,
+      "employee_share_invalidity": 29.25,
+      "employee_share_non_employment_injury": 43.85,
+      "total": 175.45
+    },
+    "second_category": {
+      "employer_share": 73.1,
+      "employee_share_non_employment_injury": 43.85,
+      "total": 116.95
+    }
+  },
+  {
+    "monthly_salary": ">5900;<6000",
+    "first_category": {
+      "employer_share": 104.15,
+      "employee_share_invalidity": 29.75,
+      "employee_share_non_employment_injury": 44.65,
+      "total": 178.55
+    },
+    "second_category": {
+      "employer_share": 74.4,
+      "employee_share_non_employment_injury": 44.65,
+      "total": 119.05
+    }
+  },
+  {
+    "monthly_salary": ">6000",
+    "first_category": {
+      "employer_share": 104.15,
+      "employee_share_invalidity": 29.75,
+      "employee_share_non_employment_injury": 44.65,
+      "total": 178.55
+    },
+    "second_category": {
+      "employer_share": 74.4,
+      "employee_share_non_employment_injury": 44.65,
+      "total": 119.05
+    }
+  }
+]

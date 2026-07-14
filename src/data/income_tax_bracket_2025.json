@@ -1,0 +1,62 @@
+[
+  {
+    "Chargeable Income": ">=0;<=5000",
+    "Rate": 0.0,
+    "previous tax total": "0",
+    "current tax max": "0"
+  },
+  {
+    "Chargeable Income": ">5000;<=20000",
+    "Rate": 0.01,
+    "previous tax total": "0",
+    "current tax max": "150"
+  },
+  {
+    "Chargeable Income": ">20000;<=35000",
+    "Rate": 0.03,
+    "previous tax total": "150",
+    "current tax max": "450"
+  },
+  {
+    "Chargeable Income": ">35000;<=50000",
+    "Rate": 0.06,
+    "previous tax total": "600",
+    "current tax max": "900"
+  },
+  {
+    "Chargeable Income": ">50000;<=70000",
+    "Rate": 0.11,
+    "previous tax total": "1,500",
+    "current tax max": "2,200"
+  },
+  {
+    "Chargeable Income": ">70000;<=100000",
+    "Rate": 0.19,
+    "previous tax total": "3,700",
+    "current tax max": "5,700"
+  },
+  {
+    "Chargeable Income": ">100000;<=400000",
+    "Rate": 0.25,
+    "previous tax total": "9,400",
+    "current tax max": "75,000"
+  },
+  {
+    "Chargeable Income": ">400000;<=600000",
+    "Rate": 0.26,
+    "previous tax total": "84,400",
+    "current tax max": "52,000"
+  },
+  {
+    "Chargeable Income": ">600000;<=2000000",
+    "Rate": 0.28,
+    "previous tax total": "136,400",
+    "current tax max": "392,000"
+  },
+  {
+    "Chargeable Income": ">2000000",
+    "Rate": 0.3,
+    "previous tax total": "528,400",
+    "current tax max": null
+  }
+]

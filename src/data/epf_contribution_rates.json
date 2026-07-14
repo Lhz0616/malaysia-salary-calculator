@@ -1,0 +1,4037 @@
+{
+  "title": "KWSP/EPF Third Schedule - Rate of Monthly Contributions",
+  "effective_date": "1 October 2025",
+  "currency": "RM (Malaysian Ringgit)",
+  "categoryA": {
+    "description": "Employees below 60 years old (Malaysian citizens; non-citizen permanent residents; non-citizens who elected to contribute before 1 August 1998) - Part A of Third Schedule",
+    "rates": [
+      {
+        "range": ">0.01;<=10.00",
+        "employer_contribution": 0.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10.01;<=20.00",
+        "employer_contribution": 3.0,
+        "employee_contribution": 3.0
+      },
+      {
+        "range": ">20.01;<=40.00",
+        "employer_contribution": 6.0,
+        "employee_contribution": 5.0
+      },
+      {
+        "range": ">40.01;<=60.00",
+        "employer_contribution": 8.0,
+        "employee_contribution": 7.0
+      },
+      {
+        "range": ">60.01;<=80.00",
+        "employer_contribution": 11.0,
+        "employee_contribution": 9.0
+      },
+      {
+        "range": ">80.01;<=100.00",
+        "employer_contribution": 13.0,
+        "employee_contribution": 11.0
+      },
+      {
+        "range": ">100.01;<=120.00",
+        "employer_contribution": 16.0,
+        "employee_contribution": 14.0
+      },
+      {
+        "range": ">120.01;<=140.00",
+        "employer_contribution": 19.0,
+        "employee_contribution": 16.0
+      },
+      {
+        "range": ">140.01;<=160.00",
+        "employer_contribution": 21.0,
+        "employee_contribution": 18.0
+      },
+      {
+        "range": ">160.01;<=180.00",
+        "employer_contribution": 24.0,
+        "employee_contribution": 20.0
+      },
+      {
+        "range": ">180.01;<=200.00",
+        "employer_contribution": 26.0,
+        "employee_contribution": 22.0
+      },
+      {
+        "range": ">200.01;<=220.00",
+        "employer_contribution": 29.0,
+        "employee_contribution": 25.0
+      },
+      {
+        "range": ">220.01;<=240.00",
+        "employer_contribution": 32.0,
+        "employee_contribution": 27.0
+      },
+      {
+        "range": ">240.01;<=260.00",
+        "employer_contribution": 34.0,
+        "employee_contribution": 29.0
+      },
+      {
+        "range": ">260.01;<=280.00",
+        "employer_contribution": 37.0,
+        "employee_contribution": 31.0
+      },
+      {
+        "range": ">280.01;<=300.00",
+        "employer_contribution": 39.0,
+        "employee_contribution": 33.0
+      },
+      {
+        "range": ">300.01;<=320.00",
+        "employer_contribution": 42.0,
+        "employee_contribution": 36.0
+      },
+      {
+        "range": ">320.01;<=340.00",
+        "employer_contribution": 45.0,
+        "employee_contribution": 38.0
+      },
+      {
+        "range": ">340.01;<=360.00",
+        "employer_contribution": 47.0,
+        "employee_contribution": 40.0
+      },
+      {
+        "range": ">360.01;<=380.00",
+        "employer_contribution": 50.0,
+        "employee_contribution": 42.0
+      },
+      {
+        "range": ">380.01;<=400.00",
+        "employer_contribution": 52.0,
+        "employee_contribution": 44.0
+      },
+      {
+        "range": ">400.01;<=420.00",
+        "employer_contribution": 55.0,
+        "employee_contribution": 47.0
+      },
+      {
+        "range": ">420.01;<=440.00",
+        "employer_contribution": 58.0,
+        "employee_contribution": 49.0
+      },
+      {
+        "range": ">440.01;<=460.00",
+        "employer_contribution": 60.0,
+        "employee_contribution": 51.0
+      },
+      {
+        "range": ">460.01;<=480.00",
+        "employer_contribution": 63.0,
+        "employee_contribution": 53.0
+      },
+      {
+        "range": ">480.01;<=500.00",
+        "employer_contribution": 65.0,
+        "employee_contribution": 55.0
+      },
+      {
+        "range": ">500.01;<=520.00",
+        "employer_contribution": 68.0,
+        "employee_contribution": 58.0
+      },
+      {
+        "range": ">520.01;<=540.00",
+        "employer_contribution": 71.0,
+        "employee_contribution": 60.0
+      },
+      {
+        "range": ">540.01;<=560.00",
+        "employer_contribution": 73.0,
+        "employee_contribution": 62.0
+      },
+      {
+        "range": ">560.01;<=580.00",
+        "employer_contribution": 76.0,
+        "employee_contribution": 64.0
+      },
+      {
+        "range": ">580.01;<=600.00",
+        "employer_contribution": 78.0,
+        "employee_contribution": 66.0
+      },
+      {
+        "range": ">600.01;<=620.00",
+        "employer_contribution": 81.0,
+        "employee_contribution": 69.0
+      },
+      {
+        "range": ">620.01;<=640.00",
+        "employer_contribution": 84.0,
+        "employee_contribution": 71.0
+      },
+      {
+        "range": ">640.01;<=660.00",
+        "employer_contribution": 86.0,
+        "employee_contribution": 73.0
+      },
+      {
+        "range": ">660.01;<=680.00",
+        "employer_contribution": 89.0,
+        "employee_contribution": 75.0
+      },
+      {
+        "range": ">680.01;<=700.00",
+        "employer_contribution": 91.0,
+        "employee_contribution": 77.0
+      },
+      {
+        "range": ">700.01;<=720.00",
+        "employer_contribution": 94.0,
+        "employee_contribution": 80.0
+      },
+      {
+        "range": ">720.01;<=740.00",
+        "employer_contribution": 97.0,
+        "employee_contribution": 82.0
+      },
+      {
+        "range": ">740.01;<=760.00",
+        "employer_contribution": 99.0,
+        "employee_contribution": 84.0
+      },
+      {
+        "range": ">760.01;<=780.00",
+        "employer_contribution": 102.0,
+        "employee_contribution": 86.0
+      },
+      {
+        "range": ">780.01;<=800.00",
+        "employer_contribution": 104.0,
+        "employee_contribution": 88.0
+      },
+      {
+        "range": ">800.01;<=820.00",
+        "employer_contribution": 107.0,
+        "employee_contribution": 91.0
+      },
+      {
+        "range": ">820.01;<=840.00",
+        "employer_contribution": 110.0,
+        "employee_contribution": 93.0
+      },
+      {
+        "range": ">840.01;<=860.00",
+        "employer_contribution": 112.0,
+        "employee_contribution": 95.0
+      },
+      {
+        "range": ">860.01;<=880.00",
+        "employer_contribution": 115.0,
+        "employee_contribution": 97.0
+      },
+      {
+        "range": ">880.01;<=900.00",
+        "employer_contribution": 117.0,
+        "employee_contribution": 99.0
+      },
+      {
+        "range": ">900.01;<=920.00",
+        "employer_contribution": 120.0,
+        "employee_contribution": 102.0
+      },
+      {
+        "range": ">920.01;<=940.00",
+        "employer_contribution": 123.0,
+        "employee_contribution": 104.0
+      },
+      {
+        "range": ">940.01;<=960.00",
+        "employer_contribution": 125.0,
+        "employee_contribution": 106.0
+      },
+      {
+        "range": ">960.01;<=980.00",
+        "employer_contribution": 128.0,
+        "employee_contribution": 108.0
+      },
+      {
+        "range": ">980.01;<=1000.00",
+        "employer_contribution": 130.0,
+        "employee_contribution": 110.0
+      },
+      {
+        "range": ">1000.01;<=1020.00",
+        "employer_contribution": 133.0,
+        "employee_contribution": 113.0
+      },
+      {
+        "range": ">1020.01;<=1040.00",
+        "employer_contribution": 136.0,
+        "employee_contribution": 115.0
+      },
+      {
+        "range": ">1040.01;<=1060.00",
+        "employer_contribution": 138.0,
+        "employee_contribution": 117.0
+      },
+      {
+        "range": ">1060.01;<=1080.00",
+        "employer_contribution": 141.0,
+        "employee_contribution": 119.0
+      },
+      {
+        "range": ">1080.01;<=1100.00",
+        "employer_contribution": 143.0,
+        "employee_contribution": 121.0
+      },
+      {
+        "range": ">1100.01;<=1120.00",
+        "employer_contribution": 146.0,
+        "employee_contribution": 124.0
+      },
+      {
+        "range": ">1120.01;<=1140.00",
+        "employer_contribution": 149.0,
+        "employee_contribution": 126.0
+      },
+      {
+        "range": ">1140.01;<=1160.00",
+        "employer_contribution": 151.0,
+        "employee_contribution": 128.0
+      },
+      {
+        "range": ">1160.01;<=1180.00",
+        "employer_contribution": 154.0,
+        "employee_contribution": 130.0
+      },
+      {
+        "range": ">1180.01;<=1200.00",
+        "employer_contribution": 156.0,
+        "employee_contribution": 132.0
+      },
+      {
+        "range": ">1200.01;<=1220.00",
+        "employer_contribution": 159.0,
+        "employee_contribution": 135.0
+      },
+      {
+        "range": ">1220.01;<=1240.00",
+        "employer_contribution": 162.0,
+        "employee_contribution": 137.0
+      },
+      {
+        "range": ">1240.01;<=1260.00",
+        "employer_contribution": 164.0,
+        "employee_contribution": 139.0
+      },
+      {
+        "range": ">1260.01;<=1280.00",
+        "employer_contribution": 167.0,
+        "employee_contribution": 141.0
+      },
+      {
+        "range": ">1280.01;<=1300.00",
+        "employer_contribution": 169.0,
+        "employee_contribution": 143.0
+      },
+      {
+        "range": ">1300.01;<=1320.00",
+        "employer_contribution": 172.0,
+        "employee_contribution": 146.0
+      },
+      {
+        "range": ">1320.01;<=1340.00",
+        "employer_contribution": 175.0,
+        "employee_contribution": 148.0
+      },
+      {
+        "range": ">1340.01;<=1360.00",
+        "employer_contribution": 177.0,
+        "employee_contribution": 150.0
+      },
+      {
+        "range": ">1360.01;<=1380.00",
+        "employer_contribution": 180.0,
+        "employee_contribution": 152.0
+      },
+      {
+        "range": ">1380.01;<=1400.00",
+        "employer_contribution": 182.0,
+        "employee_contribution": 154.0
+      },
+      {
+        "range": ">1400.01;<=1420.00",
+        "employer_contribution": 185.0,
+        "employee_contribution": 157.0
+      },
+      {
+        "range": ">1420.01;<=1440.00",
+        "employer_contribution": 188.0,
+        "employee_contribution": 159.0
+      },
+      {
+        "range": ">1440.01;<=1460.00",
+        "employer_contribution": 190.0,
+        "employee_contribution": 161.0
+      },
+      {
+        "range": ">1460.01;<=1480.00",
+        "employer_contribution": 193.0,
+        "employee_contribution": 163.0
+      },
+      {
+        "range": ">1480.01;<=1500.00",
+        "employer_contribution": 195.0,
+        "employee_contribution": 165.0
+      },
+      {
+        "range": ">1500.01;<=1520.00",
+        "employer_contribution": 198.0,
+        "employee_contribution": 168.0
+      },
+      {
+        "range": ">1520.01;<=1540.00",
+        "employer_contribution": 201.0,
+        "employee_contribution": 170.0
+      },
+      {
+        "range": ">1540.01;<=1560.00",
+        "employer_contribution": 203.0,
+        "employee_contribution": 172.0
+      },
+      {
+        "range": ">1560.01;<=1580.00",
+        "employer_contribution": 206.0,
+        "employee_contribution": 174.0
+      },
+      {
+        "range": ">1580.01;<=1600.00",
+        "employer_contribution": 208.0,
+        "employee_contribution": 176.0
+      },
+      {
+        "range": ">1600.01;<=1620.00",
+        "employer_contribution": 211.0,
+        "employee_contribution": 179.0
+      },
+      {
+        "range": ">1620.01;<=1640.00",
+        "employer_contribution": 214.0,
+        "employee_contribution": 181.0
+      },
+      {
+        "range": ">1640.01;<=1660.00",
+        "employer_contribution": 216.0,
+        "employee_contribution": 183.0
+      },
+      {
+        "range": ">1660.01;<=1680.00",
+        "employer_contribution": 219.0,
+        "employee_contribution": 185.0
+      },
+      {
+        "range": ">1680.01;<=1700.00",
+        "employer_contribution": 221.0,
+        "employee_contribution": 187.0
+      },
+      {
+        "range": ">1700.01;<=1720.00",
+        "employer_contribution": 224.0,
+        "employee_contribution": 190.0
+      },
+      {
+        "range": ">1720.01;<=1740.00",
+        "employer_contribution": 227.0,
+        "employee_contribution": 192.0
+      },
+      {
+        "range": ">1740.01;<=1760.00",
+        "employer_contribution": 229.0,
+        "employee_contribution": 194.0
+      },
+      {
+        "range": ">1760.01;<=1780.00",
+        "employer_contribution": 232.0,
+        "employee_contribution": 196.0
+      },
+      {
+        "range": ">1780.01;<=1800.00",
+        "employer_contribution": 234.0,
+        "employee_contribution": 198.0
+      },
+      {
+        "range": ">1800.01;<=1820.00",
+        "employer_contribution": 237.0,
+        "employee_contribution": 201.0
+      },
+      {
+        "range": ">1820.01;<=1840.00",
+        "employer_contribution": 240.0,
+        "employee_contribution": 203.0
+      },
+      {
+        "range": ">1840.01;<=1860.00",
+        "employer_contribution": 242.0,
+        "employee_contribution": 205.0
+      },
+      {
+        "range": ">1860.01;<=1880.00",
+        "employer_contribution": 245.0,
+        "employee_contribution": 207.0
+      },
+      {
+        "range": ">1880.01;<=1900.00",
+        "employer_contribution": 247.0,
+        "employee_contribution": 209.0
+      },
+      {
+        "range": ">1900.01;<=1920.00",
+        "employer_contribution": 250.0,
+        "employee_contribution": 212.0
+      },
+      {
+        "range": ">1920.01;<=1940.00",
+        "employer_contribution": 253.0,
+        "employee_contribution": 214.0
+      },
+      {
+        "range": ">1940.01;<=1960.00",
+        "employer_contribution": 255.0,
+        "employee_contribution": 216.0
+      },
+      {
+        "range": ">1960.01;<=1980.00",
+        "employer_contribution": 258.0,
+        "employee_contribution": 218.0
+      },
+      {
+        "range": ">1980.01;<=2000.00",
+        "employer_contribution": 260.0,
+        "employee_contribution": 220.0
+      },
+      {
+        "range": ">2000.01;<=2020.00",
+        "employer_contribution": 263.0,
+        "employee_contribution": 223.0
+      },
+      {
+        "range": ">2020.01;<=2040.00",
+        "employer_contribution": 266.0,
+        "employee_contribution": 225.0
+      },
+      {
+        "range": ">2040.01;<=2060.00",
+        "employer_contribution": 268.0,
+        "employee_contribution": 227.0
+      },
+      {
+        "range": ">2060.01;<=2080.00",
+        "employer_contribution": 271.0,
+        "employee_contribution": 229.0
+      },
+      {
+        "range": ">2080.01;<=2100.00",
+        "employer_contribution": 273.0,
+        "employee_contribution": 231.0
+      },
+      {
+        "range": ">2100.01;<=2120.00",
+        "employer_contribution": 276.0,
+        "employee_contribution": 234.0
+      },
+      {
+        "range": ">2120.01;<=2140.00",
+        "employer_contribution": 279.0,
+        "employee_contribution": 236.0
+      },
+      {
+        "range": ">2140.01;<=2160.00",
+        "employer_contribution": 281.0,
+        "employee_contribution": 238.0
+      },
+      {
+        "range": ">2160.01;<=2180.00",
+        "employer_contribution": 284.0,
+        "employee_contribution": 240.0
+      },
+      {
+        "range": ">2180.01;<=2200.00",
+        "employer_contribution": 286.0,
+        "employee_contribution": 242.0
+      },
+      {
+        "range": ">2200.01;<=2220.00",
+        "employer_contribution": 289.0,
+        "employee_contribution": 245.0
+      },
+      {
+        "range": ">2220.01;<=2240.00",
+        "employer_contribution": 292.0,
+        "employee_contribution": 247.0
+      },
+      {
+        "range": ">2240.01;<=2260.00",
+        "employer_contribution": 294.0,
+        "employee_contribution": 249.0
+      },
+      {
+        "range": ">2260.01;<=2280.00",
+        "employer_contribution": 297.0,
+        "employee_contribution": 251.0
+      },
+      {
+        "range": ">2280.01;<=2300.00",
+        "employer_contribution": 299.0,
+        "employee_contribution": 253.0
+      },
+      {
+        "range": ">2300.01;<=2320.00",
+        "employer_contribution": 302.0,
+        "employee_contribution": 256.0
+      },
+      {
+        "range": ">2320.01;<=2340.00",
+        "employer_contribution": 305.0,
+        "employee_contribution": 258.0
+      },
+      {
+        "range": ">2340.01;<=2360.00",
+        "employer_contribution": 307.0,
+        "employee_contribution": 260.0
+      },
+      {
+        "range": ">2360.01;<=2380.00",
+        "employer_contribution": 310.0,
+        "employee_contribution": 262.0
+      },
+      {
+        "range": ">2380.01;<=2400.00",
+        "employer_contribution": 312.0,
+        "employee_contribution": 264.0
+      },
+      {
+        "range": ">2400.01;<=2420.00",
+        "employer_contribution": 315.0,
+        "employee_contribution": 267.0
+      },
+      {
+        "range": ">2420.01;<=2440.00",
+        "employer_contribution": 318.0,
+        "employee_contribution": 269.0
+      },
+      {
+        "range": ">2440.01;<=2460.00",
+        "employer_contribution": 320.0,
+        "employee_contribution": 271.0
+      },
+      {
+        "range": ">2460.01;<=2480.00",
+        "employer_contribution": 323.0,
+        "employee_contribution": 273.0
+      },
+      {
+        "range": ">2480.01;<=2500.00",
+        "employer_contribution": 325.0,
+        "employee_contribution": 275.0
+      },
+      {
+        "range": ">2500.01;<=2520.00",
+        "employer_contribution": 328.0,
+        "employee_contribution": 278.0
+      },
+      {
+        "range": ">2520.01;<=2540.00",
+        "employer_contribution": 331.0,
+        "employee_contribution": 280.0
+      },
+      {
+        "range": ">2540.01;<=2560.00",
+        "employer_contribution": 333.0,
+        "employee_contribution": 282.0
+      },
+      {
+        "range": ">2560.01;<=2580.00",
+        "employer_contribution": 336.0,
+        "employee_contribution": 284.0
+      },
+      {
+        "range": ">2580.01;<=2600.00",
+        "employer_contribution": 338.0,
+        "employee_contribution": 286.0
+      },
+      {
+        "range": ">2600.01;<=2620.00",
+        "employer_contribution": 341.0,
+        "employee_contribution": 289.0
+      },
+      {
+        "range": ">2620.01;<=2640.00",
+        "employer_contribution": 344.0,
+        "employee_contribution": 291.0
+      },
+      {
+        "range": ">2640.01;<=2660.00",
+        "employer_contribution": 346.0,
+        "employee_contribution": 293.0
+      },
+      {
+        "range": ">2660.01;<=2680.00",
+        "employer_contribution": 349.0,
+        "employee_contribution": 295.0
+      },
+      {
+        "range": ">2680.01;<=2700.00",
+        "employer_contribution": 351.0,
+        "employee_contribution": 297.0
+      },
+      {
+        "range": ">2700.01;<=2720.00",
+        "employer_contribution": 354.0,
+        "employee_contribution": 300.0
+      },
+      {
+        "range": ">2720.01;<=2740.00",
+        "employer_contribution": 357.0,
+        "employee_contribution": 302.0
+      },
+      {
+        "range": ">2740.01;<=2760.00",
+        "employer_contribution": 359.0,
+        "employee_contribution": 304.0
+      },
+      {
+        "range": ">2760.01;<=2780.00",
+        "employer_contribution": 362.0,
+        "employee_contribution": 306.0
+      },
+      {
+        "range": ">2780.01;<=2800.00",
+        "employer_contribution": 364.0,
+        "employee_contribution": 308.0
+      },
+      {
+        "range": ">2800.01;<=2820.00",
+        "employer_contribution": 367.0,
+        "employee_contribution": 311.0
+      },
+      {
+        "range": ">2820.01;<=2840.00",
+        "employer_contribution": 370.0,
+        "employee_contribution": 313.0
+      },
+      {
+        "range": ">2840.01;<=2860.00",
+        "employer_contribution": 372.0,
+        "employee_contribution": 315.0
+      },
+      {
+        "range": ">2860.01;<=2880.00",
+        "employer_contribution": 375.0,
+        "employee_contribution": 317.0
+      },
+      {
+        "range": ">2880.01;<=2900.00",
+        "employer_contribution": 377.0,
+        "employee_contribution": 319.0
+      },
+      {
+        "range": ">2900.01;<=2920.00",
+        "employer_contribution": 380.0,
+        "employee_contribution": 322.0
+      },
+      {
+        "range": ">2920.01;<=2940.00",
+        "employer_contribution": 383.0,
+        "employee_contribution": 324.0
+      },
+      {
+        "range": ">2940.01;<=2960.00",
+        "employer_contribution": 385.0,
+        "employee_contribution": 326.0
+      },
+      {
+        "range": ">2960.01;<=2980.00",
+        "employer_contribution": 388.0,
+        "employee_contribution": 328.0
+      },
+      {
+        "range": ">2980.01;<=3000.00",
+        "employer_contribution": 390.0,
+        "employee_contribution": 330.0
+      },
+      {
+        "range": ">3000.01;<=3020.00",
+        "employer_contribution": 393.0,
+        "employee_contribution": 333.0
+      },
+      {
+        "range": ">3020.01;<=3040.00",
+        "employer_contribution": 396.0,
+        "employee_contribution": 335.0
+      },
+      {
+        "range": ">3040.01;<=3060.00",
+        "employer_contribution": 398.0,
+        "employee_contribution": 337.0
+      },
+      {
+        "range": ">3060.01;<=3080.00",
+        "employer_contribution": 401.0,
+        "employee_contribution": 339.0
+      },
+      {
+        "range": ">3080.01;<=3100.00",
+        "employer_contribution": 403.0,
+        "employee_contribution": 341.0
+      },
+      {
+        "range": ">3100.01;<=3120.00",
+        "employer_contribution": 406.0,
+        "employee_contribution": 344.0
+      },
+      {
+        "range": ">3120.01;<=3140.00",
+        "employer_contribution": 409.0,
+        "employee_contribution": 346.0
+      },
+      {
+        "range": ">3140.01;<=3160.00",
+        "employer_contribution": 411.0,
+        "employee_contribution": 348.0
+      },
+      {
+        "range": ">3160.01;<=3180.00",
+        "employer_contribution": 414.0,
+        "employee_contribution": 350.0
+      },
+      {
+        "range": ">3180.01;<=3200.00",
+        "employer_contribution": 416.0,
+        "employee_contribution": 352.0
+      },
+      {
+        "range": ">3200.01;<=3220.00",
+        "employer_contribution": 419.0,
+        "employee_contribution": 355.0
+      },
+      {
+        "range": ">3220.01;<=3240.00",
+        "employer_contribution": 422.0,
+        "employee_contribution": 357.0
+      },
+      {
+        "range": ">3240.01;<=3260.00",
+        "employer_contribution": 424.0,
+        "employee_contribution": 359.0
+      },
+      {
+        "range": ">3260.01;<=3280.00",
+        "employer_contribution": 427.0,
+        "employee_contribution": 361.0
+      },
+      {
+        "range": ">3280.01;<=3300.00",
+        "employer_contribution": 429.0,
+        "employee_contribution": 363.0
+      },
+      {
+        "range": ">3300.01;<=3320.00",
+        "employer_contribution": 432.0,
+        "employee_contribution": 366.0
+      },
+      {
+        "range": ">3320.01;<=3340.00",
+        "employer_contribution": 435.0,
+        "employee_contribution": 368.0
+      },
+      {
+        "range": ">3340.01;<=3360.00",
+        "employer_contribution": 437.0,
+        "employee_contribution": 370.0
+      },
+      {
+        "range": ">3360.01;<=3380.00",
+        "employer_contribution": 440.0,
+        "employee_contribution": 372.0
+      },
+      {
+        "range": ">3380.01;<=3400.00",
+        "employer_contribution": 442.0,
+        "employee_contribution": 374.0
+      },
+      {
+        "range": ">3400.01;<=3420.00",
+        "employer_contribution": 445.0,
+        "employee_contribution": 377.0
+      },
+      {
+        "range": ">3420.01;<=3440.00",
+        "employer_contribution": 448.0,
+        "employee_contribution": 379.0
+      },
+      {
+        "range": ">3440.01;<=3460.00",
+        "employer_contribution": 450.0,
+        "employee_contribution": 381.0
+      },
+      {
+        "range": ">3460.01;<=3480.00",
+        "employer_contribution": 453.0,
+        "employee_contribution": 383.0
+      },
+      {
+        "range": ">3480.01;<=3500.00",
+        "employer_contribution": 455.0,
+        "employee_contribution": 385.0
+      },
+      {
+        "range": ">3500.01;<=3520.00",
+        "employer_contribution": 458.0,
+        "employee_contribution": 388.0
+      },
+      {
+        "range": ">3520.01;<=3540.00",
+        "employer_contribution": 461.0,
+        "employee_contribution": 390.0
+      },
+      {
+        "range": ">3540.01;<=3560.00",
+        "employer_contribution": 463.0,
+        "employee_contribution": 392.0
+      },
+      {
+        "range": ">3560.01;<=3580.00",
+        "employer_contribution": 466.0,
+        "employee_contribution": 394.0
+      },
+      {
+        "range": ">3580.01;<=3600.00",
+        "employer_contribution": 468.0,
+        "employee_contribution": 396.0
+      },
+      {
+        "range": ">3600.01;<=3620.00",
+        "employer_contribution": 471.0,
+        "employee_contribution": 399.0
+      },
+      {
+        "range": ">3620.01;<=3640.00",
+        "employer_contribution": 474.0,
+        "employee_contribution": 401.0
+      },
+      {
+        "range": ">3640.01;<=3660.00",
+        "employer_contribution": 476.0,
+        "employee_contribution": 403.0
+      },
+      {
+        "range": ">3660.01;<=3680.00",
+        "employer_contribution": 479.0,
+        "employee_contribution": 405.0
+      },
+      {
+        "range": ">3680.01;<=3700.00",
+        "employer_contribution": 481.0,
+        "employee_contribution": 407.0
+      },
+      {
+        "range": ">3700.01;<=3720.00",
+        "employer_contribution": 484.0,
+        "employee_contribution": 410.0
+      },
+      {
+        "range": ">3720.01;<=3740.00",
+        "employer_contribution": 487.0,
+        "employee_contribution": 412.0
+      },
+      {
+        "range": ">3740.01;<=3760.00",
+        "employer_contribution": 489.0,
+        "employee_contribution": 414.0
+      },
+      {
+        "range": ">3760.01;<=3780.00",
+        "employer_contribution": 492.0,
+        "employee_contribution": 416.0
+      },
+      {
+        "range": ">3780.01;<=3800.00",
+        "employer_contribution": 494.0,
+        "employee_contribution": 418.0
+      },
+      {
+        "range": ">3800.01;<=3820.00",
+        "employer_contribution": 497.0,
+        "employee_contribution": 421.0
+      },
+      {
+        "range": ">3820.01;<=3840.00",
+        "employer_contribution": 500.0,
+        "employee_contribution": 423.0
+      },
+      {
+        "range": ">3840.01;<=3860.00",
+        "employer_contribution": 502.0,
+        "employee_contribution": 425.0
+      },
+      {
+        "range": ">3860.01;<=3880.00",
+        "employer_contribution": 505.0,
+        "employee_contribution": 427.0
+      },
+      {
+        "range": ">3880.01;<=3900.00",
+        "employer_contribution": 507.0,
+        "employee_contribution": 429.0
+      },
+      {
+        "range": ">3900.01;<=3920.00",
+        "employer_contribution": 510.0,
+        "employee_contribution": 432.0
+      },
+      {
+        "range": ">3920.01;<=3940.00",
+        "employer_contribution": 513.0,
+        "employee_contribution": 434.0
+      },
+      {
+        "range": ">3940.01;<=3960.00",
+        "employer_contribution": 515.0,
+        "employee_contribution": 436.0
+      },
+      {
+        "range": ">3960.01;<=3980.00",
+        "employer_contribution": 518.0,
+        "employee_contribution": 438.0
+      },
+      {
+        "range": ">3980.01;<=4000.00",
+        "employer_contribution": 520.0,
+        "employee_contribution": 440.0
+      },
+      {
+        "range": ">4000.01;<=4020.00",
+        "employer_contribution": 523.0,
+        "employee_contribution": 443.0
+      },
+      {
+        "range": ">4020.01;<=4040.00",
+        "employer_contribution": 526.0,
+        "employee_contribution": 445.0
+      },
+      {
+        "range": ">4040.01;<=4060.00",
+        "employer_contribution": 528.0,
+        "employee_contribution": 447.0
+      },
+      {
+        "range": ">4060.01;<=4080.00",
+        "employer_contribution": 531.0,
+        "employee_contribution": 449.0
+      },
+      {
+        "range": ">4080.01;<=4100.00",
+        "employer_contribution": 533.0,
+        "employee_contribution": 451.0
+      },
+      {
+        "range": ">4100.01;<=4120.00",
+        "employer_contribution": 536.0,
+        "employee_contribution": 454.0
+      },
+      {
+        "range": ">4120.01;<=4140.00",
+        "employer_contribution": 539.0,
+        "employee_contribution": 456.0
+      },
+      {
+        "range": ">4140.01;<=4160.00",
+        "employer_contribution": 541.0,
+        "employee_contribution": 458.0
+      },
+      {
+        "range": ">4160.01;<=4180.00",
+        "employer_contribution": 544.0,
+        "employee_contribution": 460.0
+      },
+      {
+        "range": ">4180.01;<=4200.00",
+        "employer_contribution": 546.0,
+        "employee_contribution": 462.0
+      },
+      {
+        "range": ">4200.01;<=4220.00",
+        "employer_contribution": 549.0,
+        "employee_contribution": 465.0
+      },
+      {
+        "range": ">4220.01;<=4240.00",
+        "employer_contribution": 552.0,
+        "employee_contribution": 467.0
+      },
+      {
+        "range": ">4240.01;<=4260.00",
+        "employer_contribution": 554.0,
+        "employee_contribution": 469.0
+      },
+      {
+        "range": ">4260.01;<=4280.00",
+        "employer_contribution": 557.0,
+        "employee_contribution": 471.0
+      },
+      {
+        "range": ">4280.01;<=4300.00",
+        "employer_contribution": 559.0,
+        "employee_contribution": 473.0
+      },
+      {
+        "range": ">4300.01;<=4320.00",
+        "employer_contribution": 562.0,
+        "employee_contribution": 476.0
+      },
+      {
+        "range": ">4320.01;<=4340.00",
+        "employer_contribution": 565.0,
+        "employee_contribution": 478.0
+      },
+      {
+        "range": ">4340.01;<=4360.00",
+        "employer_contribution": 567.0,
+        "employee_contribution": 480.0
+      },
+      {
+        "range": ">4360.01;<=4380.00",
+        "employer_contribution": 570.0,
+        "employee_contribution": 482.0
+      },
+      {
+        "range": ">4380.01;<=4400.00",
+        "employer_contribution": 572.0,
+        "employee_contribution": 484.0
+      },
+      {
+        "range": ">4400.01;<=4420.00",
+        "employer_contribution": 575.0,
+        "employee_contribution": 487.0
+      },
+      {
+        "range": ">4420.01;<=4440.00",
+        "employer_contribution": 578.0,
+        "employee_contribution": 489.0
+      },
+      {
+        "range": ">4440.01;<=4460.00",
+        "employer_contribution": 580.0,
+        "employee_contribution": 491.0
+      },
+      {
+        "range": ">4460.01;<=4480.00",
+        "employer_contribution": 583.0,
+        "employee_contribution": 493.0
+      },
+      {
+        "range": ">4480.01;<=4500.00",
+        "employer_contribution": 585.0,
+        "employee_contribution": 495.0
+      },
+      {
+        "range": ">4500.01;<=4520.00",
+        "employer_contribution": 588.0,
+        "employee_contribution": 498.0
+      },
+      {
+        "range": ">4520.01;<=4540.00",
+        "employer_contribution": 591.0,
+        "employee_contribution": 500.0
+      },
+      {
+        "range": ">4540.01;<=4560.00",
+        "employer_contribution": 593.0,
+        "employee_contribution": 502.0
+      },
+      {
+        "range": ">4560.01;<=4580.00",
+        "employer_contribution": 596.0,
+        "employee_contribution": 504.0
+      },
+      {
+        "range": ">4580.01;<=4600.00",
+        "employer_contribution": 598.0,
+        "employee_contribution": 506.0
+      },
+      {
+        "range": ">4600.01;<=4620.00",
+        "employer_contribution": 601.0,
+        "employee_contribution": 509.0
+      },
+      {
+        "range": ">4620.01;<=4640.00",
+        "employer_contribution": 604.0,
+        "employee_contribution": 511.0
+      },
+      {
+        "range": ">4640.01;<=4660.00",
+        "employer_contribution": 606.0,
+        "employee_contribution": 513.0
+      },
+      {
+        "range": ">4660.01;<=4680.00",
+        "employer_contribution": 609.0,
+        "employee_contribution": 515.0
+      },
+      {
+        "range": ">4680.01;<=4700.00",
+        "employer_contribution": 611.0,
+        "employee_contribution": 517.0
+      },
+      {
+        "range": ">4700.01;<=4720.00",
+        "employer_contribution": 614.0,
+        "employee_contribution": 520.0
+      },
+      {
+        "range": ">4720.01;<=4740.00",
+        "employer_contribution": 617.0,
+        "employee_contribution": 522.0
+      },
+      {
+        "range": ">4740.01;<=4760.00",
+        "employer_contribution": 619.0,
+        "employee_contribution": 524.0
+      },
+      {
+        "range": ">4760.01;<=4780.00",
+        "employer_contribution": 622.0,
+        "employee_contribution": 526.0
+      },
+      {
+        "range": ">4780.01;<=4800.00",
+        "employer_contribution": 624.0,
+        "employee_contribution": 528.0
+      },
+      {
+        "range": ">4800.01;<=4820.00",
+        "employer_contribution": 627.0,
+        "employee_contribution": 531.0
+      },
+      {
+        "range": ">4820.01;<=4840.00",
+        "employer_contribution": 630.0,
+        "employee_contribution": 533.0
+      },
+      {
+        "range": ">4840.01;<=4860.00",
+        "employer_contribution": 632.0,
+        "employee_contribution": 535.0
+      },
+      {
+        "range": ">4860.01;<=4880.00",
+        "employer_contribution": 635.0,
+        "employee_contribution": 537.0
+      },
+      {
+        "range": ">4880.01;<=4900.00",
+        "employer_contribution": 637.0,
+        "employee_contribution": 539.0
+      },
+      {
+        "range": ">4900.01;<=4920.00",
+        "employer_contribution": 640.0,
+        "employee_contribution": 542.0
+      },
+      {
+        "range": ">4920.01;<=4940.00",
+        "employer_contribution": 643.0,
+        "employee_contribution": 544.0
+      },
+      {
+        "range": ">4940.01;<=4960.00",
+        "employer_contribution": 645.0,
+        "employee_contribution": 546.0
+      },
+      {
+        "range": ">4960.01;<=4980.00",
+        "employer_contribution": 648.0,
+        "employee_contribution": 548.0
+      },
+      {
+        "range": ">4980.01;<=5000.00",
+        "employer_contribution": 650.0,
+        "employee_contribution": 550.0
+      },
+      {
+        "range": ">5000.01;<=5100.00",
+        "employer_contribution": 612.0,
+        "employee_contribution": 561.0
+      },
+      {
+        "range": ">5100.01;<=5200.00",
+        "employer_contribution": 624.0,
+        "employee_contribution": 572.0
+      },
+      {
+        "range": ">5200.01;<=5300.00",
+        "employer_contribution": 636.0,
+        "employee_contribution": 583.0
+      },
+      {
+        "range": ">5300.01;<=5400.00",
+        "employer_contribution": 648.0,
+        "employee_contribution": 594.0
+      },
+      {
+        "range": ">5400.01;<=5500.00",
+        "employer_contribution": 660.0,
+        "employee_contribution": 605.0
+      },
+      {
+        "range": ">5500.01;<=5600.00",
+        "employer_contribution": 672.0,
+        "employee_contribution": 616.0
+      },
+      {
+        "range": ">5600.01;<=5700.00",
+        "employer_contribution": 684.0,
+        "employee_contribution": 627.0
+      },
+      {
+        "range": ">5700.01;<=5800.00",
+        "employer_contribution": 696.0,
+        "employee_contribution": 638.0
+      },
+      {
+        "range": ">5800.01;<=5900.00",
+        "employer_contribution": 708.0,
+        "employee_contribution": 649.0
+      },
+      {
+        "range": ">5900.01;<=6000.00",
+        "employer_contribution": 720.0,
+        "employee_contribution": 660.0
+      },
+      {
+        "range": ">6000.01;<=6100.00",
+        "employer_contribution": 732.0,
+        "employee_contribution": 671.0
+      },
+      {
+        "range": ">6100.01;<=6200.00",
+        "employer_contribution": 744.0,
+        "employee_contribution": 682.0
+      },
+      {
+        "range": ">6200.01;<=6300.00",
+        "employer_contribution": 756.0,
+        "employee_contribution": 693.0
+      },
+      {
+        "range": ">6300.01;<=6400.00",
+        "employer_contribution": 768.0,
+        "employee_contribution": 704.0
+      },
+      {
+        "range": ">6400.01;<=6500.00",
+        "employer_contribution": 780.0,
+        "employee_contribution": 715.0
+      },
+      {
+        "range": ">6500.01;<=6600.00",
+        "employer_contribution": 792.0,
+        "employee_contribution": 726.0
+      },
+      {
+        "range": ">6600.01;<=6700.00",
+        "employer_contribution": 804.0,
+        "employee_contribution": 737.0
+      },
+      {
+        "range": ">6700.01;<=6800.00",
+        "employer_contribution": 816.0,
+        "employee_contribution": 748.0
+      },
+      {
+        "range": ">6800.01;<=6900.00",
+        "employer_contribution": 828.0,
+        "employee_contribution": 759.0
+      },
+      {
+        "range": ">6900.01;<=7000.00",
+        "employer_contribution": 840.0,
+        "employee_contribution": 770.0
+      },
+      {
+        "range": ">7000.01;<=7100.00",
+        "employer_contribution": 852.0,
+        "employee_contribution": 781.0
+      },
+      {
+        "range": ">7100.01;<=7200.00",
+        "employer_contribution": 864.0,
+        "employee_contribution": 792.0
+      },
+      {
+        "range": ">7200.01;<=7300.00",
+        "employer_contribution": 876.0,
+        "employee_contribution": 803.0
+      },
+      {
+        "range": ">7300.01;<=7400.00",
+        "employer_contribution": 888.0,
+        "employee_contribution": 814.0
+      },
+      {
+        "range": ">7400.01;<=7500.00",
+        "employer_contribution": 900.0,
+        "employee_contribution": 825.0
+      },
+      {
+        "range": ">7500.01;<=7600.00",
+        "employer_contribution": 912.0,
+        "employee_contribution": 836.0
+      },
+      {
+        "range": ">7600.01;<=7700.00",
+        "employer_contribution": 924.0,
+        "employee_contribution": 847.0
+      },
+      {
+        "range": ">7700.01;<=7800.00",
+        "employer_contribution": 936.0,
+        "employee_contribution": 858.0
+      },
+      {
+        "range": ">7800.01;<=7900.00",
+        "employer_contribution": 948.0,
+        "employee_contribution": 869.0
+      },
+      {
+        "range": ">7900.01;<=8000.00",
+        "employer_contribution": 960.0,
+        "employee_contribution": 880.0
+      },
+      {
+        "range": ">8000.01;<=8100.00",
+        "employer_contribution": 972.0,
+        "employee_contribution": 891.0
+      },
+      {
+        "range": ">8100.01;<=8200.00",
+        "employer_contribution": 984.0,
+        "employee_contribution": 902.0
+      },
+      {
+        "range": ">8200.01;<=8300.00",
+        "employer_contribution": 996.0,
+        "employee_contribution": 913.0
+      },
+      {
+        "range": ">8300.01;<=8400.00",
+        "employer_contribution": 1008.0,
+        "employee_contribution": 924.0
+      },
+      {
+        "range": ">8400.01;<=8500.00",
+        "employer_contribution": 1020.0,
+        "employee_contribution": 935.0
+      },
+      {
+        "range": ">8500.01;<=8600.00",
+        "employer_contribution": 1032.0,
+        "employee_contribution": 946.0
+      },
+      {
+        "range": ">8600.01;<=8700.00",
+        "employer_contribution": 1044.0,
+        "employee_contribution": 957.0
+      },
+      {
+        "range": ">8700.01;<=8800.00",
+        "employer_contribution": 1056.0,
+        "employee_contribution": 968.0
+      },
+      {
+        "range": ">8800.01;<=8900.00",
+        "employer_contribution": 1068.0,
+        "employee_contribution": 979.0
+      },
+      {
+        "range": ">8900.01;<=9000.00",
+        "employer_contribution": 1080.0,
+        "employee_contribution": 990.0
+      },
+      {
+        "range": ">9000.01;<=9100.00",
+        "employer_contribution": 1092.0,
+        "employee_contribution": 1001.0
+      },
+      {
+        "range": ">9100.01;<=9200.00",
+        "employer_contribution": 1104.0,
+        "employee_contribution": 1012.0
+      },
+      {
+        "range": ">9200.01;<=9300.00",
+        "employer_contribution": 1116.0,
+        "employee_contribution": 1023.0
+      },
+      {
+        "range": ">9300.01;<=9400.00",
+        "employer_contribution": 1128.0,
+        "employee_contribution": 1034.0
+      },
+      {
+        "range": ">9400.01;<=9500.00",
+        "employer_contribution": 1140.0,
+        "employee_contribution": 1045.0
+      },
+      {
+        "range": ">9500.01;<=9600.00",
+        "employer_contribution": 1152.0,
+        "employee_contribution": 1056.0
+      },
+      {
+        "range": ">9600.01;<=9700.00",
+        "employer_contribution": 1164.0,
+        "employee_contribution": 1067.0
+      },
+      {
+        "range": ">9700.01;<=9800.00",
+        "employer_contribution": 1176.0,
+        "employee_contribution": 1078.0
+      },
+      {
+        "range": ">9800.01;<=9900.00",
+        "employer_contribution": 1188.0,
+        "employee_contribution": 1089.0
+      },
+      {
+        "range": ">9900.01;<=10000.00",
+        "employer_contribution": 1200.0,
+        "employee_contribution": 1100.0
+      },
+      {
+        "range": ">10000.01;<=10100.00",
+        "employer_contribution": 1212.0,
+        "employee_contribution": 1111.0
+      },
+      {
+        "range": ">10100.01;<=10200.00",
+        "employer_contribution": 1224.0,
+        "employee_contribution": 1122.0
+      },
+      {
+        "range": ">10200.01;<=10300.00",
+        "employer_contribution": 1236.0,
+        "employee_contribution": 1133.0
+      },
+      {
+        "range": ">10300.01;<=10400.00",
+        "employer_contribution": 1248.0,
+        "employee_contribution": 1144.0
+      },
+      {
+        "range": ">10400.01;<=10500.00",
+        "employer_contribution": 1260.0,
+        "employee_contribution": 1155.0
+      },
+      {
+        "range": ">10500.01;<=10600.00",
+        "employer_contribution": 1272.0,
+        "employee_contribution": 1166.0
+      },
+      {
+        "range": ">10600.01;<=10700.00",
+        "employer_contribution": 1284.0,
+        "employee_contribution": 1177.0
+      },
+      {
+        "range": ">10700.01;<=10800.00",
+        "employer_contribution": 1296.0,
+        "employee_contribution": 1188.0
+      },
+      {
+        "range": ">10800.01;<=10900.00",
+        "employer_contribution": 1308.0,
+        "employee_contribution": 1199.0
+      },
+      {
+        "range": ">10900.01;<=11000.00",
+        "employer_contribution": 1320.0,
+        "employee_contribution": 1210.0
+      },
+      {
+        "range": ">11000.01;<=11100.00",
+        "employer_contribution": 1332.0,
+        "employee_contribution": 1221.0
+      },
+      {
+        "range": ">11100.01;<=11200.00",
+        "employer_contribution": 1344.0,
+        "employee_contribution": 1232.0
+      },
+      {
+        "range": ">11200.01;<=11300.00",
+        "employer_contribution": 1356.0,
+        "employee_contribution": 1243.0
+      },
+      {
+        "range": ">11300.01;<=11400.00",
+        "employer_contribution": 1368.0,
+        "employee_contribution": 1254.0
+      },
+      {
+        "range": ">11400.01;<=11500.00",
+        "employer_contribution": 1380.0,
+        "employee_contribution": 1265.0
+      },
+      {
+        "range": ">11500.01;<=11600.00",
+        "employer_contribution": 1392.0,
+        "employee_contribution": 1276.0
+      },
+      {
+        "range": ">11600.01;<=11700.00",
+        "employer_contribution": 1404.0,
+        "employee_contribution": 1287.0
+      },
+      {
+        "range": ">11700.01;<=11800.00",
+        "employer_contribution": 1416.0,
+        "employee_contribution": 1298.0
+      },
+      {
+        "range": ">11800.01;<=11900.00",
+        "employer_contribution": 1428.0,
+        "employee_contribution": 1309.0
+      },
+      {
+        "range": ">11900.01;<=12000.00",
+        "employer_contribution": 1440.0,
+        "employee_contribution": 1320.0
+      },
+      {
+        "range": ">12000.01;<=12100.00",
+        "employer_contribution": 1452.0,
+        "employee_contribution": 1331.0
+      },
+      {
+        "range": ">12100.01;<=12200.00",
+        "employer_contribution": 1464.0,
+        "employee_contribution": 1342.0
+      },
+      {
+        "range": ">12200.01;<=12300.00",
+        "employer_contribution": 1476.0,
+        "employee_contribution": 1353.0
+      },
+      {
+        "range": ">12300.01;<=12400.00",
+        "employer_contribution": 1488.0,
+        "employee_contribution": 1364.0
+      },
+      {
+        "range": ">12400.01;<=12500.00",
+        "employer_contribution": 1500.0,
+        "employee_contribution": 1375.0
+      },
+      {
+        "range": ">12500.01;<=12600.00",
+        "employer_contribution": 1512.0,
+        "employee_contribution": 1386.0
+      },
+      {
+        "range": ">12600.01;<=12700.00",
+        "employer_contribution": 1524.0,
+        "employee_contribution": 1397.0
+      },
+      {
+        "range": ">12700.01;<=12800.00",
+        "employer_contribution": 1536.0,
+        "employee_contribution": 1408.0
+      },
+      {
+        "range": ">12800.01;<=12900.00",
+        "employer_contribution": 1548.0,
+        "employee_contribution": 1419.0
+      },
+      {
+        "range": ">12900.01;<=13000.00",
+        "employer_contribution": 1560.0,
+        "employee_contribution": 1430.0
+      },
+      {
+        "range": ">13000.01;<=13100.00",
+        "employer_contribution": 1572.0,
+        "employee_contribution": 1441.0
+      },
+      {
+        "range": ">13100.01;<=13200.00",
+        "employer_contribution": 1584.0,
+        "employee_contribution": 1452.0
+      },
+      {
+        "range": ">13200.01;<=13300.00",
+        "employer_contribution": 1596.0,
+        "employee_contribution": 1463.0
+      },
+      {
+        "range": ">13300.01;<=13400.00",
+        "employer_contribution": 1608.0,
+        "employee_contribution": 1474.0
+      },
+      {
+        "range": ">13400.01;<=13500.00",
+        "employer_contribution": 1620.0,
+        "employee_contribution": 1485.0
+      },
+      {
+        "range": ">13500.01;<=13600.00",
+        "employer_contribution": 1632.0,
+        "employee_contribution": 1496.0
+      },
+      {
+        "range": ">13600.01;<=13700.00",
+        "employer_contribution": 1644.0,
+        "employee_contribution": 1507.0
+      },
+      {
+        "range": ">13700.01;<=13800.00",
+        "employer_contribution": 1656.0,
+        "employee_contribution": 1518.0
+      },
+      {
+        "range": ">13800.01;<=13900.00",
+        "employer_contribution": 1668.0,
+        "employee_contribution": 1529.0
+      },
+      {
+        "range": ">13900.01;<=14000.00",
+        "employer_contribution": 1680.0,
+        "employee_contribution": 1540.0
+      },
+      {
+        "range": ">14000.01;<=14100.00",
+        "employer_contribution": 1692.0,
+        "employee_contribution": 1551.0
+      },
+      {
+        "range": ">14100.01;<=14200.00",
+        "employer_contribution": 1704.0,
+        "employee_contribution": 1562.0
+      },
+      {
+        "range": ">14200.01;<=14300.00",
+        "employer_contribution": 1716.0,
+        "employee_contribution": 1573.0
+      },
+      {
+        "range": ">14300.01;<=14400.00",
+        "employer_contribution": 1728.0,
+        "employee_contribution": 1584.0
+      },
+      {
+        "range": ">14400.01;<=14500.00",
+        "employer_contribution": 1740.0,
+        "employee_contribution": 1595.0
+      },
+      {
+        "range": ">14500.01;<=14600.00",
+        "employer_contribution": 1752.0,
+        "employee_contribution": 1606.0
+      },
+      {
+        "range": ">14600.01;<=14700.00",
+        "employer_contribution": 1764.0,
+        "employee_contribution": 1617.0
+      },
+      {
+        "range": ">14700.01;<=14800.00",
+        "employer_contribution": 1776.0,
+        "employee_contribution": 1628.0
+      },
+      {
+        "range": ">14800.01;<=14900.00",
+        "employer_contribution": 1788.0,
+        "employee_contribution": 1639.0
+      },
+      {
+        "range": ">14900.01;<=15000.00",
+        "employer_contribution": 1800.0,
+        "employee_contribution": 1650.0
+      },
+      {
+        "range": ">15000.01;<=15100.00",
+        "employer_contribution": 1812.0,
+        "employee_contribution": 1661.0
+      },
+      {
+        "range": ">15100.01;<=15200.00",
+        "employer_contribution": 1824.0,
+        "employee_contribution": 1672.0
+      },
+      {
+        "range": ">15200.01;<=15300.00",
+        "employer_contribution": 1836.0,
+        "employee_contribution": 1683.0
+      },
+      {
+        "range": ">15300.01;<=15400.00",
+        "employer_contribution": 1848.0,
+        "employee_contribution": 1694.0
+      },
+      {
+        "range": ">15400.01;<=15500.00",
+        "employer_contribution": 1860.0,
+        "employee_contribution": 1705.0
+      },
+      {
+        "range": ">15500.01;<=15600.00",
+        "employer_contribution": 1872.0,
+        "employee_contribution": 1716.0
+      },
+      {
+        "range": ">15600.01;<=15700.00",
+        "employer_contribution": 1884.0,
+        "employee_contribution": 1727.0
+      },
+      {
+        "range": ">15700.01;<=15800.00",
+        "employer_contribution": 1896.0,
+        "employee_contribution": 1738.0
+      },
+      {
+        "range": ">15800.01;<=15900.00",
+        "employer_contribution": 1908.0,
+        "employee_contribution": 1749.0
+      },
+      {
+        "range": ">15900.01;<=16000.00",
+        "employer_contribution": 1920.0,
+        "employee_contribution": 1760.0
+      },
+      {
+        "range": ">16000.01;<=16100.00",
+        "employer_contribution": 1932.0,
+        "employee_contribution": 1771.0
+      },
+      {
+        "range": ">16100.01;<=16200.00",
+        "employer_contribution": 1944.0,
+        "employee_contribution": 1782.0
+      },
+      {
+        "range": ">16200.01;<=16300.00",
+        "employer_contribution": 1956.0,
+        "employee_contribution": 1793.0
+      },
+      {
+        "range": ">16300.01;<=16400.00",
+        "employer_contribution": 1968.0,
+        "employee_contribution": 1804.0
+      },
+      {
+        "range": ">16400.01;<=16500.00",
+        "employer_contribution": 1980.0,
+        "employee_contribution": 1815.0
+      },
+      {
+        "range": ">16500.01;<=16600.00",
+        "employer_contribution": 1992.0,
+        "employee_contribution": 1826.0
+      },
+      {
+        "range": ">16600.01;<=16700.00",
+        "employer_contribution": 2004.0,
+        "employee_contribution": 1837.0
+      },
+      {
+        "range": ">16700.01;<=16800.00",
+        "employer_contribution": 2016.0,
+        "employee_contribution": 1848.0
+      },
+      {
+        "range": ">16800.01;<=16900.00",
+        "employer_contribution": 2028.0,
+        "employee_contribution": 1859.0
+      },
+      {
+        "range": ">16900.01;<=17000.00",
+        "employer_contribution": 2040.0,
+        "employee_contribution": 1870.0
+      },
+      {
+        "range": ">17000.01;<=17100.00",
+        "employer_contribution": 2052.0,
+        "employee_contribution": 1881.0
+      },
+      {
+        "range": ">17100.01;<=17200.00",
+        "employer_contribution": 2064.0,
+        "employee_contribution": 1892.0
+      },
+      {
+        "range": ">17200.01;<=17300.00",
+        "employer_contribution": 2076.0,
+        "employee_contribution": 1903.0
+      },
+      {
+        "range": ">17300.01;<=17400.00",
+        "employer_contribution": 2088.0,
+        "employee_contribution": 1914.0
+      },
+      {
+        "range": ">17400.01;<=17500.00",
+        "employer_contribution": 2100.0,
+        "employee_contribution": 1925.0
+      },
+      {
+        "range": ">17500.01;<=17600.00",
+        "employer_contribution": 2112.0,
+        "employee_contribution": 1936.0
+      },
+      {
+        "range": ">17600.01;<=17700.00",
+        "employer_contribution": 2124.0,
+        "employee_contribution": 1947.0
+      },
+      {
+        "range": ">17700.01;<=17800.00",
+        "employer_contribution": 2136.0,
+        "employee_contribution": 1958.0
+      },
+      {
+        "range": ">17800.01;<=17900.00",
+        "employer_contribution": 2148.0,
+        "employee_contribution": 1969.0
+      },
+      {
+        "range": ">17900.01;<=18000.00",
+        "employer_contribution": 2160.0,
+        "employee_contribution": 1980.0
+      },
+      {
+        "range": ">18000.01;<=18100.00",
+        "employer_contribution": 2172.0,
+        "employee_contribution": 1991.0
+      },
+      {
+        "range": ">18100.01;<=18200.00",
+        "employer_contribution": 2184.0,
+        "employee_contribution": 2002.0
+      },
+      {
+        "range": ">18200.01;<=18300.00",
+        "employer_contribution": 2196.0,
+        "employee_contribution": 2013.0
+      },
+      {
+        "range": ">18300.01;<=18400.00",
+        "employer_contribution": 2208.0,
+        "employee_contribution": 2024.0
+      },
+      {
+        "range": ">18400.01;<=18500.00",
+        "employer_contribution": 2220.0,
+        "employee_contribution": 2035.0
+      },
+      {
+        "range": ">18500.01;<=18600.00",
+        "employer_contribution": 2232.0,
+        "employee_contribution": 2046.0
+      },
+      {
+        "range": ">18600.01;<=18700.00",
+        "employer_contribution": 2244.0,
+        "employee_contribution": 2057.0
+      },
+      {
+        "range": ">18700.01;<=18800.00",
+        "employer_contribution": 2256.0,
+        "employee_contribution": 2068.0
+      },
+      {
+        "range": ">18800.01;<=18900.00",
+        "employer_contribution": 2268.0,
+        "employee_contribution": 2079.0
+      },
+      {
+        "range": ">18900.01;<=19000.00",
+        "employer_contribution": 2280.0,
+        "employee_contribution": 2090.0
+      },
+      {
+        "range": ">19000.01;<=19100.00",
+        "employer_contribution": 2292.0,
+        "employee_contribution": 2101.0
+      },
+      {
+        "range": ">19100.01;<=19200.00",
+        "employer_contribution": 2304.0,
+        "employee_contribution": 2112.0
+      },
+      {
+        "range": ">19200.01;<=19300.00",
+        "employer_contribution": 2316.0,
+        "employee_contribution": 2123.0
+      },
+      {
+        "range": ">19300.01;<=19400.00",
+        "employer_contribution": 2328.0,
+        "employee_contribution": 2134.0
+      },
+      {
+        "range": ">19400.01;<=19500.00",
+        "employer_contribution": 2340.0,
+        "employee_contribution": 2145.0
+      },
+      {
+        "range": ">19500.01;<=19600.00",
+        "employer_contribution": 2352.0,
+        "employee_contribution": 2156.0
+      },
+      {
+        "range": ">19600.01;<=19700.00",
+        "employer_contribution": 2364.0,
+        "employee_contribution": 2167.0
+      },
+      {
+        "range": ">19700.01;<=19800.00",
+        "employer_contribution": 2376.0,
+        "employee_contribution": 2178.0
+      },
+      {
+        "range": ">19800.01;<=19900.00",
+        "employer_contribution": 2388.0,
+        "employee_contribution": 2189.0
+      },
+      {
+        "range": ">19900.01;<=20000.00",
+        "employer_contribution": 2400.0,
+        "employee_contribution": 2200.0
+      },
+      {
+        "range": ">20000.00",
+        "employer_contribution": "12% of monthly wages",
+        "employee_contribution": "11% of monthly wages",
+        "note": "Applies for months where wages exceed RM20,000.00. Total contribution (incl. cents) rounded up to next ringgit."
+      }
+    ]
+  },
+  "categoryB": {
+    "description": "Malaysian citizen employees aged 60 years and above - Part E of Third Schedule",
+    "rates": [
+      {
+        "range": ">0.01;<=10.00",
+        "employer_contribution": 0.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10.01;<=20.00",
+        "employer_contribution": 1.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">20.01;<=40.00",
+        "employer_contribution": 2.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">40.01;<=60.00",
+        "employer_contribution": 3.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">60.01;<=80.00",
+        "employer_contribution": 4.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">80.01;<=100.00",
+        "employer_contribution": 4.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">100.01;<=120.00",
+        "employer_contribution": 5.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">120.01;<=140.00",
+        "employer_contribution": 6.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">140.01;<=160.00",
+        "employer_contribution": 7.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">160.01;<=180.00",
+        "employer_contribution": 8.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">180.01;<=200.00",
+        "employer_contribution": 8.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">200.01;<=220.00",
+        "employer_contribution": 9.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">220.01;<=240.00",
+        "employer_contribution": 10.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">240.01;<=260.00",
+        "employer_contribution": 11.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">260.01;<=280.00",
+        "employer_contribution": 12.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">280.01;<=300.00",
+        "employer_contribution": 12.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">300.01;<=320.00",
+        "employer_contribution": 13.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">320.01;<=340.00",
+        "employer_contribution": 14.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">340.01;<=360.00",
+        "employer_contribution": 15.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">360.01;<=380.00",
+        "employer_contribution": 16.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">380.01;<=400.00",
+        "employer_contribution": 16.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">400.01;<=420.00",
+        "employer_contribution": 17.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">420.01;<=440.00",
+        "employer_contribution": 18.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">440.01;<=460.00",
+        "employer_contribution": 19.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">460.01;<=480.00",
+        "employer_contribution": 20.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">480.01;<=500.00",
+        "employer_contribution": 20.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">500.01;<=520.00",
+        "employer_contribution": 21.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">520.01;<=540.00",
+        "employer_contribution": 22.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">540.01;<=560.00",
+        "employer_contribution": 23.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">560.01;<=580.00",
+        "employer_contribution": 24.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">580.01;<=600.00",
+        "employer_contribution": 24.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">600.01;<=620.00",
+        "employer_contribution": 25.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">620.01;<=640.00",
+        "employer_contribution": 26.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">640.01;<=660.00",
+        "employer_contribution": 27.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">660.01;<=680.00",
+        "employer_contribution": 28.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">680.01;<=700.00",
+        "employer_contribution": 28.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">700.01;<=720.00",
+        "employer_contribution": 29.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">720.01;<=740.00",
+        "employer_contribution": 30.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">740.01;<=760.00",
+        "employer_contribution": 31.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">760.01;<=780.00",
+        "employer_contribution": 32.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">780.01;<=800.00",
+        "employer_contribution": 32.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">800.01;<=820.00",
+        "employer_contribution": 33.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">820.01;<=840.00",
+        "employer_contribution": 34.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">840.01;<=860.00",
+        "employer_contribution": 35.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">860.01;<=880.00",
+        "employer_contribution": 36.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">880.01;<=900.00",
+        "employer_contribution": 36.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">900.01;<=920.00",
+        "employer_contribution": 37.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">920.01;<=940.00",
+        "employer_contribution": 38.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">940.01;<=960.00",
+        "employer_contribution": 39.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">960.01;<=980.00",
+        "employer_contribution": 40.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">980.01;<=1000.00",
+        "employer_contribution": 40.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1000.01;<=1020.00",
+        "employer_contribution": 41.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1020.01;<=1040.00",
+        "employer_contribution": 42.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1040.01;<=1060.00",
+        "employer_contribution": 43.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1060.01;<=1080.00",
+        "employer_contribution": 44.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1080.01;<=1100.00",
+        "employer_contribution": 44.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1100.01;<=1120.00",
+        "employer_contribution": 45.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1120.01;<=1140.00",
+        "employer_contribution": 46.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1140.01;<=1160.00",
+        "employer_contribution": 47.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1160.01;<=1180.00",
+        "employer_contribution": 48.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1180.01;<=1200.00",
+        "employer_contribution": 48.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1200.01;<=1220.00",
+        "employer_contribution": 49.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1220.01;<=1240.00",
+        "employer_contribution": 50.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1240.01;<=1260.00",
+        "employer_contribution": 51.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1260.01;<=1280.00",
+        "employer_contribution": 52.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1280.01;<=1300.00",
+        "employer_contribution": 52.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1300.01;<=1320.00",
+        "employer_contribution": 53.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1320.01;<=1340.00",
+        "employer_contribution": 54.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1340.01;<=1360.00",
+        "employer_contribution": 55.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1360.01;<=1380.00",
+        "employer_contribution": 56.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1380.01;<=1400.00",
+        "employer_contribution": 56.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1400.01;<=1420.00",
+        "employer_contribution": 57.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1420.01;<=1440.00",
+        "employer_contribution": 58.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1440.01;<=1460.00",
+        "employer_contribution": 59.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1460.01;<=1480.00",
+        "employer_contribution": 60.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1480.01;<=1500.00",
+        "employer_contribution": 60.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1500.01;<=1520.00",
+        "employer_contribution": 61.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1520.01;<=1540.00",
+        "employer_contribution": 62.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1540.01;<=1560.00",
+        "employer_contribution": 63.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1560.01;<=1580.00",
+        "employer_contribution": 64.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1580.01;<=1600.00",
+        "employer_contribution": 64.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1600.01;<=1620.00",
+        "employer_contribution": 65.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1620.01;<=1640.00",
+        "employer_contribution": 66.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1640.01;<=1660.00",
+        "employer_contribution": 67.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1660.01;<=1680.00",
+        "employer_contribution": 68.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1680.01;<=1700.00",
+        "employer_contribution": 68.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1700.01;<=1720.00",
+        "employer_contribution": 69.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1720.01;<=1740.00",
+        "employer_contribution": 70.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1740.01;<=1760.00",
+        "employer_contribution": 71.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1760.01;<=1780.00",
+        "employer_contribution": 72.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1780.01;<=1800.00",
+        "employer_contribution": 72.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1800.01;<=1820.00",
+        "employer_contribution": 73.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1820.01;<=1840.00",
+        "employer_contribution": 74.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1840.01;<=1860.00",
+        "employer_contribution": 75.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1860.01;<=1880.00",
+        "employer_contribution": 76.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1880.01;<=1900.00",
+        "employer_contribution": 76.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1900.01;<=1920.00",
+        "employer_contribution": 77.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1920.01;<=1940.00",
+        "employer_contribution": 78.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1940.01;<=1960.00",
+        "employer_contribution": 79.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1960.01;<=1980.00",
+        "employer_contribution": 80.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">1980.01;<=2000.00",
+        "employer_contribution": 80.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2000.01;<=2020.00",
+        "employer_contribution": 81.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2020.01;<=2040.00",
+        "employer_contribution": 82.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2040.01;<=2060.00",
+        "employer_contribution": 83.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2060.01;<=2080.00",
+        "employer_contribution": 84.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2080.01;<=2100.00",
+        "employer_contribution": 84.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2100.01;<=2120.00",
+        "employer_contribution": 85.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2120.01;<=2140.00",
+        "employer_contribution": 86.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2140.01;<=2160.00",
+        "employer_contribution": 87.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2160.01;<=2180.00",
+        "employer_contribution": 88.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2180.01;<=2200.00",
+        "employer_contribution": 88.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2200.01;<=2220.00",
+        "employer_contribution": 89.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2220.01;<=2240.00",
+        "employer_contribution": 90.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2240.01;<=2260.00",
+        "employer_contribution": 91.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2260.01;<=2280.00",
+        "employer_contribution": 92.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2280.01;<=2300.00",
+        "employer_contribution": 92.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2300.01;<=2320.00",
+        "employer_contribution": 93.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2320.01;<=2340.00",
+        "employer_contribution": 94.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2340.01;<=2360.00",
+        "employer_contribution": 95.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2360.01;<=2380.00",
+        "employer_contribution": 96.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2380.01;<=2400.00",
+        "employer_contribution": 96.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2400.01;<=2420.00",
+        "employer_contribution": 97.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2420.01;<=2440.00",
+        "employer_contribution": 98.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2440.01;<=2460.00",
+        "employer_contribution": 99.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2460.01;<=2480.00",
+        "employer_contribution": 100.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2480.01;<=2500.00",
+        "employer_contribution": 100.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2500.01;<=2520.00",
+        "employer_contribution": 101.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2520.01;<=2540.00",
+        "employer_contribution": 102.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2540.01;<=2560.00",
+        "employer_contribution": 103.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2560.01;<=2580.00",
+        "employer_contribution": 104.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2580.01;<=2600.00",
+        "employer_contribution": 104.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2600.01;<=2620.00",
+        "employer_contribution": 105.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2620.01;<=2640.00",
+        "employer_contribution": 106.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2640.01;<=2660.00",
+        "employer_contribution": 107.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2660.01;<=2680.00",
+        "employer_contribution": 108.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2680.01;<=2700.00",
+        "employer_contribution": 108.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2700.01;<=2720.00",
+        "employer_contribution": 109.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2720.01;<=2740.00",
+        "employer_contribution": 110.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2740.01;<=2760.00",
+        "employer_contribution": 111.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2760.01;<=2780.00",
+        "employer_contribution": 112.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2780.01;<=2800.00",
+        "employer_contribution": 112.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2800.01;<=2820.00",
+        "employer_contribution": 113.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2820.01;<=2840.00",
+        "employer_contribution": 114.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2840.01;<=2860.00",
+        "employer_contribution": 115.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2860.01;<=2880.00",
+        "employer_contribution": 116.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2880.01;<=2900.00",
+        "employer_contribution": 116.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2900.01;<=2920.00",
+        "employer_contribution": 117.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2920.01;<=2940.00",
+        "employer_contribution": 118.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2940.01;<=2960.00",
+        "employer_contribution": 119.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2960.01;<=2980.00",
+        "employer_contribution": 120.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">2980.01;<=3000.00",
+        "employer_contribution": 120.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3000.01;<=3020.00",
+        "employer_contribution": 121.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3020.01;<=3040.00",
+        "employer_contribution": 122.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3040.01;<=3060.00",
+        "employer_contribution": 123.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3060.01;<=3080.00",
+        "employer_contribution": 124.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3080.01;<=3100.00",
+        "employer_contribution": 124.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3100.01;<=3120.00",
+        "employer_contribution": 125.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3120.01;<=3140.00",
+        "employer_contribution": 126.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3140.01;<=3160.00",
+        "employer_contribution": 127.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3160.01;<=3180.00",
+        "employer_contribution": 128.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3180.01;<=3200.00",
+        "employer_contribution": 128.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3200.01;<=3220.00",
+        "employer_contribution": 129.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3220.01;<=3240.00",
+        "employer_contribution": 130.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3240.01;<=3260.00",
+        "employer_contribution": 131.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3260.01;<=3280.00",
+        "employer_contribution": 132.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3280.01;<=3300.00",
+        "employer_contribution": 132.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3300.01;<=3320.00",
+        "employer_contribution": 133.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3320.01;<=3340.00",
+        "employer_contribution": 134.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3340.01;<=3360.00",
+        "employer_contribution": 135.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3360.01;<=3380.00",
+        "employer_contribution": 136.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3380.01;<=3400.00",
+        "employer_contribution": 136.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3400.01;<=3420.00",
+        "employer_contribution": 137.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3420.01;<=3440.00",
+        "employer_contribution": 138.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3440.01;<=3460.00",
+        "employer_contribution": 139.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3460.01;<=3480.00",
+        "employer_contribution": 140.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3480.01;<=3500.00",
+        "employer_contribution": 140.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3500.01;<=3520.00",
+        "employer_contribution": 141.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3520.01;<=3540.00",
+        "employer_contribution": 142.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3540.01;<=3560.00",
+        "employer_contribution": 143.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3560.01;<=3580.00",
+        "employer_contribution": 144.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3580.01;<=3600.00",
+        "employer_contribution": 144.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3600.01;<=3620.00",
+        "employer_contribution": 145.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3620.01;<=3640.00",
+        "employer_contribution": 146.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3640.01;<=3660.00",
+        "employer_contribution": 147.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3660.01;<=3680.00",
+        "employer_contribution": 148.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3680.01;<=3700.00",
+        "employer_contribution": 148.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3700.01;<=3720.00",
+        "employer_contribution": 149.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3720.01;<=3740.00",
+        "employer_contribution": 150.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3740.01;<=3760.00",
+        "employer_contribution": 151.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3760.01;<=3780.00",
+        "employer_contribution": 152.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3780.01;<=3800.00",
+        "employer_contribution": 152.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3800.01;<=3820.00",
+        "employer_contribution": 153.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3820.01;<=3840.00",
+        "employer_contribution": 154.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3840.01;<=3860.00",
+        "employer_contribution": 155.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3860.01;<=3880.00",
+        "employer_contribution": 156.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3880.01;<=3900.00",
+        "employer_contribution": 156.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3900.01;<=3920.00",
+        "employer_contribution": 157.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3920.01;<=3940.00",
+        "employer_contribution": 158.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3940.01;<=3960.00",
+        "employer_contribution": 159.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3960.01;<=3980.00",
+        "employer_contribution": 160.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">3980.01;<=4000.00",
+        "employer_contribution": 160.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4000.01;<=4020.00",
+        "employer_contribution": 161.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4020.01;<=4040.00",
+        "employer_contribution": 162.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4040.01;<=4060.00",
+        "employer_contribution": 163.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4060.01;<=4080.00",
+        "employer_contribution": 164.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4080.01;<=4100.00",
+        "employer_contribution": 164.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4100.01;<=4120.00",
+        "employer_contribution": 165.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4120.01;<=4140.00",
+        "employer_contribution": 166.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4140.01;<=4160.00",
+        "employer_contribution": 167.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4160.01;<=4180.00",
+        "employer_contribution": 168.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4180.01;<=4200.00",
+        "employer_contribution": 168.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4200.01;<=4220.00",
+        "employer_contribution": 169.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4220.01;<=4240.00",
+        "employer_contribution": 170.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4240.01;<=4260.00",
+        "employer_contribution": 171.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4260.01;<=4280.00",
+        "employer_contribution": 172.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4280.01;<=4300.00",
+        "employer_contribution": 172.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4300.01;<=4320.00",
+        "employer_contribution": 173.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4320.01;<=4340.00",
+        "employer_contribution": 174.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4340.01;<=4360.00",
+        "employer_contribution": 175.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4360.01;<=4380.00",
+        "employer_contribution": 176.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4380.01;<=4400.00",
+        "employer_contribution": 176.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4400.01;<=4420.00",
+        "employer_contribution": 177.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4420.01;<=4440.00",
+        "employer_contribution": 178.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4440.01;<=4460.00",
+        "employer_contribution": 179.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4460.01;<=4480.00",
+        "employer_contribution": 180.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4480.01;<=4500.00",
+        "employer_contribution": 180.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4500.01;<=4520.00",
+        "employer_contribution": 181.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4520.01;<=4540.00",
+        "employer_contribution": 182.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4540.01;<=4560.00",
+        "employer_contribution": 183.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4560.01;<=4580.00",
+        "employer_contribution": 184.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4580.01;<=4600.00",
+        "employer_contribution": 184.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4600.01;<=4620.00",
+        "employer_contribution": 185.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4620.01;<=4640.00",
+        "employer_contribution": 186.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4640.01;<=4660.00",
+        "employer_contribution": 187.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4660.01;<=4680.00",
+        "employer_contribution": 188.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4680.01;<=4700.00",
+        "employer_contribution": 188.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4700.01;<=4720.00",
+        "employer_contribution": 189.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4720.01;<=4740.00",
+        "employer_contribution": 190.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4740.01;<=4760.00",
+        "employer_contribution": 191.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4760.01;<=4780.00",
+        "employer_contribution": 192.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4780.01;<=4800.00",
+        "employer_contribution": 192.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4800.01;<=4820.00",
+        "employer_contribution": 193.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4820.01;<=4840.00",
+        "employer_contribution": 194.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4840.01;<=4860.00",
+        "employer_contribution": 195.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4860.01;<=4880.00",
+        "employer_contribution": 196.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4880.01;<=4900.00",
+        "employer_contribution": 196.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4900.01;<=4920.00",
+        "employer_contribution": 197.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4920.01;<=4940.00",
+        "employer_contribution": 198.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4940.01;<=4960.00",
+        "employer_contribution": 199.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4960.01;<=4980.00",
+        "employer_contribution": 200.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">4980.01;<=5000.00",
+        "employer_contribution": 200.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5000.01;<=5100.00",
+        "employer_contribution": 204.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5100.01;<=5200.00",
+        "employer_contribution": 208.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5200.01;<=5300.00",
+        "employer_contribution": 212.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5300.01;<=5400.00",
+        "employer_contribution": 216.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5400.01;<=5500.00",
+        "employer_contribution": 220.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5500.01;<=5600.00",
+        "employer_contribution": 224.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5600.01;<=5700.00",
+        "employer_contribution": 228.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5700.01;<=5800.00",
+        "employer_contribution": 232.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5800.01;<=5900.00",
+        "employer_contribution": 236.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">5900.01;<=6000.00",
+        "employer_contribution": 240.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6000.01;<=6100.00",
+        "employer_contribution": 244.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6100.01;<=6200.00",
+        "employer_contribution": 248.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6200.01;<=6300.00",
+        "employer_contribution": 252.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6300.01;<=6400.00",
+        "employer_contribution": 256.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6400.01;<=6500.00",
+        "employer_contribution": 260.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6500.01;<=6600.00",
+        "employer_contribution": 264.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6600.01;<=6700.00",
+        "employer_contribution": 268.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6700.01;<=6800.00",
+        "employer_contribution": 272.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6800.01;<=6900.00",
+        "employer_contribution": 276.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">6900.01;<=7000.00",
+        "employer_contribution": 280.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7000.01;<=7100.00",
+        "employer_contribution": 284.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7100.01;<=7200.00",
+        "employer_contribution": 288.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7200.01;<=7300.00",
+        "employer_contribution": 292.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7300.01;<=7400.00",
+        "employer_contribution": 296.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7400.01;<=7500.00",
+        "employer_contribution": 300.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7500.01;<=7600.00",
+        "employer_contribution": 304.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7600.01;<=7700.00",
+        "employer_contribution": 308.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7700.01;<=7800.00",
+        "employer_contribution": 312.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7800.01;<=7900.00",
+        "employer_contribution": 316.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">7900.01;<=8000.00",
+        "employer_contribution": 320.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8000.01;<=8100.00",
+        "employer_contribution": 324.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8100.01;<=8200.00",
+        "employer_contribution": 328.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8200.01;<=8300.00",
+        "employer_contribution": 332.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8300.01;<=8400.00",
+        "employer_contribution": 336.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8400.01;<=8500.00",
+        "employer_contribution": 340.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8500.01;<=8600.00",
+        "employer_contribution": 344.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8600.01;<=8700.00",
+        "employer_contribution": 348.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8700.01;<=8800.00",
+        "employer_contribution": 352.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8800.01;<=8900.00",
+        "employer_contribution": 356.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">8900.01;<=9000.00",
+        "employer_contribution": 360.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9000.01;<=9100.00",
+        "employer_contribution": 364.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9100.01;<=9200.00",
+        "employer_contribution": 368.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9200.01;<=9300.00",
+        "employer_contribution": 372.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9300.01;<=9400.00",
+        "employer_contribution": 376.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9400.01;<=9500.00",
+        "employer_contribution": 380.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9500.01;<=9600.00",
+        "employer_contribution": 384.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9600.01;<=9700.00",
+        "employer_contribution": 388.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9700.01;<=9800.00",
+        "employer_contribution": 392.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9800.01;<=9900.00",
+        "employer_contribution": 396.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">9900.01;<=10000.00",
+        "employer_contribution": 400.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10000.01;<=10100.00",
+        "employer_contribution": 404.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10100.01;<=10200.00",
+        "employer_contribution": 408.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10200.01;<=10300.00",
+        "employer_contribution": 412.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10300.01;<=10400.00",
+        "employer_contribution": 416.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10400.01;<=10500.00",
+        "employer_contribution": 420.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10500.01;<=10600.00",
+        "employer_contribution": 424.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10600.01;<=10700.00",
+        "employer_contribution": 428.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10700.01;<=10800.00",
+        "employer_contribution": 432.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10800.01;<=10900.00",
+        "employer_contribution": 436.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">10900.01;<=11000.00",
+        "employer_contribution": 440.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11000.01;<=11100.00",
+        "employer_contribution": 444.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11100.01;<=11200.00",
+        "employer_contribution": 448.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11200.01;<=11300.00",
+        "employer_contribution": 452.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11300.01;<=11400.00",
+        "employer_contribution": 456.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11400.01;<=11500.00",
+        "employer_contribution": 460.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11500.01;<=11600.00",
+        "employer_contribution": 464.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11600.01;<=11700.00",
+        "employer_contribution": 468.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11700.01;<=11800.00",
+        "employer_contribution": 472.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11800.01;<=11900.00",
+        "employer_contribution": 476.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">11900.01;<=12000.00",
+        "employer_contribution": 480.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12000.01;<=12100.00",
+        "employer_contribution": 484.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12100.01;<=12200.00",
+        "employer_contribution": 488.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12200.01;<=12300.00",
+        "employer_contribution": 492.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12300.01;<=12400.00",
+        "employer_contribution": 496.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12400.01;<=12500.00",
+        "employer_contribution": 500.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12500.01;<=12600.00",
+        "employer_contribution": 504.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12600.01;<=12700.00",
+        "employer_contribution": 508.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12700.01;<=12800.00",
+        "employer_contribution": 512.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12800.01;<=12900.00",
+        "employer_contribution": 516.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">12900.01;<=13000.00",
+        "employer_contribution": 520.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13000.01;<=13100.00",
+        "employer_contribution": 524.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13100.01;<=13200.00",
+        "employer_contribution": 528.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13200.01;<=13300.00",
+        "employer_contribution": 532.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13300.01;<=13400.00",
+        "employer_contribution": 536.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13400.01;<=13500.00",
+        "employer_contribution": 540.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13500.01;<=13600.00",
+        "employer_contribution": 544.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13600.01;<=13700.00",
+        "employer_contribution": 548.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13700.01;<=13800.00",
+        "employer_contribution": 552.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13800.01;<=13900.00",
+        "employer_contribution": 556.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">13900.01;<=14000.00",
+        "employer_contribution": 560.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14000.01;<=14100.00",
+        "employer_contribution": 564.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14100.01;<=14200.00",
+        "employer_contribution": 568.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14200.01;<=14300.00",
+        "employer_contribution": 572.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14300.01;<=14400.00",
+        "employer_contribution": 576.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14400.01;<=14500.00",
+        "employer_contribution": 580.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14500.01;<=14600.00",
+        "employer_contribution": 584.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14600.01;<=14700.00",
+        "employer_contribution": 588.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14700.01;<=14800.00",
+        "employer_contribution": 592.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14800.01;<=14900.00",
+        "employer_contribution": 596.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">14900.01;<=15000.00",
+        "employer_contribution": 600.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15000.01;<=15100.00",
+        "employer_contribution": 604.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15100.01;<=15200.00",
+        "employer_contribution": 608.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15200.01;<=15300.00",
+        "employer_contribution": 612.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15300.01;<=15400.00",
+        "employer_contribution": 616.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15400.01;<=15500.00",
+        "employer_contribution": 620.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15500.01;<=15600.00",
+        "employer_contribution": 624.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15600.01;<=15700.00",
+        "employer_contribution": 628.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15700.01;<=15800.00",
+        "employer_contribution": 632.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15800.01;<=15900.00",
+        "employer_contribution": 636.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">15900.01;<=16000.00",
+        "employer_contribution": 640.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16000.01;<=16100.00",
+        "employer_contribution": 644.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16100.01;<=16200.00",
+        "employer_contribution": 648.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16200.01;<=16300.00",
+        "employer_contribution": 652.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16300.01;<=16400.00",
+        "employer_contribution": 656.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16400.01;<=16500.00",
+        "employer_contribution": 660.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16500.01;<=16600.00",
+        "employer_contribution": 664.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16600.01;<=16700.00",
+        "employer_contribution": 668.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16700.01;<=16800.00",
+        "employer_contribution": 672.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16800.01;<=16900.00",
+        "employer_contribution": 676.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">16900.01;<=17000.00",
+        "employer_contribution": 680.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17000.01;<=17100.00",
+        "employer_contribution": 684.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17100.01;<=17200.00",
+        "employer_contribution": 688.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17200.01;<=17300.00",
+        "employer_contribution": 692.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17300.01;<=17400.00",
+        "employer_contribution": 696.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17400.01;<=17500.00",
+        "employer_contribution": 700.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17500.01;<=17600.00",
+        "employer_contribution": 704.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17600.01;<=17700.00",
+        "employer_contribution": 708.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17700.01;<=17800.00",
+        "employer_contribution": 712.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17800.01;<=17900.00",
+        "employer_contribution": 716.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">17900.01;<=18000.00",
+        "employer_contribution": 720.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18000.01;<=18100.00",
+        "employer_contribution": 724.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18100.01;<=18200.00",
+        "employer_contribution": 728.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18200.01;<=18300.00",
+        "employer_contribution": 732.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18300.01;<=18400.00",
+        "employer_contribution": 736.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18400.01;<=18500.00",
+        "employer_contribution": 740.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18500.01;<=18600.00",
+        "employer_contribution": 744.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18600.01;<=18700.00",
+        "employer_contribution": 748.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18700.01;<=18800.00",
+        "employer_contribution": 752.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18800.01;<=18900.00",
+        "employer_contribution": 756.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">18900.01;<=19000.00",
+        "employer_contribution": 760.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19000.01;<=19100.00",
+        "employer_contribution": 764.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19100.01;<=19200.00",
+        "employer_contribution": 768.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19200.01;<=19300.00",
+        "employer_contribution": 772.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19300.01;<=19400.00",
+        "employer_contribution": 776.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19400.01;<=19500.00",
+        "employer_contribution": 780.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19500.01;<=19600.00",
+        "employer_contribution": 784.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19600.01;<=19700.00",
+        "employer_contribution": 788.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19700.01;<=19800.00",
+        "employer_contribution": 792.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19800.01;<=19900.00",
+        "employer_contribution": 796.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">19900.01;<=20000.00",
+        "employer_contribution": 800.0,
+        "employee_contribution": 0.0
+      },
+      {
+        "range": ">20000.00",
+        "employer_contribution": "4% of monthly wages",
+        "employee_contribution": "0% of monthly wages",
+        "note": "Applies for months where wages exceed RM20,000.00. Total contribution (incl. cents) rounded up to next ringgit."
+      }
+    ]
+  }
+}

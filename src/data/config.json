@@ -1,0 +1,19 @@
+{
+  "fixed_overtime_days": 26,
+  "fixed_unpaid_leave_days": "calendar_days",
+  "fixed_late_hours_days": "calendar_days",
+  "overtime_rates": {
+    "weekday": 1.5,
+    "weekend": 2.0,
+    "public_holiday": 3.0
+  },
+  "pcb": {
+    "tax_brackets_file": "src/data/income_tax_bracket_2025.json",
+    "reliefs": {
+      "self": 9000,
+      "spouse": 4000,
+      "child": 2000,
+      "epf": 4000
+    }
+  }
+}

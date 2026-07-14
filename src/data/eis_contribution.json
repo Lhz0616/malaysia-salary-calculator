@@ -1,0 +1,392 @@
+[
+  {
+    "amount_of_wages": "<=30",
+    "employer_contribution": "0.05",
+    "employee_contribution": "0.05",
+    "total_contribution": "0.10"
+  },
+  {
+    "amount_of_wages": ">30;<=50",
+    "employer_contribution": "0.10",
+    "employee_contribution": "0.10",
+    "total_contribution": "0.20"
+  },
+  {
+    "amount_of_wages": ">50;<=70",
+    "employer_contribution": "0.15",
+    "employee_contribution": "0.15",
+    "total_contribution": "0.30"
+  },
+  {
+    "amount_of_wages": ">70;<=100",
+    "employer_contribution": "0.20",
+    "employee_contribution": "0.20",
+    "total_contribution": "0.40"
+  },
+  {
+    "amount_of_wages": ">100;<=140",
+    "employer_contribution": "0.25",
+    "employee_contribution": "0.25",
+    "total_contribution": "0.50"
+  },
+  {
+    "amount_of_wages": ">140;<=200",
+    "employer_contribution": "0.35",
+    "employee_contribution": "0.35",
+    "total_contribution": "0.70"
+  },
+  {
+    "amount_of_wages": ">200;<=300",
+    "employer_contribution": "0.50",
+    "employee_contribution": "0.50",
+    "total_contribution": "1.00"
+  },
+  {
+    "amount_of_wages": ">300;<=400",
+    "employer_contribution": "0.70",
+    "employee_contribution": "0.70",
+    "total_contribution": "1.40"
+  },
+  {
+    "amount_of_wages": ">400;<=500",
+    "employer_contribution": "0.90",
+    "employee_contribution": "0.90",
+    "total_contribution": "1.80"
+  },
+  {
+    "amount_of_wages": ">500;<=600",
+    "employer_contribution": "1.10",
+    "employee_contribution": "1.10",
+    "total_contribution": "2.20"
+  },
+  {
+    "amount_of_wages": ">600;<=700",
+    "employer_contribution": "1.30",
+    "employee_contribution": "1.30",
+    "total_contribution": "2.60"
+  },
+  {
+    "amount_of_wages": ">700;<=800",
+    "employer_contribution": "1.50",
+    "employee_contribution": "1.50",
+    "total_contribution": "3.00"
+  },
+  {
+    "amount_of_wages": ">800;<=900",
+    "employer_contribution": "1.70",
+    "employee_contribution": "1.70",
+    "total_contribution": "3.40"
+  },
+  {
+    "amount_of_wages": ">900;<=1000",
+    "employer_contribution": "1.90",
+    "employee_contribution": "1.90",
+    "total_contribution": "3.80"
+  },
+  {
+    "amount_of_wages": ">1000;<=1100",
+    "employer_contribution": "2.10",
+    "employee_contribution": "2.10",
+    "total_contribution": "4.20"
+  },
+  {
+    "amount_of_wages": ">1100;<=1200",
+    "employer_contribution": "2.30",
+    "employee_contribution": "2.30",
+    "total_contribution": "4.60"
+  },
+  {
+    "amount_of_wages": ">1200;<=1300",
+    "employer_contribution": "2.50",
+    "employee_contribution": "2.50",
+    "total_contribution": "5.00"
+  },
+  {
+    "amount_of_wages": ">1300;<=1400",
+    "employer_contribution": "2.70",
+    "employee_contribution": "2.70",
+    "total_contribution": "5.40"
+  },
+  {
+    "amount_of_wages": ">1400;<=1500",
+    "employer_contribution": "2.90",
+    "employee_contribution": "2.90",
+    "total_contribution": "5.80"
+  },
+  {
+    "amount_of_wages": ">1500;<=1600",
+    "employer_contribution": "3.10",
+    "employee_contribution": "3.10",
+    "total_contribution": "6.20"
+  },
+  {
+    "amount_of_wages": ">1600;<=1700",
+    "employer_contribution": "3.30",
+    "employee_contribution": "3.30",
+    "total_contribution": "6.60"
+  },
+  {
+    "amount_of_wages": ">1700;<=1800",
+    "employer_contribution": "3.50",
+    "employee_contribution": "3.50",
+    "total_contribution": "7.00"
+  },
+  {
+    "amount_of_wages": ">1800;<=1900",
+    "employer_contribution": "3.70",
+    "employee_contribution": "3.70",
+    "total_contribution": "7.40"
+  },
+  {
+    "amount_of_wages": ">1900;<=2000",
+    "employer_contribution": "3.90",
+    "employee_contribution": "3.90",
+    "total_contribution": "7.80"
+  },
+  {
+    "amount_of_wages": ">2000;<=2100",
+    "employer_contribution": "4.10",
+    "employee_contribution": "4.10",
+    "total_contribution": "8.20"
+  },
+  {
+    "amount_of_wages": ">2100;<=2200",
+    "employer_contribution": "4.30",
+    "employee_contribution": "4.30",
+    "total_contribution": "8.60"
+  },
+  {
+    "amount_of_wages": ">2200;<=2300",
+    "employer_contribution": "4.50",
+    "employee_contribution": "4.50",
+    "total_contribution": "9.00"
+  },
+  {
+    "amount_of_wages": ">2300;<=2400",
+    "employer_contribution": "4.70",
+    "employee_contribution": "4.70",
+    "total_contribution": "9.40"
+  },
+  {
+    "amount_of_wages": ">2400;<=2500",
+    "employer_contribution": "4.90",
+    "employee_contribution": "4.90",
+    "total_contribution": "9.80"
+  },
+  {
+    "amount_of_wages": ">2500;<=2600",
+    "employer_contribution": "5.10",
+    "employee_contribution": "5.10",
+    "total_contribution": "10.20"
+  },
+  {
+    "amount_of_wages": ">2600;<=2700",
+    "employer_contribution": "5.30",
+    "employee_contribution": "5.30",
+    "total_contribution": "10.60"
+  },
+  {
+    "amount_of_wages": ">2700;<=2800",
+    "employer_contribution": "5.50",
+    "employee_contribution": "5.50",
+    "total_contribution": "11.00"
+  },
+  {
+    "amount_of_wages": ">2800;<=2900",
+    "employer_contribution": "5.70",
+    "employee_contribution": "5.70",
+    "total_contribution": "11.40"
+  },
+  {
+    "amount_of_wages": ">2900;<=3000",
+    "employer_contribution": "5.90",
+    "employee_contribution": "5.90",
+    "total_contribution": "11.80"
+  },
+  {
+    "amount_of_wages": ">3000;<=3100",
+    "employer_contribution": "6.10",
+    "employee_contribution": "6.10",
+    "total_contribution": "12.20"
+  },
+  {
+    "amount_of_wages": ">3100;<=3200",
+    "employer_contribution": "6.30",
+    "employee_contribution": "6.30",
+    "total_contribution": "12.60"
+  },
+  {
+    "amount_of_wages": ">3200;<=3300",
+    "employer_contribution": "6.50",
+    "employee_contribution": "6.50",
+    "total_contribution": "13.00"
+  },
+  {
+    "amount_of_wages": ">3300;<=3400",
+    "employer_contribution": "6.70",
+    "employee_contribution": "6.70",
+    "total_contribution": "13.40"
+  },
+  {
+    "amount_of_wages": ">3400;<=3500",
+    "employer_contribution": "6.90",
+    "employee_contribution": "6.90",
+    "total_contribution": "13.80"
+  },
+  {
+    "amount_of_wages": ">3500;<=3600",
+    "employer_contribution": "7.10",
+    "employee_contribution": "7.10",
+    "total_contribution": "14.20"
+  },
+  {
+    "amount_of_wages": ">3600;<=3700",
+    "employer_contribution": "7.30",
+    "employee_contribution": "7.30",
+    "total_contribution": "14.60"
+  },
+  {
+    "amount_of_wages": ">3700;<=3800",
+    "employer_contribution": "7.50",
+    "employee_contribution": "7.50",
+    "total_contribution": "15.00"
+  },
+  {
+    "amount_of_wages": ">3800;<=3900",
+    "employer_contribution": "7.70",
+    "employee_contribution": "7.70",
+    "total_contribution": "15.40"
+  },
+  {
+    "amount_of_wages": ">3900;<=4000",
+    "employer_contribution": "7.90",
+    "employee_contribution": "7.90",
+    "total_contribution": "15.80"
+  },
+  {
+    "amount_of_wages": ">4000;<=4100",
+    "employer_contribution": "8.10",
+    "employee_contribution": "8.10",
+    "total_contribution": "16.20"
+  },
+  {
+    "amount_of_wages": ">4100;<=4200",
+    "employer_contribution": "8.30",
+    "employee_contribution": "8.30",
+    "total_contribution": "16.60"
+  },
+  {
+    "amount_of_wages": ">4200;<=4300",
+    "employer_contribution": "8.50",
+    "employee_contribution": "8.50",
+    "total_contribution": "17.00"
+  },
+  {
+    "amount_of_wages": ">4300;<=4400",
+    "employer_contribution": "8.70",
+    "employee_contribution": "8.70",
+    "total_contribution": "17.40"
+  },
+  {
+    "amount_of_wages": ">4400;<=4500",
+    "employer_contribution": "8.90",
+    "employee_contribution": "8.90",
+    "total_contribution": "17.80"
+  },
+  {
+    "amount_of_wages": ">4500;<=4600",
+    "employer_contribution": "9.10",
+    "employee_contribution": "9.10",
+    "total_contribution": "18.20"
+  },
+  {
+    "amount_of_wages": ">4600;<=4700",
+    "employer_contribution": "9.30",
+    "employee_contribution": "9.30",
+    "total_contribution": "18.60"
+  },
+  {
+    "amount_of_wages": ">4700;<=4800",
+    "employer_contribution": "9.50",
+    "employee_contribution": "9.50",
+    "total_contribution": "19.00"
+  },
+  {
+    "amount_of_wages": ">4800;<=4900",
+    "employer_contribution": "9.70",
+    "employee_contribution": "9.70",
+    "total_contribution": "19.40"
+  },
+  {
+    "amount_of_wages": ">4900;<=5000",
+    "employer_contribution": "9.90",
+    "employee_contribution": "9.90",
+    "total_contribution": "19.80"
+  },
+  {
+    "amount_of_wages": ">5000;<=5100",
+    "employer_contribution": "10.10",
+    "employee_contribution": "10.10",
+    "total_contribution": "20.20"
+  },
+  {
+    "amount_of_wages": ">5100;<=5200",
+    "employer_contribution": "10.30",
+    "employee_contribution": "10.30",
+    "total_contribution": "20.60"
+  },
+  {
+    "amount_of_wages": ">5200;<=5300",
+    "employer_contribution": "10.50",
+    "employee_contribution": "10.50",
+    "total_contribution": "21.00"
+  },
+  {
+    "amount_of_wages": ">5300;<=5400",
+    "employer_contribution": "10.70",
+    "employee_contribution": "10.70",
+    "total_contribution": "21.40"
+  },
+  {
+    "amount_of_wages": ">5400;<=5500",
+    "employer_contribution": "10.90",
+    "employee_contribution": "10.90",
+    "total_contribution": "21.80"
+  },
+  {
+    "amount_of_wages": ">5500;<=5600",
+    "employer_contribution": "11.10",
+    "employee_contribution": "11.10",
+    "total_contribution": "22.20"
+  },
+  {
+    "amount_of_wages": ">5600;<=5700",
+    "employer_contribution": "11.30",
+    "employee_contribution": "11.30",
+    "total_contribution": "22.60"
+  },
+  {
+    "amount_of_wages": ">5700;<=5800",
+    "employer_contribution": "11.50",
+    "employee_contribution": "11.50",
+    "total_contribution": "23.00"
+  },
+  {
+    "amount_of_wages": ">5800;<=5900",
+    "employer_contribution": "11.70",
+    "employee_contribution": "11.70",
+    "total_contribution": "23.40"
+  },
+  {
+    "amount_of_wages": ">5900;<=6000",
+    "employer_contribution": "11.90",
+    "employee_contribution": "11.90",
+    "total_contribution": "23.80"
+  },
+  {
+    "amount_of_wages": ">6000",
+    "employer_contribution": "11.90",
+    "employee_contribution": "11.90",
+    "total_contribution": "23.80"
+  }
+]
