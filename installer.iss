@@ -3,7 +3,7 @@
 
 #define MyAppName "Malaysian Salary Calculator"
 #ifndef MyAppVersion
-#define MyAppVersion "0.0.2"
+#define MyAppVersion "0.0.1"
 #endif
 #define MyAppPublisher "Hong Zhi Lim"
 #define MyAppURL "https://github.com/Lhz0616/malaysia-salary-calculator"

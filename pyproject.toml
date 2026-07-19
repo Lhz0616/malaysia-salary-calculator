@@ -1,6 +1,6 @@
 [project]
 name = "salary_calculator"
-version = "0.0.2"
+version = "0.0.1"
 description = "Salary, Statutory, and PCB Calculator for Malaysia"
 dependencies = [
     "pillow>=12.3.0",
