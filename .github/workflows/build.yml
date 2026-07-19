@@ -34,9 +34,14 @@ jobs:
       - name: Determine Release Tag & Version
         id: release_info
         run: |
-          if ("${{ steps.tag_version.outputs.new_tag }}" -ne "") {
-            $tag = "${{ steps.tag_version.outputs.new_tag }}"
-            $ver = "${{ steps.tag_version.outputs.new_version }}"
+          $newTag = "${{ steps.tag_version.outputs.new_tag }}"
+          $tagVal = "${{ steps.tag_version.outputs.tag }}"
+          if ($newTag -ne "") {
+            $tag = $newTag
+            $ver = $newTag.TrimStart("v")
+          } elseif ($tagVal -ne "") {
+            $tag = if ($tagVal.StartsWith("v")) { $tagVal } else { "v$tagVal" }
+            $ver = $tagVal.TrimStart("v")
           } else {
             $tag = "${{ github.ref }}".Replace("refs/tags/", "")
             $ver = $tag.TrimStart("v")
