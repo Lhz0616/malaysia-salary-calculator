@@ -55,7 +55,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Malaysia Salary Calculator Interface][product-screenshot]](https://github.com/Lhz0616/malaysia-salary-calculator)
+![Malaysia Salary Calculator Interface][product-screenshot-dark][![Malaysia Salary Calculator Interface][product-screenshot-light]](https://github.com/Lhz0616/malaysia-salary-calculator)
 
 The **Malaysia Salary, Statutory & PCB Calculator** is a modular, high-precision desktop application built using Python and PySide6. Unlike hardcoded calculators, this app runs on a fully configurable, data-driven engine where statutory contribution tiers and tax brackets are separated into JSON schema files, making maintenance and policy updates trivial.
 
@@ -76,9 +76,11 @@ The **Malaysia Salary, Statutory & PCB Calculator** is a modular, high-precision
 This project is a showcase of AI-assisted software engineering. The workflow was designed around the following process:
 * **Prompt Engineering**: [Claude (Web Interface)](https://claude.ai) was used to bootstrap and refine the project specifications, operational constraints, and mathematical rules into the comprehensive [prompt.md](file:///C:/Lim/PythonProjects/salary_calculator/prompt.md) file.
 * **Code Generation**: The [prompt.md](file:///C:/Lim/PythonProjects/salary_calculator/prompt.md) specification was fed directly to **Antigravity CLI** and charmbracelet's **crush** to generate, structure, and assemble the entire Python/PySide6 codebase.
-* **Data Extraction**: Google Gemini in Chrome was used to scrape, extract, and format statutory tables from official portals (SOCSO, EPF, EIS, and PCB) into the structured configuration tables in the `src/data/` folder.
+* **Data Extraction**: Google Gemini in Chrome was used to scrape, extract, and format statutory tables from official portals (SOCSO, EPF, EIS, and PCB) into the structured configuration tables in the `src/data/` folder
 
 #### Additional Plugins & Tools:
+* **[Inno Setup (ISCC)](https://jrsoftware.org/isinfo.php)**: Used for compiling professional Windows Setup `.exe` installers.
+* **[GitHub Tag Action](https://github.com/mathieudutour/github-tag-action)**: Automated semantic versioning (`v1.x.x`) and release drafting in CI/CD.
 * **[DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)**: Makes AI coding agents write less, simpler code.
 * **[UPX (Ultimate Packer for eXecutables)](https://upx.github.io/)**: Used for PyInstaller module compressions to reduce standalone executable size.
 
@@ -133,13 +135,18 @@ This project uses `uv` as its package manager. If you do not have it, install it
 
 ### Packaging with PyInstaller
 
-To bundle the application into a standalone executable:
+To bundle the application into a standalone executable manually:
 ```sh
-uv run pyinstaller --onefile src/main.py
+uv run pyinstaller --noconfirm --onefile --windowed --name "MalaysianSalaryCalculator" --icon "src/icon/app_icon.ico" --add-data "src/assets;assets" --add-data "src/data;data" --add-data "src/icon;icon" src/main.py
+```
+
+Or run the automated PowerShell script to build the executable, bundle data, and compile an Inno Setup installer (`ISCC`):
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/build_installer.ps1
 ```
 
 > [!WARNING]
-> **Data Folder Dependency**: The compiled executable requires the statutory data tables to run. After exporting the project with PyInstaller, you must copy and place the `src/data/` folder (or name it `data/` or `.data/` at the root) next to the generated executable in the same directory. The application loads all rates, contribution tables, and tax brackets dynamically from these JSON files.
+> **Data Folder Dependency**: The compiled executable requires the statutory data tables to run. After exporting the project with PyInstaller, place the `src/data/` folder (named `data/` or `.data/`) next to the generated executable in the same directory (handled automatically by `scripts/build_installer.ps1`). The application loads all rates, contribution tables, and tax brackets dynamically from these JSON files.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -217,7 +224,8 @@ Project Link: [https://github.com/Lhz0616/malaysia-salary-calculator](https://gi
 [license-shield]: https://img.shields.io/github/license/Lhz0616/malaysia-salary-calculator.svg?style=for-the-badge
 [license-url]: https://github.com/Lhz0616/malaysia-salary-calculator/blob/master/LICENSE
 
-[product-screenshot]: assets/interface.png
+[product-screenshot-dark]: assets/interface_dark_mode.png
+[product-screenshot-light]: assets/interface_light_mode.png
 [payslip-screenshot]: assets/pdf.png
 [config-screenshot]: assets/config.png
 

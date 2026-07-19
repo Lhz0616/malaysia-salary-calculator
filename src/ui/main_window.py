@@ -1,6 +1,7 @@
 import calendar
 import datetime
 from decimal import Decimal
+import os
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QFormLayout,
     QLabel, QLineEdit, QComboBox, QCheckBox, QSpinBox, QDoubleSpinBox, QRadioButton,
@@ -8,23 +9,27 @@ from PySide6.QtWidgets import (
     QDialog, QScrollArea, QFrame, QTabWidget,
     QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy
 )
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QDoubleValidator, QIntValidator, QTextDocument, QPdfWriter, QPageSize, QColor, QFont
+from PySide6.QtCore import Qt, QUrl
+from PySide6.QtGui import QDoubleValidator, QIntValidator, QTextDocument, QPdfWriter, QPageSize, QColor, QFont, QIcon, QDesktopServices
 
 from core.salary_calculator import calculate_salary_package
 from core.config_loader import get_configs, save_all_config
+from core.update_checker import UpdateCheckerThread
+from ui.theme_manager import apply_theme
 
 # Rows shown in the payroll breakdown table for each employment mode.
 # Each entry is (label, merged?) where merged rows span the Employee + Employer columns.
 FULLTIMER_BREAKDOWN_ROWS = [
     ("Gross Salary", True),
+    ("Weekdays OT", True),
+    ("Weekend OT", True),
+    ("Public Holiday OT", True),
     ("Late Deduction", True),
     ("Unpaid Leave Deduction", True),
     ("EPF (Statutory)", False),
     ("SOCSO (Statutory)", False),
     ("EIS (Statutory)", False),
     ("PCB Monthly Tax Deduction", True),
-    ("Nett Take-Home Salary", True),
 ]
 
 PARTTIMER_BREAKDOWN_ROWS = [
@@ -39,75 +44,8 @@ class ConfigEditorDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle("Configuration Editor")
         self.resize(550, 480)
-        self.setStyleSheet("""
-            QDialog {
-                background-color: #0F172A;
-            }
-            QLabel {
-                color: #F8FAFC;
-                font-weight: 500;
-                font-size: 14px;
-                font-family: 'Arial';
-            }
-            QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox {
-                background-color: #1E293B;
-                border: 1px solid #475569;
-                border-radius: 6px;
-                padding: 5px 10px;
-                color: #F8FAFC;
-                font-size: 14px;
-                font-family: 'Arial';
-            }
-            QLineEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus {
-                border: 1px solid #3B82F6;
-                background-color: #1E293B;
-            }
-            QTabWidget::pane {
-                border: 1px solid #334155;
-                background-color: #0F172A;
-                border-radius: 6px;
-                padding: 8px;
-            }
-            QTabBar::tab {
-                background-color: #1E293B;
-                color: #94A3B8;
-                border: 1px solid #334155;
-                padding: 6px 10px;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-                font-weight: bold;
-                font-size: 14px;
-                font-family: 'Arial';
-            }
-            QTabBar::tab:selected {
-                background-color: #3B82F6;
-                color: #FFFFFF;
-                border-color: #3B82F6;
-            }
-            QPushButton {
-                background-color: #3B82F6;
-                color: white;
-                border: none;
-                border-radius: 6px;
-                padding: 8px 16px;
-                font-weight: bold;
-                font-size: 14px;
-                font-family: 'Arial';
-            }
-            QPushButton:hover {
-                background-color: #2563EB;
-            }
-            QPushButton#cancelBtn {
-                background-color: transparent;
-                border: 1px solid #475569;
-                color: #94A3B8;
-                font-family: 'Arial';
-            }
-            QPushButton#cancelBtn:hover {
-                background-color: #1E293B;
-                color: #F8FAFC;
-            }
-        """)
+        self.current_mode = parent.current_mode if hasattr(parent, 'current_mode') else "dark"
+        apply_theme(self, self.current_mode)
         
         # Load active configs (global in-memory collection; config page edits "config")
         try:
@@ -123,7 +61,7 @@ class ConfigEditorDialog(QDialog):
         layout.setSpacing(15)
         
         title_lbl = QLabel("Modify Global System Configuration", self)
-        title_lbl.setStyleSheet("font-size: 17px; font-weight: bold; color: #38BDF8; font-family: 'Segoe UI';")
+        title_lbl.setObjectName("sectionTitle")
         layout.addWidget(title_lbl)
         
         # Tab Widget
@@ -207,10 +145,11 @@ class ConfigEditorDialog(QDialog):
         # Action Buttons
         btn_layout = QHBoxLayout()
         cancel_btn = QPushButton("Cancel", self)
-        cancel_btn.setObjectName("cancelBtn")
+        cancel_btn.setObjectName("outlineBtn")
         cancel_btn.clicked.connect(self.reject)
         
         save_btn = QPushButton("Save & Apply", self)
+        save_btn.setObjectName("primaryBtn")
         save_btn.clicked.connect(self.on_save)
         
         btn_layout.addWidget(cancel_btn)
@@ -269,6 +208,14 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Malaysian Salary, Statutory & PCB Calculator")
         self.resize(1300, 880)
+
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        icon_path = os.path.abspath(os.path.join(script_dir, "..", "icon", "app_icon.ico"))
+        if os.path.exists(icon_path):
+            self.setWindowIcon(QIcon(icon_path))
+        
+        self.current_mode = "dark"
+        
         self.setup_ui()
         self.apply_theme()
         
@@ -278,109 +225,95 @@ class MainWindow(QMainWindow):
         # Trigger initial calculation with default inputs
         self.on_calculate()
 
+        # Check for GitHub releases in the background
+        self.update_checker = UpdateCheckerThread(parent=self)
+        self.update_checker.update_available.connect(self.on_update_available)
+        self.update_checker.start()
+
     def apply_theme(self):
-        self.setStyleSheet("""
-            QMainWindow {
-                background-color: #0F172A;
-            }
-            QWidget {
-                font-family: 'Arial';
-                color: #F8FAFC;
-            }
-            QLabel {
-                font-size: 15px;
-                font-weight: 500;
-            }
-            QLineEdit, QComboBox, QSpinBox {
-                background-color: #1E293B;
-                border: 1px solid #475569;
-                border-radius: 6px;
-                padding: 7px 12px;
-                color: #F8FAFC;
-                font-size: 15px;
-                selection-background-color: #3B82F6;
-            }
-            QLineEdit:hover, QComboBox:hover, QSpinBox:hover {
-                border: 1px solid #64748B;
-                background-color: #243349;
-            }
-            QLineEdit:focus, QComboBox:focus, QSpinBox:focus {
-                border: 1px solid #3B82F6;
-                background-color: #1E293B;
-            }
-            QCheckBox, QRadioButton {
-                font-size: 15px;
-                spacing: 8px;
-            }
-            QCheckBox::indicator, QRadioButton::indicator {
-                width: 18px;
-                height: 18px;
-            }
-            QGroupBox {
-                border: 1px solid #334155;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 14px;
-                font-weight: bold;
-                font-size: 14px;
-                color: #94A3B8;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                subcontrol-position: top left;
-                left: 12px;
-                padding: 0 6px;
-                background-color: #0F172A;
-            }
-            QPushButton {
-                background-color: #3B82F6;
-                color: #FFFFFF;
-                border: none;
-                border-radius: 6px;
-                padding: 9px 18px;
-                font-size: 15px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #2563EB;
-            }
-            QPushButton:pressed {
-                background-color: #1D4ED8;
-            }
-            QScrollArea {
-                background-color: transparent;
-                border: none;
-            }
-            QAbstractScrollArea::viewport {
-                background-color: transparent;
-                border: none;
-            }
-        """)
+        apply_theme(self, self.current_mode)
 
     def setup_ui(self):
-        central_widget = QWidget(self)
-        self.setCentralWidget(central_widget)
+        # --- TOP HEADER BAR ---
+        header_layout = QHBoxLayout()
+        header_layout.setContentsMargins(0, 0, 0, 10)
+        header_layout.setSpacing(8)
         
-        main_layout = QHBoxLayout(central_widget)
-        main_layout.setContentsMargins(12, 12, 12, 12)
+        self.app_title_lbl = QLabel("Malaysian Salary Calculator")
+        self.app_title_lbl.setObjectName("appTitle")
+        
+        self.btn_view_config = QPushButton("⚙️ Configs", self)
+        self.btn_view_config.setObjectName("outlineBtn")
+        self.btn_view_config.clicked.connect(self.on_view_configs)
+
+        self.btn_toggle_mode = QPushButton("🌙 Dark", self)
+        self.btn_toggle_mode.setObjectName("toggleModeBtn")
+        self.btn_toggle_mode.setCheckable(True)
+        self.btn_toggle_mode.setChecked(True)
+        self.btn_toggle_mode.clicked.connect(self.on_mode_toggle)
+        
+        header_layout.addWidget(self.app_title_lbl)
+        header_layout.addStretch()
+        header_layout.addWidget(self.btn_view_config)
+        header_layout.addWidget(self.btn_toggle_mode)
+        
+        # We will wrap the main content in a VBox to include the header
+        wrapper_widget = QWidget(self)
+        self.setCentralWidget(wrapper_widget)
+        
+        wrapper_layout = QVBoxLayout(wrapper_widget)
+        wrapper_layout.setContentsMargins(12, 12, 12, 12)
+        wrapper_layout.addLayout(header_layout)
+        
+        # --- UPDATE NOTIFICATION BANNER ---
+        self.update_banner = QFrame(self)
+        self.update_banner.setObjectName("updateBanner")
+        self.update_banner.setVisible(False)
+        banner_layout = QHBoxLayout(self.update_banner)
+        banner_layout.setContentsMargins(14, 8, 14, 8)
+        banner_layout.setSpacing(12)
+        
+        self.lbl_update_msg = QLabel("🎉 A new release is available on GitHub!", self.update_banner)
+        self.btn_download_update = QPushButton("Download Update", self.update_banner)
+        self.btn_download_update.setObjectName("primaryBtn")
+        self.btn_download_update.clicked.connect(self.on_download_update_clicked)
+        self.btn_dismiss_update = QPushButton("✕", self.update_banner)
+        self.btn_dismiss_update.setObjectName("outlineBtn")
+        self.btn_dismiss_update.setFixedWidth(32)
+        self.btn_dismiss_update.clicked.connect(lambda: self.update_banner.setVisible(False))
+        
+        banner_layout.addWidget(self.lbl_update_msg)
+        banner_layout.addStretch()
+        banner_layout.addWidget(self.btn_download_update)
+        banner_layout.addWidget(self.btn_dismiss_update)
+
+        wrapper_layout.addWidget(self.update_banner)
+        
+        # Now create the split layout
+        main_layout = QHBoxLayout()
         main_layout.setSpacing(16)
+        wrapper_layout.addLayout(main_layout, 1)
         
-        # --- LEFT PANEL: Input Form ---
-        input_scroll = QScrollArea(self)
+        # --- LEFT PANEL: Input Form (Card Container) ---
+        left_card = QFrame(self)
+        left_card.setObjectName("leftCard")
+        left_card_layout = QVBoxLayout(left_card)
+        left_card_layout.setContentsMargins(12, 12, 12, 12)
+
+        input_scroll = QScrollArea(left_card)
+        input_scroll.setObjectName("inputScroll")
         input_scroll.setWidgetResizable(True)
         input_scroll.setFrameShape(QFrame.Shape.NoFrame)
-        input_scroll.setStyleSheet("""
-            QScrollArea { background-color: #0F172A; border: none; }
-            QAbstractScrollArea::viewport { background-color: #0F172A; border: none; }
-        """)
+        input_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         
-        input_widget = QWidget(self)
+        input_widget = QWidget(input_scroll)
+        input_widget.setObjectName("inputWidget")
         input_layout = QVBoxLayout(input_widget)
         input_layout.setContentsMargins(0, 0, 0, 0)
         input_layout.setSpacing(10)
         
         title_label = QLabel("Salary Parameters", self)
-        title_label.setStyleSheet("font-size: 22px; font-weight: bold; color: #38BDF8; letter-spacing: 0.3px;")
+        title_label.setObjectName("sectionTitle")
         title_label.setContentsMargins(0, 0, 0, 6)
         input_layout.addWidget(title_label)
 
@@ -522,8 +455,11 @@ class MainWindow(QMainWindow):
 
         input_layout.addLayout(self.input_form)
         
-        # --- Marital & Family Status Section ---
-        family_group = QGroupBox("Marital & Family Status", self)
+        # --- Marital & Family Status Section & SOCSO Category Section (Side by Side) ---
+        family_socso_layout = QHBoxLayout()
+        family_socso_layout.setSpacing(10)
+
+        family_group = QGroupBox("Marital and Family Status", self)
         family_layout = QFormLayout(family_group)
         family_layout.setSpacing(5)
         family_layout.setContentsMargins(10, 8, 10, 8)
@@ -533,7 +469,7 @@ class MainWindow(QMainWindow):
         self.cmb_marital.setCurrentText("Single")
         family_layout.addRow("Marital Status:", self.cmb_marital)
         
-        self.chk_spouse_relief = QCheckBox("Spouse has no income / claim spouse relief", self)
+        self.chk_spouse_relief = QCheckBox("Spouse has no income / claim relief", self)
         self.chk_spouse_relief.setChecked(True)
         family_layout.addRow("Spouse Eligible:", self.chk_spouse_relief)
         
@@ -544,7 +480,6 @@ class MainWindow(QMainWindow):
         self.txt_children.setPlaceholderText("0–20")
         family_layout.addRow("Number of Children:", self.txt_children)
         
-        input_layout.addWidget(family_group)
         self.fulltimer_groups.append(family_group)
         
         # Enable/Disable spouse relief checkbox based on Marital status selection
@@ -558,9 +493,9 @@ class MainWindow(QMainWindow):
         socso_layout.setSpacing(4)
         socso_layout.setContentsMargins(10, 8, 10, 8)
         
-        self.radio_socso_cat1 = QRadioButton("First Category (Employee < 60 years old)", self)
+        self.radio_socso_cat1 = QRadioButton("First Category (< 60 yrs old)", self)
         self.radio_socso_cat1.setChecked(True)
-        self.radio_socso_cat2 = QRadioButton("Second Category (Employee >= 60 years old)", self)
+        self.radio_socso_cat2 = QRadioButton("Second Category (≥ 60 yrs old)", self)
         
         self.socso_bg = QButtonGroup(self)
         self.socso_bg.addButton(self.radio_socso_cat1, 1)
@@ -569,36 +504,17 @@ class MainWindow(QMainWindow):
         socso_layout.addWidget(self.radio_socso_cat1)
         socso_layout.addWidget(self.radio_socso_cat2)
 
-        self.chk_socso_injury = QCheckBox("Include Non-Employment Injury Scheme", self)
+        self.chk_socso_injury = QCheckBox("Include Non-Employment Injury Scheme\n(LINDUNG24)", self)
         self.chk_socso_injury.setChecked(False)
         socso_layout.addWidget(self.chk_socso_injury)
         
-        input_layout.addWidget(socso_group)
         self.fulltimer_groups.append(socso_group)
+
+        # Add both group boxes to horizontal layout
+        family_socso_layout.addWidget(family_group, 1)
+        family_socso_layout.addWidget(socso_group, 1)
+        input_layout.addLayout(family_socso_layout)
         
-        # Action Buttons
-        btn_layout = QHBoxLayout()
-        self.btn_calculate = QPushButton("Calculate Salary", self)
-        self.btn_calculate.clicked.connect(lambda: self.on_calculate(show_errors=True))
-        
-        self.btn_view_config = QPushButton("View Configs", self)
-        self.btn_view_config.setObjectName("outlineBtn")
-        self.btn_view_config.setStyleSheet("""
-            QPushButton#outlineBtn {
-                background-color: transparent;
-                border: 1px solid #475569;
-                color: #94A3B8;
-            }
-            QPushButton#outlineBtn:hover {
-                background-color: #1E293B;
-                color: #F8FAFC;
-            }
-        """)
-        self.btn_view_config.clicked.connect(self.on_view_configs)
-        
-        btn_layout.addWidget(self.btn_calculate, 2)
-        btn_layout.addWidget(self.btn_view_config, 1)
-        input_layout.addLayout(btn_layout)
         input_layout.addStretch(1)
         
         # --- Connect all input widgets to auto-calculate on change ---
@@ -623,36 +539,29 @@ class MainWindow(QMainWindow):
         self.txt_pt_additional.textChanged.connect(self.on_calculate)
         
         input_scroll.setWidget(input_widget)
-        main_layout.addWidget(input_scroll, 1)
+        left_card_layout.addWidget(input_scroll)
+        main_layout.addWidget(left_card, 1)
         
-        # --- RIGHT PANEL: Calculation Results Dashboard ---
-        results_widget = QWidget(self)
-        results_layout = QVBoxLayout(results_widget)
-        results_layout.setContentsMargins(0, 0, 0, 0)
+        # --- RIGHT PANEL: Calculation Results Dashboard (Card Container) ---
+        right_card = QFrame(self)
+        right_card.setObjectName("rightCard")
+        results_layout = QVBoxLayout(right_card)
+        results_layout.setContentsMargins(12, 12, 12, 12)
         results_layout.setSpacing(10)
         
         # 1. Nett Salary Card (Highlight)
         self.nett_card = QFrame(self)
-        self.nett_card.setStyleSheet("""
-            QFrame {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #1E3A8A, stop:1 #0F766E);
-                border-radius: 12px;
-            }
-            QLabel {
-                color: #F8FAFC;
-                background-color: transparent;
-            }
-        """)
+        self.nett_card.setObjectName("nettCard")
         nett_card_layout = QVBoxLayout(self.nett_card)
         nett_card_layout.setContentsMargins(20, 16, 20, 16)
         nett_card_layout.setSpacing(4)
         nett_card_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         nett_title = QLabel("NETT MONTHLY SALARY", self.nett_card)
-        nett_title.setStyleSheet("font-size: 13px; font-weight: bold; color: #93C5FD; letter-spacing: 1px;")
+        nett_title.setObjectName("nettTitle")
         
         self.lbl_nett_val = QLabel("RM 0.00", self.nett_card)
-        self.lbl_nett_val.setStyleSheet("font-size: 32px; font-weight: 800; color: #FFFFFF;")
+        self.lbl_nett_val.setObjectName("nettValue")
         
         nett_card_layout.addWidget(nett_title)
         nett_card_layout.addWidget(self.lbl_nett_val)
@@ -674,22 +583,11 @@ class MainWindow(QMainWindow):
         
         # Export PDF button
         self.btn_export = QPushButton("Export PDF Pay Slip", self)
-        self.btn_export.setObjectName("secondaryBtn")
-        self.btn_export.setStyleSheet("""
-            QPushButton#secondaryBtn {
-                background-color: #0D9488;
-            }
-            QPushButton#secondaryBtn:hover {
-                background-color: #0F766E;
-            }
-            QPushButton#secondaryBtn:pressed {
-                background-color: #115E59;
-            }
-        """)
+        self.btn_export.setObjectName("primaryBtn")
         self.btn_export.clicked.connect(self.on_export_pdf)
         results_layout.addWidget(self.btn_export)
         
-        main_layout.addWidget(results_widget, 1)
+        main_layout.addWidget(right_card, 1)
 
     def rebuild_breakdown(self, rows):
         """(Re)build the payroll breakdown table from a list of (label, merged) tuples."""
@@ -710,29 +608,6 @@ class MainWindow(QMainWindow):
         hh.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         hh.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.breakdown_table.setShowGrid(True)
-        self.breakdown_table.setStyleSheet("""
-            QTableWidget {
-                background-color: transparent;
-                gridline-color: #334155;
-                font-size: 15px;
-                border: none;
-            }
-            QTableWidget::item {
-                padding: 11px 10px;
-            }
-            QTableWidget::item:selected, QTableWidget::item:hover {
-                background-color: #1E293B;
-            }
-            QHeaderView::section {
-                background-color: #1E293B;
-                color: #94A3B8;
-                font-weight: bold;
-                font-size: 14px;
-                padding: 10px;
-                border: none;
-                border-bottom: 1px solid #334155;
-            }
-        """)
 
         deduction_labels = {
             "Late Deduction", "Unpaid Leave Deduction",
@@ -740,7 +615,6 @@ class MainWindow(QMainWindow):
             "PCB Monthly Tax Deduction"
         }
         red_fg = QColor("#EF4444")
-        label_fg = QColor("#CBD5E1")
         base_font = QFont("Arial", 15)
         bold_font = QFont("Arial", 15)
         bold_font.setBold(True)
@@ -749,7 +623,6 @@ class MainWindow(QMainWindow):
             item_label = QTableWidgetItem(label)
             item_label.setFlags(item_label.flags() & ~Qt.ItemFlag.ItemIsEditable)
             item_label.setFont(bold_font)
-            item_label.setForeground(label_fg)
             self.breakdown_table.setItem(i, 0, item_label)
 
             if merged:
@@ -782,10 +655,27 @@ class MainWindow(QMainWindow):
 
         self.breakdown_layout.addWidget(self.breakdown_table)
 
-        # Set consistent row heights
         row_height = self.breakdown_table.verticalHeader().defaultSectionSize()
         for i in range(nrows):
             self.breakdown_table.setRowHeight(i, max(row_height, 42))
+
+    def on_mode_toggle(self):
+        if self.btn_toggle_mode.isChecked():
+            self.current_mode = "dark"
+            self.btn_toggle_mode.setText("🌙 Dark")
+        else:
+            self.current_mode = "light"
+            self.btn_toggle_mode.setText("☀️ Light")
+        self.apply_theme()
+
+    def on_download_update_clicked(self):
+        url = getattr(self, "release_url", "https://github.com/Lhz0616/malaysia-salary-calculator/releases")
+        QDesktopServices.openUrl(QUrl(url))
+
+    def on_update_available(self, latest_version, release_url, release_notes):
+        self.lbl_update_msg.setText(f"🎉 New version {latest_version} is available on GitHub!")
+        self.release_url = release_url
+        self.update_banner.setVisible(True)
 
     def update_mode(self):
         """Toggle field visibility between full-timer and part-timer input sets."""
@@ -885,8 +775,15 @@ class MainWindow(QMainWindow):
             if res.get("is_part_timer"):
                 cells["Nett Take-Home Salary"].setText(f"RM {res['nett_salary']:,.2f}")
             else:
+                additions = res["additions"]
                 stat = res["statutory"]
                 cells["Gross Salary"].setText(f"RM {res['gross_salary']:,.2f}")
+                if "Weekdays OT" in cells:
+                    cells["Weekdays OT"].setText(f"RM {additions['overtime_weekday_pay']:,.2f}")
+                if "Weekend OT" in cells:
+                    cells["Weekend OT"].setText(f"RM {additions['overtime_weekend_pay']:,.2f}")
+                if "Public Holiday OT" in cells:
+                    cells["Public Holiday OT"].setText(f"RM {additions['overtime_holiday_pay']:,.2f}")
                 cells["Late Deduction"].setText(
                     f"-RM {res['deductions']['late_deduction']:,.2f}"
                 )
@@ -900,7 +797,6 @@ class MainWindow(QMainWindow):
                 cells["EIS (Statutory)"][0].setText(f"RM {stat['eis_employee']:,.2f}")
                 cells["EIS (Statutory)"][1].setText(f"RM {stat['eis_employer']:,.2f}")
                 cells["PCB Monthly Tax Deduction"].setText(f"RM {stat['pcb']:,.2f}")
-                cells["Nett Take-Home Salary"].setText(f"RM {res['nett_salary']:,.2f}")
             
         except Exception as e:
             if show_errors:

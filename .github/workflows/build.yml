@@ -1,0 +1,108 @@
+name: Build & Release Windows App
+
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Auto Semantic Tagging
+        id: tag_version
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: patch
+          release_branches: main,master
+
+      - name: Determine Release Tag & Version
+        id: release_info
+        run: |
+          if ("${{ steps.tag_version.outputs.new_tag }}" -ne "") {
+            $tag = "${{ steps.tag_version.outputs.new_tag }}"
+            $ver = "${{ steps.tag_version.outputs.new_version }}"
+          } else {
+            $tag = "${{ github.ref }}".Replace("refs/tags/", "")
+            $ver = $tag.TrimStart("v")
+          }
+          echo "TAG_NAME=$tag" >> $env:GITHUB_ENV
+          echo "APP_VERSION=$ver" >> $env:GITHUB_ENV
+          Write-Host "Releasing Tag: $tag, Version: $ver"
+
+      - name: Sync Version in pyproject.toml & installer.iss
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && env.APP_VERSION != ''
+        run: |
+          $ver = "$env:APP_VERSION"
+          Write-Host "Updating pyproject.toml and installer.iss to version $ver..."
+
+          (Get-Content pyproject.toml) -replace 'version\s*=\s*"[^"]+"', ("version = `"{0}`"" -f $ver) | Set-Content pyproject.toml
+          (Get-Content installer.iss) -replace '#define MyAppVersion\s+"[^"]+"', ("#define MyAppVersion `"{0}`"" -f $ver) | Set-Content installer.iss
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pyproject.toml installer.iss
+          $status = git status --porcelain
+          if ($status) {
+            git commit -m "chore: sync version to $ver in pyproject.toml and installer.iss [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          }
+
+      - name: Install uv & Python
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          python-version: "3.12"
+
+      - name: Install UPX Executable Compressor
+        uses: crazy-max/ghaction-upx@v3
+        with:
+          install-only: true
+
+      - name: Install Inno Setup Compiler (ISCC)
+        run: |
+          choco install innosetup --no-progress
+
+      - name: Install dependencies with uv
+        run: |
+          uv sync --all-groups
+
+      - name: Run build script to produce installer and zip file
+        run: |
+          powershell -ExecutionPolicy Bypass -File scripts/build_installer.ps1
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MalaysianSalaryCalculator-Build
+          path: |
+            Output/MalaysianSalaryCalculator_Setup.exe
+            Output/MalaysianSalaryCalculator-Windows.zip
+
+      - name: Create & Publish GitHub Release
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && env.TAG_NAME != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: Release ${{ env.TAG_NAME }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+          files: |
+            Output/MalaysianSalaryCalculator_Setup.exe
+            Output/MalaysianSalaryCalculator-Windows.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
