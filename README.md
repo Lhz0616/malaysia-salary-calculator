@@ -13,8 +13,6 @@
   <p align="center">
     A robust, data-driven desktop application for calculating employee wages and statutory deductions in Malaysia.
     <br />
-    <a href="https://github.com/Lhz0616/malaysia-salary-calculator"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/Lhz0616/malaysia-salary-calculator/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
@@ -44,9 +42,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -60,14 +56,15 @@
 The **Malaysia Salary, Statutory & PCB Calculator** is a modular, high-precision desktop application built using Python and PySide6. Unlike hardcoded calculators, this app runs on a fully configurable, data-driven engine where statutory contribution tiers and tax brackets are separated into JSON schema files, making maintenance and policy updates trivial.
 
 ### Key Features:
-* **Master Payroll Pipeline**: Accurate calculation of Gross Salary, Overtime, Deductions, EPF, SOCSO, EIS, PCB (Monthly Tax Deduction), and final Nett Salary.
+* **Deep Payroll Engine** (`core/payroll_engine.py`): A single, consolidated domain module encapsulating all payroll and statutory calculations using pre-compiled rate interval tables (`StatutoryRateRepository`) and immutable value objects (`PayrollInput` / `PayrollResult`).
 * **Data-driven Statutory Logic**:
-  * **EPF (KWSP)**: Implements the KWSP Third Schedule (effective 1 Oct 2025) table lookup rather than flat percentage approximations.
+  * **EPF (KWSP)**: Implements the KWSP Third Schedule (effective 1 Oct 2025) table lookup rather than flat percentage approximations, with `>RM20,000` salary tier support.
   * **SOCSO (PERKESO)**: Includes calculation for both First Category (<60) and Second Category (≥60) employees. Also features support for the **latest LINDUNG24 scheme** (which can be opted out/in directly from the UI).
   * **EIS**: Full SIP wage contribution matching.
   * **PCB**: Progressive bracket calculations based on the 2025/2026 brackets with personal tax relief configurations (Self, Spouse, Children, and EPF caps).
 * **Part-timer & Full-timer Modes**: Instantly toggle between full-time statutory payroll and hourly part-time wages.
-* **Payslip Export**: Renders elegant, formatted HTML payslips and exports them directly to PDF.
+* **Payslip Export** (`services/payslip_exporter.py`): Dedicated service that renders HTML payslips and exports them directly to PDF — decoupled from the UI layer.
+* **Modular UI**: Main window, configuration editor dialog, and theme loading are separated into independent modules (`ui/main_window.py`, `ui/dialogs/config_dialog.py`) with external QSS theme files (`assets/styles/`).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -83,6 +80,7 @@ This project is a showcase of AI-assisted software engineering. The workflow was
 * **[GitHub Tag Action](https://github.com/mathieudutour/github-tag-action)**: Automated semantic versioning (`v1.x.x`) and release drafting in CI/CD.
 * **[DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)**: Makes AI coding agents write less, simpler code.
 * **[UPX (Ultimate Packer for eXecutables)](https://upx.github.io/)**: Used for PyInstaller module compressions to reduce standalone executable size.
+* **[mattpocock/improve-codebase-architecture](https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md)**: Antigravity skill used to identify and implement architectural deepening opportunities — consolidating shallow calculator modules into a single deep `PayrollEngine`, extracting the `PayslipExporter` service seam, and decoupling the `ConfigEditorDialog` from the main window.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -205,10 +203,11 @@ Project Link: [https://github.com/Lhz0616/malaysia-salary-calculator](https://gi
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-
 * [KWSP Statutory Rates Reference](https://www.kwsp.gov.my)
 * [PERKESO Rates Reference](https://www.perkeso.gov.my)
 * [LHDN PCB Reference](https://www.hasil.gov.my)
+* [mattpocock/improve-codebase-architecture](https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md) — Codebase architecture skill by Matt Pocock
+* [Antigravity CLI](https://antigravity.dev) — AI coding agent used throughout development and architecture refactoring
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

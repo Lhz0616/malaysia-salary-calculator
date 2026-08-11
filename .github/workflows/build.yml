@@ -5,6 +5,8 @@ on:
     branches:
       - "main"
       - "master"
+    tags:
+      - "v*"
   pull_request:
     branches: [ "main", "master" ]
   workflow_dispatch:
@@ -24,7 +26,7 @@ jobs:
 
       - name: Auto Semantic Tagging
         id: tag_version
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && !startsWith(github.ref, 'refs/tags/')
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -33,25 +35,48 @@ jobs:
 
       - name: Determine Release Tag & Version
         id: release_info
+        shell: pwsh
         run: |
+          $ref = "${{ github.ref }}"
           $newTag = "${{ steps.tag_version.outputs.new_tag }}"
           $tagVal = "${{ steps.tag_version.outputs.tag }}"
-          if ($newTag -ne "") {
+
+          if ($ref.StartsWith("refs/tags/")) {
+            $tag = $ref.Replace("refs/tags/", "")
+            $ver = $tag.TrimStart("v")
+          } elseif ($newTag -ne "") {
             $tag = $newTag
             $ver = $newTag.TrimStart("v")
           } elseif ($tagVal -ne "") {
             $tag = if ($tagVal.StartsWith("v")) { $tagVal } else { "v$tagVal" }
             $ver = $tagVal.TrimStart("v")
           } else {
-            $tag = "${{ github.ref }}".Replace("refs/tags/", "")
-            $ver = $tag.TrimStart("v")
+            $tag = "v0.1.0"
+            $ver = "0.1.0"
           }
+
+          # Enforce minimum version of 0.1.0
+          try {
+            $cleanVerStr = $ver.Split('-')[0]
+            $cleanVer = [version]$cleanVerStr
+            if ($cleanVer -lt [version]"0.1.0") {
+              $ver = "0.1.0"
+              $tag = "v0.1.0"
+            }
+          } catch {
+            if ($ver -eq "" -or $ver -eq "0.0.0") {
+              $ver = "0.1.0"
+              $tag = "v0.1.0"
+            }
+          }
+
           echo "TAG_NAME=$tag" >> $env:GITHUB_ENV
           echo "APP_VERSION=$ver" >> $env:GITHUB_ENV
           Write-Host "Releasing Tag: $tag, Version: $ver"
 
       - name: Sync Version in pyproject.toml & installer.iss
-        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && env.APP_VERSION != ''
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')) && env.APP_VERSION != ''
+        shell: pwsh
         run: |
           $ver = "$env:APP_VERSION"
           Write-Host "Updating pyproject.toml and installer.iss to version $ver..."
@@ -100,7 +125,7 @@ jobs:
             Output/MalaysianSalaryCalculator-Windows.zip
 
       - name: Create & Publish GitHub Release
-        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && env.TAG_NAME != ''
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')) && env.TAG_NAME != ''
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}

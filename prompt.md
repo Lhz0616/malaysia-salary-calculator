@@ -33,23 +33,31 @@ The system is **modular, data-driven, and configurable**. Statutory rates live i
 ```
 salary_calculator/
 ├── src/
-│   ├── main.py                      # QApplication bootstrap -> MainWindow
+│   ├── main.py                          # QApplication bootstrap -> MainWindow
 │   ├── core/
-│   │   ├── salary_calculator.py     # calculate_salary_package() master pipeline
-│   │   ├── config_loader.py         # get_resource_path(), load/save config, parse_contribution_range()
-│   │   ├── epf_calculator.py        # calculate_epf()  (table-driven)
-│   │   ├── socso_calculator.py      # calculate_socso()
-│   │   ├── eis_calculator.py        # calculate_eis()
-│   │   ├── pcb_calculator.py        # calculate_pcb() + parse_pcb_bracket()
-│   │   └── helper.py                # to_decimal(), CENTS quantization
+│   │   ├── payroll_engine.py            # PayrollEngine, PayrollInput, PayrollResult — master pipeline & all statutory calculations
+│   │   ├── config_loader.py             # get_resource_path(), load/save config, parse_contribution_range()
+│   │   ├── decimal_utils.py             # to_decimal(), CENTS / FOUR_PLACES quantization constants
+│   │   └── update_checker.py            # Background QThread for GitHub release checks
+│   ├── services/
+│   │   └── payslip_exporter.py          # HTML payslip renderer + PDF export (PayslipExporter)
 │   ├── ui/
-│   │   └── main_window.py           # MainWindow + ConfigEditorDialog
+│   │   ├── main_window.py               # MainWindow — inputs, results, theme loading
+│   │   └── dialogs/
+│   │       └── config_dialog.py         # ConfigEditorDialog — edit config.json via UI
 │   └── data/
-│       ├── config.json              # global config (days, OT rates, PCB reliefs)
+│       ├── config.json                  # global config (days, OT rates, PCB reliefs)
 │       ├── epf_contribution_rates.json
 │       ├── socso_contribution.json
 │       ├── eis_contribution.json
 │       └── income_tax_bracket_2025.json
+├── assets/
+│   └── styles/
+│       ├── light.qss                    # Soft Material Paper light theme
+│       └── dark.qss                     # Soft Material Paper dark theme
+├── tests/
+│   ├── test_payroll_engine.py
+│   └── test_payslip_exporter.py
 ├── prompt.md
 ├── pyproject.toml
 └── uv.lock
@@ -60,7 +68,7 @@ salary_calculator/
 ## 🔢 Money & Precision (applies everywhere)
 
 * All monetary values are handled as `decimal.Decimal`, never raw `float`.
-* `helper.to_decimal(value)` builds a `Decimal` **from the string form** of a value to avoid binary float error.
+* `decimal_utils.to_decimal(value)` builds a `Decimal` **from the string form** of a value to avoid binary float error. Handles `float`, `int`, `str`, `None`, and comma-formatted strings (e.g. `"1,500"`).
 * Final amounts are quantized to 2 decimal places with `ROUND_HALF_UP`.
 * The JSON contribution tables use `Decimal`-parsed range strings (`">10.01;<=20.00"`); the EIS table stores its amounts as strings (`"0.05"`) and is cast on load.
 
@@ -107,7 +115,7 @@ Field rules:
 
 ## 🧮 Salary Calculation Flow (MASTER PIPELINE)
 
-Implemented in `core/salary_calculator.calculate_salary_package(...)`.
+Implemented in `core/payroll_engine.PayrollEngine.calculate(PayrollInput)`. The engine accepts an immutable `PayrollInput` value object and returns a structured `PayrollResult`.
 
 ### Step 0: Employment mode
 
@@ -293,11 +301,11 @@ Calculation runs automatically on any input change (auto-calculate).
 
 1. NO hardcoded SOCSO / EIS / EPF values — load and match from `src/data/*.json`.
 2. NO flat PCB percentage — use the progressive `income_tax_bracket_2025.json` with `Chargeable Income` / `Rate` / `previous tax total` / `current tax max`.
-3. All money must flow through `Decimal` + `to_decimal()`; final outputs quantized HALF_UP.
+3. All money must flow through `Decimal` + `decimal_utils.to_decimal()`; final outputs quantized HALF_UP.
 4. EPF base = `monthly_salary + taxable_additional_income − total_deductions` (not gross, not including overtime).
 5. SOCSO & EIS base = `gross_salary`.
 6. Nett = gross − (EPF + SOCSO + EIS + PCB employee shares) + non-taxable additional income.
-7. Logic must stay modular (one calculator module per statutory component) and data-driven (new brackets/rates edited in JSON only).
+7. All statutory calculations are consolidated inside `PayrollEngine` — do not split them back into separate calculator modules.
 
 ---
 
@@ -330,6 +338,29 @@ pyinstaller --onefile src/main.py
 This app behaves like a **real payroll mini-engine**, not a simple calculator:
 
 * **Data-driven** — statutory tables live in JSON, independently versioned (e.g. when LHDN revises a schedule).
-* **Modular** — `salary_calculator` orchestrates one module per component.
+* **Modular** — `PayrollEngine` is the single deep domain module; PDF export lives in `PayslipExporter`; UI dialogs are isolated in `dialogs/`.
 * **Extensible** — new brackets/rates are added/edited in the JSON files without touching code.
 * **Accurate** — `Decimal` math, HALF_UP rounding, and faithful progressive-tax logic.
+
+---
+
+## 📖 Domain Glossary
+
+### Payroll Engine
+The central domain module (`core/payroll_engine.py`) that executes payroll calculations, statutory deduction lookups (EPF, SOCSO, EIS, PCB), overtime calculations, and deduction processing. Entry point: `PayrollEngine.default().calculate(inp)`.
+
+### Statutory Deductions
+Mandatory Malaysian statutory contributions computed per payroll cycle:
+- **EPF (Employees Provident Fund / KWSP)**: Retirement savings contribution with employee and employer tiers (Category A for under age 60, Category B for age 60 and above).
+- **SOCSO (Social Security Organization / PERKESO)**: Employment injury and invalidity scheme contributions.
+- **EIS (Employment Insurance System / SIP)**: Job loss insurance contributions.
+- **PCB (Potongan Cukai Bulanan / Monthly Tax Deduction)**: Income tax deduction based on annual chargeable income and tax reliefs.
+
+### Rate Table
+Indexed numeric tier interval data parsed from statutory configuration files (`epf_contribution_rates.json`, `socso_contribution.json`, `eis_contribution.json`, `income_tax_bracket_2025.json`). Range strings (e.g. `">30;<=50"`) are pre-compiled into numeric interval lookups at engine initialization via `StatutoryRateRepository`.
+
+### Payroll Input
+Immutable value object (`PayrollInput`) containing an employee's salary parameters, overtime hours, unpaid leave days, late hours, additional income, marital/tax relief status, and period info.
+
+### Payroll Result
+Structured breakdown object (`PayrollResult`) containing line-by-line monetary calculations: gross wage, overtime additions, late/unpaid leave deductions, employee statutory shares, employer statutory shares, PCB tax, and net wage.
