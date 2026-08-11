@@ -1,7 +1,8 @@
+import json
 import os
 import sys
-import json
 from decimal import Decimal
+
 
 def get_resource_path(relative_path: str) -> str:
     """

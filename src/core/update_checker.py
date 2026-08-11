@@ -1,6 +1,7 @@
 import json
-import urllib.request
 import urllib.error
+import urllib.request
+
 from PySide6.QtCore import QThread, Signal
 
 CURRENT_VERSION = "0.1.0"

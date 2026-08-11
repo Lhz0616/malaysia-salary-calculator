@@ -1,21 +1,46 @@
-import calendar
 import datetime
-from decimal import Decimal
+import logging
 import os
-from PySide6.QtWidgets import (
-    QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QFormLayout,
-    QLabel, QLineEdit, QComboBox, QCheckBox, QSpinBox, QDoubleSpinBox, QRadioButton,
-    QButtonGroup, QPushButton, QGroupBox, QFileDialog, QMessageBox,
-    QDialog, QScrollArea, QFrame, QTabWidget,
-    QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy
-)
-from PySide6.QtCore import Qt, QUrl
-from PySide6.QtGui import QDoubleValidator, QIntValidator, QTextDocument, QPdfWriter, QPageSize, QColor, QFont, QIcon, QDesktopServices
+from decimal import Decimal
 
-from core.salary_calculator import calculate_salary_package
-from core.config_loader import get_configs, save_all_config
+from PySide6.QtCore import Qt, QUrl
+from PySide6.QtGui import (
+    QColor,
+    QDesktopServices,
+    QDoubleValidator,
+    QFont,
+    QIcon,
+    QIntValidator,
+)
+from PySide6.QtWidgets import (
+    QButtonGroup,
+    QCheckBox,
+    QComboBox,
+    QDialog,
+    QFileDialog,
+    QFormLayout,
+    QFrame,
+    QGroupBox,
+    QHBoxLayout,
+    QHeaderView,
+    QLabel,
+    QLineEdit,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QRadioButton,
+    QScrollArea,
+    QSizePolicy,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+    QWidget,
+)
+
+from core.config_loader import get_resource_path
+from core.payroll_engine import PayrollEngine, PayrollInput
 from core.update_checker import UpdateCheckerThread
-from ui.theme_manager import apply_theme
+from services.payslip_exporter import PayslipExporter
 
 # Rows shown in the payroll breakdown table for each employment mode.
 # Each entry is (label, merged?) where merged rows span the Employee + Employer columns.
@@ -36,168 +61,7 @@ PARTTIMER_BREAKDOWN_ROWS = [
     ("Nett Take-Home Salary", True),
 ]
 
-class ConfigEditorDialog(QDialog):
-    """
-    A pop-up dialog that allows editing global config JSON data.
-    """
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Configuration Editor")
-        self.resize(550, 480)
-        self.current_mode = parent.current_mode if hasattr(parent, 'current_mode') else "dark"
-        apply_theme(self, self.current_mode)
-        
-        # Load active configs (global in-memory collection; config page edits "config")
-        try:
-            self.configs = get_configs()
-            self.config = self.configs.get("config", {})
-        except Exception as e:
-            QMessageBox.critical(self, "Load Error", f"Failed to load configuration: {e}")
-            self.configs = {}
-            self.config = {}
-            
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(15, 15, 15, 15)
-        layout.setSpacing(15)
-        
-        title_lbl = QLabel("Modify Global System Configuration", self)
-        title_lbl.setObjectName("sectionTitle")
-        layout.addWidget(title_lbl)
-        
-        # Tab Widget
-        self.tabs = QTabWidget(self)
-        
-        # TAB 1: Workdays & Overtime Rates
-        tab1 = QWidget()
-        form1 = QFormLayout(tab1)
-        form1.setSpacing(10)
-        
-        self.spin_ot_days = QSpinBox(self)
-        self.spin_ot_days.setRange(1, 31)
-        self.spin_ot_days.setValue(int(self.config.get("fixed_overtime_days", 26)))
-        form1.addRow("Fixed Overtime Days/Month:", self.spin_ot_days)
-        
-        self.txt_unpaid_days_cfg = QLineEdit(self)
-        self.txt_unpaid_days_cfg.setText(str(self.config.get("fixed_unpaid_leave_days", "calendar_days")))
-        form1.addRow("Unpaid Leave Base Days (e.g. 'calendar_days' or float):", self.txt_unpaid_days_cfg)
-        
-        self.txt_late_days_cfg = QLineEdit(self)
-        self.txt_late_days_cfg.setText(str(self.config.get("fixed_late_hours_days", "calendar_days")))
-        form1.addRow("Late Hours Base Days (e.g. 'calendar_days' or float):", self.txt_late_days_cfg)
-        
-        ot_rates = self.config.get("overtime_rates", {})
-        self.spin_rate_weekday = QDoubleSpinBox(self)
-        self.spin_rate_weekday.setRange(0.0, 10.0)
-        self.spin_rate_weekday.setSingleStep(0.1)
-        self.spin_rate_weekday.setValue(float(ot_rates.get("weekday", 1.5)))
-        form1.addRow("Weekday OT multiplier:", self.spin_rate_weekday)
-        
-        self.spin_rate_weekend = QDoubleSpinBox(self)
-        self.spin_rate_weekend.setRange(0.0, 10.0)
-        self.spin_rate_weekend.setSingleStep(0.1)
-        self.spin_rate_weekend.setValue(float(ot_rates.get("weekend", 2.0)))
-        form1.addRow("Weekend OT multiplier:", self.spin_rate_weekend)
-        
-        self.spin_rate_holiday = QDoubleSpinBox(self)
-        self.spin_rate_holiday.setRange(0.0, 10.0)
-        self.spin_rate_holiday.setSingleStep(0.1)
-        self.spin_rate_holiday.setValue(float(ot_rates.get("public_holiday", 3.0)))
-        form1.addRow("Public Holiday OT multiplier:", self.spin_rate_holiday)
-        
-        self.tabs.addTab(tab1, "Wages & OT")
-        
-        # TAB 2: PCB Tax Reliefs
-        tab3 = QWidget()
-        form3 = QFormLayout(tab3)
-        form3.setSpacing(10)
-        
-        pcb_cfg = self.config.get("pcb", {})
-        reliefs = pcb_cfg.get("reliefs", {})
-        
-        self.spin_relief_self = QSpinBox(self)
-        self.spin_relief_self.setRange(0, 50000)
-        self.spin_relief_self.setSingleStep(500)
-        self.spin_relief_self.setValue(int(reliefs.get("self", 9000)))
-        form3.addRow("Self Tax Relief (RM):", self.spin_relief_self)
-        
-        self.spin_relief_spouse = QSpinBox(self)
-        self.spin_relief_spouse.setRange(0, 50000)
-        self.spin_relief_spouse.setSingleStep(500)
-        self.spin_relief_spouse.setValue(int(reliefs.get("spouse", 4000)))
-        form3.addRow("Spouse Tax Relief (RM):", self.spin_relief_spouse)
-        
-        self.spin_relief_child = QSpinBox(self)
-        self.spin_relief_child.setRange(0, 50000)
-        self.spin_relief_child.setSingleStep(500)
-        self.spin_relief_child.setValue(int(reliefs.get("child", 2000)))
-        form3.addRow("Child Tax Relief (RM/child):", self.spin_relief_child)
-        
-        self.spin_relief_epf = QSpinBox(self)
-        self.spin_relief_epf.setRange(0, 50000)
-        self.spin_relief_epf.setSingleStep(500)
-        self.spin_relief_epf.setValue(int(reliefs.get("epf", 4000)))
-        form3.addRow("EPF Contribution Max Relief (RM):", self.spin_relief_epf)
-        
-        self.tabs.addTab(tab3, "PCB Reliefs")
-        
-        layout.addWidget(self.tabs)
-        
-        # Action Buttons
-        btn_layout = QHBoxLayout()
-        cancel_btn = QPushButton("Cancel", self)
-        cancel_btn.setObjectName("outlineBtn")
-        cancel_btn.clicked.connect(self.reject)
-        
-        save_btn = QPushButton("Save & Apply", self)
-        save_btn.setObjectName("primaryBtn")
-        save_btn.clicked.connect(self.on_save)
-        
-        btn_layout.addWidget(cancel_btn)
-        btn_layout.addWidget(save_btn)
-        layout.addLayout(btn_layout)
-        
-    def on_save(self):
-        # Update config dictionary
-        self.config["fixed_overtime_days"] = self.spin_ot_days.value()
-        
-        # Handle string or float for leave / late days
-        def parse_days_cfg(val):
-            val = val.strip()
-            if val == "calendar_days":
-                return "calendar_days"
-            try:
-                return float(val)
-            except ValueError:
-                return val # save as string if they enter something else
-                
-        self.config["fixed_unpaid_leave_days"] = parse_days_cfg(self.txt_unpaid_days_cfg.text())
-        self.config["fixed_late_hours_days"] = parse_days_cfg(self.txt_late_days_cfg.text())
-        
-        self.config["overtime_rates"] = {
-            "weekday": self.spin_rate_weekday.value(),
-            "weekend": self.spin_rate_weekend.value(),
-            "public_holiday": self.spin_rate_holiday.value()
-        }
-
-        if "pcb" not in self.config:
-            self.config["pcb"] = {}
-        if "reliefs" not in self.config["pcb"]:
-            self.config["pcb"]["reliefs"] = {}
-            
-        self.config["pcb"]["reliefs"]["self"] = self.spin_relief_self.value()
-        self.config["pcb"]["reliefs"]["spouse"] = self.spin_relief_spouse.value()
-        self.config["pcb"]["reliefs"]["child"] = self.spin_relief_child.value()
-        self.config["pcb"]["reliefs"]["epf"] = self.spin_relief_epf.value()
-
-        # Push the edited config back into the global collection, then persist all
-        self.configs["config"] = self.config
-
-        try:
-            save_all_config(self.configs)
-            QMessageBox.information(self, "Success", "Configuration successfully saved and applied.")
-            self.accept()
-        except Exception as e:
-            QMessageBox.critical(self, "Save Error", f"Failed to save configuration: {e}")
+from ui.dialogs.config_dialog import ConfigEditorDialog
 
 
 class MainWindow(QMainWindow):
@@ -230,8 +94,34 @@ class MainWindow(QMainWindow):
         self.update_checker.update_available.connect(self.on_update_available)
         self.update_checker.start()
 
-    def apply_theme(self):
-        apply_theme(self, self.current_mode)
+    def apply_theme(self, target=None, mode=None):
+        if target is None:
+            target = self
+        if mode is None:
+            mode = getattr(self, "current_mode", "dark")
+        MainWindow.apply_theme_to(target, mode)
+
+    @staticmethod
+    def apply_theme_to(target, mode: str = "dark"):
+        """
+        Loads and applies QSS stylesheets directly onto target widget/dialog.
+        """
+        mode_name = mode.lower() if mode else "dark"
+        style_path = get_resource_path(f"src/assets/styles/{mode_name}.qss")
+
+        if not os.path.exists(style_path):
+            style_path = get_resource_path(f"assets/styles/{mode_name}.qss")
+
+        assets_dir = get_resource_path("src/assets").replace("\\", "/")
+
+        try:
+            with open(style_path, "r", encoding="utf-8") as f:
+                qss_content = f.read()
+
+            qss_formatted = qss_content.replace("{assets_dir}", assets_dir)
+            target.setStyleSheet(qss_formatted)
+        except Exception as e:
+            logging.error(f"Failed to apply theme '{mode}': {e}")
 
     def setup_ui(self):
         # --- TOP HEADER BAR ---
@@ -722,7 +612,7 @@ class MainWindow(QMainWindow):
                 pt_rate = Decimal(self.txt_pt_rate.text() or "0")
                 pt_add = Decimal(self.txt_pt_additional.text() or "0")
 
-                res = calculate_salary_package(
+                inp = PayrollInput(
                     is_part_timer=True,
                     total_working_hours=pt_hours,
                     hourly_rate=pt_rate,
@@ -730,6 +620,7 @@ class MainWindow(QMainWindow):
                     month=month,
                     year=year
                 )
+                res = PayrollEngine.default().calculate(inp)
             else:
                 base_sal = Decimal(self.txt_base_salary.text() or "0")
                 ot_weekday = Decimal(self.txt_ot_weekday.text() or "0")
@@ -747,7 +638,7 @@ class MainWindow(QMainWindow):
                 socso_cat = "first_category" if self.radio_socso_cat1.isChecked() else "second_category"
                 include_injury = self.chk_socso_injury.isChecked()
 
-                res = calculate_salary_package(
+                inp = PayrollInput(
                     monthly_salary=base_sal,
                     overtime_weekday_hours=ot_weekday,
                     overtime_weekend_hours=ot_weekend,
@@ -764,6 +655,7 @@ class MainWindow(QMainWindow):
                     month=month,
                     year=year
                 )
+                res = PayrollEngine.default().calculate(inp)
 
             # Store results cache
             self.latest_results = res
@@ -809,245 +701,28 @@ class MainWindow(QMainWindow):
 
     def on_export_pdf(self):
         """
-        Generates a premium HTML payslip and prints it to PDF.
+        Delegates payslip document rendering and PDF export to PayslipExporter.
         """
         if not self.latest_results:
             QMessageBox.warning(self, "Export Warning", "Please execute a valid calculation first.")
             return
-            
+
+        res = self.latest_results
+        if res.get("is_part_timer"):
+            QMessageBox.information(
+                self, "Export Unavailable",
+                "PDF export is currently supported for full-timer payslips."
+            )
+            return
+
         file_path, _ = QFileDialog.getSaveFileName(
             self, "Export Pay Slip", "", "PDF Files (*.pdf)"
         )
         if not file_path:
             return
-            
-        res = self.latest_results
 
-        if res.get("is_part_timer"):
-            QMessageBox.information(
-                self, "Export Unavailable",
-                "PDF export is only available for full-timer payslips."
-            )
-            return
-
-        inputs = res["inputs"]
-        additions = res["additions"]
-        deductions = res["deductions"]
-        stat = res["statutory"]
-        
-        # Build premium HTML contents
-        html_content = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8">
-            <style>
-                body {{
-                    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                    color: #334155;
-                    line-height: 1.5;
-                    margin: 40px;
-                }}
-                .header {{
-                    text-align: center;
-                    margin-bottom: 30px;
-                }}
-                .company-name {{
-                    font-size: 26px;
-                    font-weight: bold;
-                    color: #1E3A8A;
-                    margin: 0;
-                }}
-                .payslip-title {{
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: #64748B;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                }}
-                .meta-table, .breakdown-table {{
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-bottom: 25px;
-                }}
-                .meta-table td {{
-                    padding: 6px 12px;
-                    border: none;
-                }}
-                .breakdown-table th {{
-                    background-color: #F8FAFC;
-                    color: #475569;
-                    font-weight: bold;
-                    text-align: left;
-                    border-bottom: 2px solid #E2E8F0;
-                    padding: 10px 12px;
-                }}
-                .breakdown-table td {{
-                    padding: 10px 12px;
-                    border-bottom: 1px solid #F1F5F9;
-                }}
-                .breakdown-table tr.total {{
-                    background-color: #F1F5F9;
-                    font-weight: bold;
-                    color: #0F172A;
-                }}
-                .breakdown-table tr.nett-total {{
-                    background-color: #ECFDF5;
-                    font-weight: 800;
-                    font-size: 16px;
-                    color: #065F46;
-                    border-top: 2px solid #10B981;
-                    border-bottom: 2px solid #10B981;
-                }}
-                .right {{
-                    text-align: right;
-                }}
-                .text-bold {{
-                    font-weight: bold;
-                }}
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <p class="company-name">DEMO MALAYSIA ENTERPRISE</p>
-                <span class="payslip-title">Official Pay Slip</span>
-            </div>
-            
-            <table class="meta-table">
-                <tr>
-                    <td class="text-bold">Employee Status:</td>
-                    <td>{inputs['socso_category'].replace('_', ' ').title()}</td>
-                    <td class="text-bold">Marital Status:</td>
-                    <td>{inputs['marital']}</td>
-                </tr>
-                <tr>
-                    <td class="text-bold">Spouse Relief:</td>
-                    <td>{'Claimed' if inputs['spouse_eligible'] else 'None'}</td>
-                    <td class="text-bold">Children Count:</td>
-                    <td>{inputs['children_count']}</td>
-                </tr>
-                <tr>
-                    <td class="text-bold">Pay Period:</td>
-                    <td>{calendar.month_name[inputs['month']]} {inputs['year']}</td>
-                    <td class="text-bold"></td>
-                    <td></td>
-                </tr>
-            </table>
-            
-            <table class="breakdown-table">
-                <thead>
-                    <tr>
-                        <th>Earnings Breakdown</th>
-                        <th class="right">Employee Share (RM)</th>
-                        <th class="right">Employer Share (RM)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Base Salary</td>
-                        <td class="right">{inputs['monthly_salary']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    <tr>
-                        <td>Weekday Overtime ({inputs['overtime_weekday_hours']} hrs)</td>
-                        <td class="right">{additions['overtime_weekday_pay']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    <tr>
-                        <td>Weekend Overtime ({inputs['overtime_weekend_hours']} hrs)</td>
-                        <td class="right">{additions['overtime_weekend_pay']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    <tr>
-                        <td>Public Holiday Overtime ({inputs['overtime_holiday_hours']} hrs)</td>
-                        <td class="right">{additions['overtime_holiday_pay']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    <tr>
-                        <td>Taxable Additional Income</td>
-                        <td class="right">{additions['taxable_additional_income']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    
-                    <thead>
-                        <tr>
-                            <th>Deductions & Statutory Contributions</th>
-                            <th class="right"></th>
-                            <th class="right"></th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td>Late Hours Deduction ({inputs['late_hours']} hrs)</td>
-                        <td class="right" style="color: #EF4444;">-{deductions['late_deduction']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    <tr>
-                        <td>Unpaid Leave Deduction ({inputs['unpaid_leave_days']} days)</td>
-                        <td class="right" style="color: #EF4444;">-{deductions['unpaid_leave_deduction']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    
-                    <tr class="total">
-                        <td>GROSS SALARY</td>
-                        <td class="right">{res['gross_salary']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>EPF Contribution</td>
-                        <td class="right" style="color: #EF4444;">-{stat['epf_employee']:,.2f}</td>
-                        <td class="right">{stat['epf_employer']:,.2f}</td>
-                    </tr>
-                    <tr>
-                        <td>SOCSO Contribution</td>
-                        <td class="right" style="color: #EF4444;">-{stat['socso_employee']:,.2f}</td>
-                        <td class="right">{stat['socso_employer']:,.2f}</td>
-                    </tr>
-                    <tr>
-                        <td>EIS Contribution</td>
-                        <td class="right" style="color: #EF4444;">-{stat['eis_employee']:,.2f}</td>
-                        <td class="right">{stat['eis_employer']:,.2f}</td>
-                    </tr>
-                    <tr>
-                        <td>PCB Monthly Tax Deduction</td>
-                        <td class="right" style="color: #EF4444;">-{stat['pcb']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>Non-Taxable Additional Income</td>
-                        <td class="right" style="color: #10B981;">+{additions['nontaxable_additional_income']:,.2f}</td>
-                        <td class="right">-</td>
-                    </tr>
-                    
-                    <tr class="nett-total">
-                        <td>NETT TAKE-HOME SALARY</td>
-                        <td class="right">RM {res['nett_salary']:,.2f}</td>
-                        <td class="right"></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div style="margin-top: 40px; font-size: 13px; text-align: center; color: #94A3B8;">
-                This is a computer-generated document. No signature is required.
-            </div>
-        </body>
-        </html>
-        """
-        
         try:
-            doc = QTextDocument()
-            doc.setHtml(html_content)
-            
-            writer = QPdfWriter(file_path)
-            # Set resolution to screen-equivalent DPI so CSS px sizes render correctly
-            writer.setResolution(96)
-            # Setup Page layout
-            writer.setPageSize(QPageSize(QPageSize.PageSizeId.A4))
-            
-            # Print document using standard PySide6 print
-            doc.print_(writer)
-            
+            PayslipExporter.export_pdf(res, file_path)
             QMessageBox.information(
                 self, "Export Success", f"Pay Slip successfully saved as PDF:\n{file_path}"
             )
