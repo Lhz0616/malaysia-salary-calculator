@@ -11,6 +11,7 @@ uv run pyinstaller --noconfirm --onefile --windowed `
     --icon "src/icon/app_icon.ico" `
     --add-data "src/assets;assets" `
     --add-data "src/icon;icon" `
+    --add-data "src/data;data" `
     src/main.py
 
 $distDir = "dist"
@@ -62,6 +63,7 @@ if ($isccPath) {
 }
 
 Write-Host "==> 5. Creating standalone ZIP package..." -ForegroundColor Cyan
-Compress-Archive -Path "dist/*" -DestinationPath "Output/MalaysianSalaryCalculator-Windows.zip"
+if (!(Test-Path "Output")) { New-Item -ItemType Directory -Path "Output" -Force | Out-Null }
+Compress-Archive -Path "dist/*" -DestinationPath "Output/MalaysianSalaryCalculator-Windows.zip" -Force
 
-Write-Host "Done!" --ForegroundColor Green
+Write-Host "Done!" -ForegroundColor Green
