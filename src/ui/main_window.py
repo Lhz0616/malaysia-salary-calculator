@@ -1,7 +1,7 @@
 import datetime
 import logging
 import os
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 
 from PySide6.QtCore import Qt, QUrl
 from PySide6.QtGui import (
@@ -58,7 +58,10 @@ FULLTIMER_BREAKDOWN_ROWS = [
 ]
 
 PARTTIMER_BREAKDOWN_ROWS = [
-    ("Nett Take-Home Salary", True),
+    ("Total Working Hours", True),
+    ("Hourly Rate", True),
+    ("Base Wages", True),
+    ("Additional Income", True),
 ]
 
 from ui.dialogs.config_dialog import ConfigEditorDialog
@@ -315,12 +318,35 @@ class MainWindow(QMainWindow):
         self.fulltimer_fields.append(self.txt_nontax_additional_income)
 
         # --- Part Timer fields (hidden until toggled) ---
-        self.txt_pt_hours = QLineEdit(self)
-        self.txt_pt_hours.setValidator(double_validator)
-        self.txt_pt_hours.setText("0")
-        self.txt_pt_hours.setPlaceholderText("Total hours worked")
-        self.input_form.addRow("Total Working Hours:", self.txt_pt_hours)
-        self.parttimer_fields.append(self.txt_pt_hours)
+        self.shift_rows = []
+
+        self.pt_shifts_container = QWidget(self)
+        self.pt_shifts_layout = QVBoxLayout(self.pt_shifts_container)
+        self.pt_shifts_layout.setContentsMargins(0, 0, 0, 0)
+        self.pt_shifts_layout.setSpacing(6)
+
+        self.pt_shift_rows_widget = QWidget(self.pt_shifts_container)
+        self.pt_shift_rows_layout = QVBoxLayout(self.pt_shift_rows_widget)
+        self.pt_shift_rows_layout.setContentsMargins(0, 0, 0, 0)
+        self.pt_shift_rows_layout.setSpacing(6)
+        self.pt_shifts_layout.addWidget(self.pt_shift_rows_widget)
+
+        # Working hours summary bar
+        shifts_bar = QHBoxLayout()
+        shifts_bar.setContentsMargins(0, 2, 0, 0)
+        shifts_bar.addStretch()
+
+        self.lbl_total_hours_summary = QLabel("Total: 0.00 hrs", self.pt_shifts_container)
+        self.lbl_total_hours_summary.setStyleSheet("font-weight: bold; color: #818CF8; font-size: 13px;")
+        shifts_bar.addWidget(self.lbl_total_hours_summary)
+
+        self.pt_shifts_layout.addLayout(shifts_bar)
+
+        # Add initial default shift row
+        self.add_shift_row("0", "0")
+
+        self.input_form.addRow("Working Hours (day x hour):", self.pt_shifts_container)
+        self.parttimer_fields.append(self.pt_shifts_container)
 
         self.txt_pt_rate = QLineEdit(self)
         self.txt_pt_rate.setValidator(double_validator)
@@ -424,7 +450,6 @@ class MainWindow(QMainWindow):
         self.socso_bg.idToggled.connect(self.on_calculate)
         self.chk_socso_injury.toggled.connect(self.on_calculate)
         self.chk_part_timer.toggled.connect(self.update_mode)
-        self.txt_pt_hours.textChanged.connect(self.on_calculate)
         self.txt_pt_rate.textChanged.connect(self.on_calculate)
         self.txt_pt_additional.textChanged.connect(self.on_calculate)
         
@@ -549,6 +574,118 @@ class MainWindow(QMainWindow):
         for i in range(nrows):
             self.breakdown_table.setRowHeight(i, max(row_height, 42))
 
+    def add_shift_row(self, hours: str = "0", days: str = "0"):
+        """Appends a new shift (Hours/Day x Days) row."""
+        row_widget = QWidget(self.pt_shift_rows_widget)
+        row_layout = QHBoxLayout(row_widget)
+        row_layout.setContentsMargins(0, 0, 0, 0)
+        row_layout.setSpacing(6)
+
+        double_validator = QDoubleValidator(0.0, 9999999.99, 4, self)
+        double_validator.setNotation(QDoubleValidator.Notation.StandardNotation)
+
+        txt_hours = QLineEdit(row_widget)
+        txt_hours.setValidator(double_validator)
+        txt_hours.setText(str(hours))
+        txt_hours.setPlaceholderText("Hrs/day")
+        txt_hours.setFixedWidth(68)
+
+        lbl_mult = QLabel("×", row_widget)
+        lbl_mult.setStyleSheet("font-weight: bold; color: #94A3B8;")
+
+        txt_days = QLineEdit(row_widget)
+        txt_days.setValidator(double_validator)
+        txt_days.setText(str(days))
+        txt_days.setPlaceholderText("Days")
+        txt_days.setFixedWidth(56)
+
+        lbl_eq = QLabel("=", row_widget)
+        lbl_eq.setStyleSheet("font-weight: bold; color: #94A3B8;")
+
+        lbl_subtotal = QLabel("0.00 hrs", row_widget)
+        lbl_subtotal.setStyleSheet("font-weight: 600; min-width: 60px;")
+
+        btn_add = QPushButton("+", row_widget)
+        btn_add.setObjectName("shiftAddBtn")
+        btn_add.setFixedWidth(28)
+        btn_add.setFixedHeight(28)
+        btn_add.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_add.setToolTip("Add new row (Keyboard: +)")
+
+        btn_remove = QPushButton("-", row_widget)
+        btn_remove.setObjectName("shiftRemoveBtn")
+        btn_remove.setFixedWidth(28)
+        btn_remove.setFixedHeight(28)
+        btn_remove.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_remove.setToolTip("Delete row (Keyboard: -)")
+
+        row_layout.addWidget(txt_hours)
+        row_layout.addWidget(lbl_mult)
+        row_layout.addWidget(txt_days)
+        row_layout.addWidget(lbl_eq)
+        row_layout.addWidget(lbl_subtotal)
+        row_layout.addStretch()
+        row_layout.addWidget(btn_add)
+        row_layout.addWidget(btn_remove)
+
+        row_entry = {
+            "widget": row_widget,
+            "txt_hours": txt_hours,
+            "txt_days": txt_days,
+            "lbl_subtotal": lbl_subtotal,
+            "btn_add": btn_add,
+            "btn_remove": btn_remove,
+        }
+
+        btn_add.clicked.connect(lambda: self.add_shift_row("0", "0"))
+        btn_remove.clicked.connect(lambda: self.remove_shift_row(row_entry))
+        txt_hours.textChanged.connect(self.on_calculate)
+        txt_days.textChanged.connect(self.on_calculate)
+
+        self.shift_rows.append(row_entry)
+        self.pt_shift_rows_layout.addWidget(row_widget)
+        self.update_shift_row_controls()
+        if hasattr(self, "breakdown_table"):
+            self.on_calculate()
+
+    def remove_shift_row(self, row_entry: dict):
+        """Removes a specific shift row if more than 1 row exists."""
+        if len(self.shift_rows) <= 1:
+            return
+        if row_entry in self.shift_rows:
+            self.shift_rows.remove(row_entry)
+            self.pt_shift_rows_layout.removeWidget(row_entry["widget"])
+            row_entry["widget"].deleteLater()
+            self.update_shift_row_controls()
+            self.on_calculate()
+
+    def remove_last_shift_row(self):
+        """Removes the last shift row (used by keyboard shortcut '-')."""
+        if len(self.shift_rows) > 1:
+            self.remove_shift_row(self.shift_rows[-1])
+
+    def update_shift_row_controls(self):
+        """Updates delete button enabled states across all shift rows."""
+        can_remove = len(self.shift_rows) > 1
+        for row in self.shift_rows:
+            row["btn_remove"].setEnabled(can_remove)
+            row["btn_remove"].setToolTip("Delete shift row" if can_remove else "At least 1 shift row is required")
+
+    def keyPressEvent(self, event):
+        """Handle '+' and '-' shortcuts exclusively in Part-Timer mode."""
+        if self.chk_part_timer.isChecked():
+            key = event.key()
+            text = event.text()
+            if key == Qt.Key.Key_Plus or text == "+":
+                self.add_shift_row("0", "0")
+                event.accept()
+                return
+            elif key == Qt.Key.Key_Minus or text == "-":
+                self.remove_last_shift_row()
+                event.accept()
+                return
+        super().keyPressEvent(event)
+
     def on_mode_toggle(self):
         if self.btn_toggle_mode.isChecked():
             self.current_mode = "dark"
@@ -608,19 +745,42 @@ class MainWindow(QMainWindow):
             is_part_timer = self.chk_part_timer.isChecked()
 
             if is_part_timer:
-                pt_hours = Decimal(self.txt_pt_hours.text() or "0")
-                pt_rate = Decimal(self.txt_pt_rate.text() or "0")
-                pt_add = Decimal(self.txt_pt_additional.text() or "0")
+                shifts = []
+                for row in self.shift_rows:
+                    try:
+                        h_val = Decimal(row["txt_hours"].text().strip() or "0")
+                    except Exception:
+                        h_val = Decimal("0.00")
+                    try:
+                        d_val = Decimal(row["txt_days"].text().strip() or "0")
+                    except Exception:
+                        d_val = Decimal("0.00")
+
+                    shifts.append((h_val, d_val))
+                    subtotal = (h_val * d_val).quantize(Decimal("0.01"), ROUND_HALF_UP)
+                    row["lbl_subtotal"].setText(f"{subtotal:,.2f} hrs")
+
+                try:
+                    pt_rate = Decimal(self.txt_pt_rate.text().strip() or "0")
+                except Exception:
+                    pt_rate = Decimal("0.00")
+                try:
+                    pt_add = Decimal(self.txt_pt_additional.text().strip() or "0")
+                except Exception:
+                    pt_add = Decimal("0.00")
 
                 inp = PayrollInput(
                     is_part_timer=True,
-                    total_working_hours=pt_hours,
+                    part_time_shifts=tuple(shifts),
                     hourly_rate=pt_rate,
                     taxable_additional_income=pt_add,
                     month=month,
-                    year=year
+                    year=year,
                 )
                 res = PayrollEngine.default().calculate(inp)
+
+                total_h = res["inputs"]["total_working_hours"]
+                self.lbl_total_hours_summary.setText(f"Total: {total_h:,.2f} hrs")
             else:
                 base_sal = Decimal(self.txt_base_salary.text() or "0")
                 ot_weekday = Decimal(self.txt_ot_weekday.text() or "0")
@@ -665,7 +825,14 @@ class MainWindow(QMainWindow):
 
             cells = self._breakdown_cells
             if res.get("is_part_timer"):
-                cells["Nett Take-Home Salary"].setText(f"RM {res['nett_salary']:,.2f}")
+                if "Total Working Hours" in cells:
+                    cells["Total Working Hours"].setText(f"{res['inputs']['total_working_hours']:,.2f} hrs")
+                if "Hourly Rate" in cells:
+                    cells["Hourly Rate"].setText(f"RM {res['rates']['hourly_rate']:,.2f}")
+                if "Base Wages" in cells:
+                    cells["Base Wages"].setText(f"RM {res['additions']['base_wages']:,.2f}")
+                if "Additional Income" in cells:
+                    cells["Additional Income"].setText(f"RM {res['additions']['taxable_additional_income']:,.2f}")
             else:
                 additions = res["additions"]
                 stat = res["statutory"]
@@ -708,13 +875,6 @@ class MainWindow(QMainWindow):
             return
 
         res = self.latest_results
-        if res.get("is_part_timer"):
-            QMessageBox.information(
-                self, "Export Unavailable",
-                "PDF export is currently supported for full-timer payslips."
-            )
-            return
-
         file_path, _ = QFileDialog.getSaveFileName(
             self, "Export Pay Slip", "", "PDF Files (*.pdf)"
         )
