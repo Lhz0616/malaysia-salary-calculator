@@ -33,6 +33,57 @@ class TestPayrollEngine(unittest.TestCase):
         self.assertTrue(res["is_part_timer"])
         self.assertEqual(res["nett_salary"], 670.0)
         self.assertEqual(res["gross_salary"], 670.0)
+        self.assertEqual(res["additions"]["base_wages"], 620.0)
+        self.assertEqual(res["rates"]["hourly_rate"], 15.5)
+
+    def test_part_timer_multiple_shifts(self):
+        inp = PayrollInput(
+            is_part_timer=True,
+            part_time_shifts=(
+                (Decimal("8.0"), Decimal("5.0")),  # 40 hrs
+                (Decimal("4.0"), Decimal("3.0")),  # 12 hrs
+            ),
+            hourly_rate=Decimal("15.00"),
+            taxable_additional_income=Decimal("50.00"),
+        )
+        res = self.engine.calculate(inp)
+        self.assertTrue(res["is_part_timer"])
+        self.assertEqual(res["inputs"]["total_working_hours"], 52.0)
+        self.assertEqual(res["additions"]["base_wages"], 780.0)
+        self.assertEqual(res["gross_salary"], 830.0)
+        self.assertEqual(res["nett_salary"], 830.0)
+        self.assertEqual(len(res["inputs"]["part_time_shifts"]), 2)
+        self.assertEqual(res["inputs"]["part_time_shifts"][0]["subtotal_hours"], 40.0)
+        self.assertEqual(res["inputs"]["part_time_shifts"][1]["subtotal_hours"], 12.0)
+
+    def test_part_timer_from_dict_shifts(self):
+        inp = PayrollInput.from_dict({
+            "is_part_timer": True,
+            "part_time_shifts": [
+                {"hours": 7.5, "days": 4},
+                {"hours": 6.0, "days": 2},
+            ],
+            "hourly_rate": 20.0,
+            "taxable_additional_income": 0.0,
+        })
+        res = self.engine.calculate(inp)
+        self.assertTrue(res["is_part_timer"])
+        self.assertEqual(res["inputs"]["total_working_hours"], 42.0)
+        self.assertEqual(res["nett_salary"], 840.0)
+
+    def test_part_timer_decimal_shifts(self):
+        inp = PayrollInput(
+            is_part_timer=True,
+            part_time_shifts=(
+                (Decimal("7.5"), Decimal("2.5")),  # 18.75 hrs
+            ),
+            hourly_rate=Decimal("20.00"),
+            taxable_additional_income=Decimal("10.50"),
+        )
+        res = self.engine.calculate(inp)
+        self.assertEqual(res["inputs"]["total_working_hours"], 18.75)
+        self.assertEqual(res["additions"]["base_wages"], 375.0)
+        self.assertEqual(res["nett_salary"], 385.5)
 
     def test_full_timer_basic_payroll(self):
         inp = PayrollInput(
