@@ -73,8 +73,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Malaysian Salary, Statutory & PCB Calculator")
         self.resize(1300, 880)
 
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        icon_path = os.path.abspath(os.path.join(script_dir, "..", "icon", "app_icon.ico"))
+        icon_path = get_resource_path("icon/app_icon.ico")
         if os.path.exists(icon_path):
             self.setWindowIcon(QIcon(icon_path))
         
@@ -107,12 +106,8 @@ class MainWindow(QMainWindow):
         Loads and applies QSS stylesheets directly onto target widget/dialog.
         """
         mode_name = mode.lower() if mode else "dark"
-        style_path = get_resource_path(f"src/assets/styles/{mode_name}.qss")
-
-        if not os.path.exists(style_path):
-            style_path = get_resource_path(f"assets/styles/{mode_name}.qss")
-
-        assets_dir = get_resource_path("src/assets").replace("\\", "/")
+        style_path = get_resource_path(f"assets/styles/{mode_name}.qss")
+        assets_dir = get_resource_path("assets").replace("\\", "/")
 
         try:
             with open(style_path, "r", encoding="utf-8") as f:
