@@ -4,12 +4,14 @@ import urllib.request
 
 from PySide6.QtCore import QThread, Signal
 
-CURRENT_VERSION = "0.1.0"
+from version import __version__
+
+CURRENT_VERSION = __version__
 DEFAULT_REPO = "Lhz0616/malaysia-salary-calculator"
 
 def parse_version(v_str: str):
     """Clean version string into a tuple of integers for comparison, e.g. 'v1.2.3' -> (1, 2, 3)."""
-    v_clean = v_str.lstrip("vV").strip()
+    v_clean = v_str.lstrip("vV").strip().split("-")[0].split("+")[0]
     parts = []
     for part in v_clean.split("."):
         try:
@@ -21,9 +23,9 @@ def parse_version(v_str: str):
 class UpdateCheckerThread(QThread):
     """
     Background thread to check for new releases on GitHub without blocking the GUI.
-    Emits update_available(latest_version, release_url, release_notes) if a newer version exists.
+    Emits update_available(latest_version, release_url, release_notes, download_url) if a newer version exists.
     """
-    update_available = Signal(str, str, str)  # (latest_version, release_url, release_notes)
+    update_available = Signal(str, str, str, str)  # (latest_version, release_url, release_notes, download_url)
 
     def __init__(self, repo_slug=DEFAULT_REPO, current_version=CURRENT_VERSION, parent=None):
         super().__init__(parent)
@@ -47,8 +49,15 @@ class UpdateCheckerThread(QThread):
                     release_url = data.get("html_url", f"https://github.com/{self.repo_slug}/releases")
                     release_notes = data.get("body", "")
 
+                    download_url = ""
+                    for asset in data.get("assets", []):
+                        name = asset.get("name", "").lower()
+                        if name.endswith("_setup.exe") or name.endswith(".exe"):
+                            download_url = asset.get("browser_download_url", "")
+                            break
+
                     if parse_version(latest_tag) > parse_version(self.current_version):
-                        self.update_available.emit(latest_tag, release_url, release_notes)
+                        self.update_available.emit(latest_tag, release_url, release_notes, download_url)
         except Exception:
             # Quietly fail on network errors or rate-limits so UI experience is uninterrupted
             pass

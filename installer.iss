@@ -3,7 +3,7 @@
 
 #define MyAppName "Malaysian Salary Calculator"
 #ifndef MyAppVersion
-#define MyAppVersion "0.1.0"
+#define MyAppVersion "1.0.0"
 #endif
 #define MyAppPublisher "Hong Zhi Lim"
 #define MyAppURL "https://github.com/Lhz0616/malaysia-salary-calculator"
@@ -18,6 +18,11 @@ AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
+ArchitecturesInstallIn64BitMode=x64compatible
+PrivilegesRequired=lowest
+PrivilegesRequiredOverridesAllowed=dialog
+UsePreviousAppDir=yes
+DisableDirPage=auto
 DisableProgramGroupPage=yes
 OutputBaseFilename=MalaysianSalaryCalculator_Setup
 Compression=lzma2/ultra64
@@ -33,8 +38,13 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-; Copy all build output files from dist/MalaysianSalaryCalculator
-Source: "dist\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Copy all build output files from dist/MalaysianSalaryCalculator (--onedir output)
+Source: "dist\MalaysianSalaryCalculator\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+[InstallDelete]
+Type: filesandordirs; Name: "{app}\_internal"
+Type: files; Name: "{app}\MalaysianSalaryCalculator.exe"
+Type: filesandordirs; Name: "{app}\.data"
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

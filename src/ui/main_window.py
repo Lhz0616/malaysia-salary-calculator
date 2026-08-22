@@ -13,6 +13,7 @@ from PySide6.QtGui import (
     QIntValidator,
 )
 from PySide6.QtWidgets import (
+    QApplication,
     QButtonGroup,
     QCheckBox,
     QComboBox,
@@ -27,6 +28,7 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QMainWindow,
     QMessageBox,
+    QProgressBar,
     QPushButton,
     QRadioButton,
     QScrollArea,
@@ -39,8 +41,10 @@ from PySide6.QtWidgets import (
 
 from core.config_loader import get_resource_path
 from core.payroll_engine import PayrollEngine, PayrollInput
-from core.update_checker import UpdateCheckerThread
 from services.payslip_exporter import PayslipExporter
+from services.update_checker import UpdateCheckerThread
+from services.update_downloader import UpdateDownloaderThread, apply_update_and_restart
+from version import __version__
 
 # Rows shown in the payroll breakdown table for each employment mode.
 # Each entry is (label, merged?) where merged rows span the Employee + Employer columns.
@@ -70,11 +74,10 @@ class MainWindow(QMainWindow):
     """
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Malaysian Salary, Statutory & PCB Calculator")
+        self.setWindowTitle(f"Malaysian Salary Calculator v{__version__}")
         self.resize(1300, 880)
 
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        icon_path = os.path.abspath(os.path.join(script_dir, "..", "icon", "app_icon.ico"))
+        icon_path = get_resource_path("icon/app_icon.ico")
         if os.path.exists(icon_path):
             self.setWindowIcon(QIcon(icon_path))
         
@@ -107,12 +110,8 @@ class MainWindow(QMainWindow):
         Loads and applies QSS stylesheets directly onto target widget/dialog.
         """
         mode_name = mode.lower() if mode else "dark"
-        style_path = get_resource_path(f"src/assets/styles/{mode_name}.qss")
-
-        if not os.path.exists(style_path):
-            style_path = get_resource_path(f"assets/styles/{mode_name}.qss")
-
-        assets_dir = get_resource_path("src/assets").replace("\\", "/")
+        style_path = get_resource_path(f"assets/styles/{mode_name}.qss")
+        assets_dir = get_resource_path("assets").replace("\\", "/")
 
         try:
             with open(style_path, "r", encoding="utf-8") as f:
@@ -121,7 +120,7 @@ class MainWindow(QMainWindow):
             qss_formatted = qss_content.replace("{assets_dir}", assets_dir)
             target.setStyleSheet(qss_formatted)
         except Exception as e:
-            logging.error(f"Failed to apply theme '{mode}': {e}")
+            logging.error(f"Failed to apply theme '{mode}' from {style_path}: {e}")
 
     def setup_ui(self):
         # --- TOP HEADER BAR ---
@@ -131,6 +130,9 @@ class MainWindow(QMainWindow):
         
         self.app_title_lbl = QLabel("Malaysian Salary Calculator")
         self.app_title_lbl.setObjectName("appTitle")
+        
+        self.version_badge = QLabel(f"v{__version__}")
+        self.version_badge.setObjectName("versionBadge")
         
         self.btn_view_config = QPushButton("⚙️ Configs", self)
         self.btn_view_config.setObjectName("outlineBtn")
@@ -143,6 +145,7 @@ class MainWindow(QMainWindow):
         self.btn_toggle_mode.clicked.connect(self.on_mode_toggle)
         
         header_layout.addWidget(self.app_title_lbl)
+        header_layout.addWidget(self.version_badge)
         header_layout.addStretch()
         header_layout.addWidget(self.btn_view_config)
         header_layout.addWidget(self.btn_toggle_mode)
@@ -164,15 +167,30 @@ class MainWindow(QMainWindow):
         banner_layout.setSpacing(12)
         
         self.lbl_update_msg = QLabel("🎉 A new release is available on GitHub!", self.update_banner)
-        self.btn_download_update = QPushButton("Download Update", self.update_banner)
+        self.btn_download_update = QPushButton("⬇️ Download Update", self.update_banner)
         self.btn_download_update.setObjectName("primaryBtn")
         self.btn_download_update.clicked.connect(self.on_download_update_clicked)
         self.btn_dismiss_update = QPushButton("✕", self.update_banner)
-        self.btn_dismiss_update.setObjectName("outlineBtn")
-        self.btn_dismiss_update.setFixedWidth(32)
+        self.btn_dismiss_update.setObjectName("dismissBannerBtn")
+        self.btn_dismiss_update.setFixedSize(28, 28)
+        self.btn_dismiss_update.setToolTip("Dismiss notification")
         self.btn_dismiss_update.clicked.connect(lambda: self.update_banner.setVisible(False))
+
+        # Progress widgets for background downloading
+        self.lbl_download_status = QLabel("Downloading...", self.update_banner)
+        self.lbl_download_status.setObjectName("downloadStatusLabel")
+        self.lbl_download_status.setVisible(False)
+
+        self.update_progress_bar = QProgressBar(self.update_banner)
+        self.update_progress_bar.setObjectName("updateProgressBar")
+        self.update_progress_bar.setRange(0, 100)
+        self.update_progress_bar.setValue(0)
+        self.update_progress_bar.setFixedHeight(16)
+        self.update_progress_bar.setVisible(False)
         
         banner_layout.addWidget(self.lbl_update_msg)
+        banner_layout.addWidget(self.lbl_download_status)
+        banner_layout.addWidget(self.update_progress_bar, 1)
         banner_layout.addStretch()
         banner_layout.addWidget(self.btn_download_update)
         banner_layout.addWidget(self.btn_dismiss_update)
@@ -559,12 +577,70 @@ class MainWindow(QMainWindow):
         self.apply_theme()
 
     def on_download_update_clicked(self):
-        url = getattr(self, "release_url", "https://github.com/Lhz0616/malaysia-salary-calculator/releases")
-        QDesktopServices.openUrl(QUrl(url))
+        download_url = getattr(self, "download_url", "")
+        if not download_url:
+            # Fallback to browser if direct asset URL is not found
+            url = getattr(self, "release_url", "https://github.com/Lhz0616/malaysia-salary-calculator/releases")
+            QDesktopServices.openUrl(QUrl(url))
+            return
 
-    def on_update_available(self, latest_version, release_url, release_notes):
+        # Switch banner to downloading progress mode
+        self.lbl_update_msg.setVisible(False)
+        self.btn_download_update.setVisible(False)
+        self.btn_dismiss_update.setVisible(False)
+
+        self.lbl_download_status.setText("Downloading...")
+        self.lbl_download_status.setVisible(True)
+        self.update_progress_bar.setValue(0)
+        self.update_progress_bar.setVisible(True)
+
+        self.downloader_thread = UpdateDownloaderThread(download_url, parent=self)
+        self.downloader_thread.progress.connect(self.on_download_progress)
+        self.downloader_thread.download_finished.connect(self.on_download_finished)
+        self.downloader_thread.error_occurred.connect(self.on_download_error)
+        self.downloader_thread.start()
+
+    def on_download_progress(self, downloaded, total):
+        if total > 0:
+            percent = int((downloaded / total) * 100)
+            self.update_progress_bar.setRange(0, 100)
+            self.update_progress_bar.setValue(percent)
+            self.lbl_download_status.setText(f"Downloading... ({percent}%)")
+        else:
+            self.update_progress_bar.setRange(0, 0)
+            self.lbl_download_status.setText("Downloading...")
+
+    def on_download_finished(self, installer_path):
+        self.lbl_download_status.setText("Applying update and restarting...")
+        self.update_progress_bar.setRange(0, 100)
+        self.update_progress_bar.setValue(100)
+        
+        apply_update_and_restart(installer_path)
+        QApplication.instance().quit()
+
+    def on_download_error(self, error_msg):
+        logging.error(f"Failed to download update: {error_msg}")
+        self.lbl_download_status.setVisible(False)
+        self.update_progress_bar.setVisible(False)
+        
+        self.lbl_update_msg.setText("⚠️ Automatic update failed. Click to open browser download.")
+        self.lbl_update_msg.setVisible(True)
+        self.btn_download_update.setText("🌐 Open Download Page")
+        self.btn_download_update.setVisible(True)
+        self.btn_dismiss_update.setVisible(True)
+
+    def on_update_available(self, latest_version, release_url, release_notes, download_url=""):
         self.lbl_update_msg.setText(f"🎉 New version {latest_version} is available on GitHub!")
         self.release_url = release_url
+        self.download_url = download_url
+        
+        # Reset banner state
+        self.lbl_download_status.setVisible(False)
+        self.update_progress_bar.setVisible(False)
+        self.lbl_update_msg.setVisible(True)
+        self.btn_download_update.setText("⬇️ Download Update")
+        self.btn_download_update.setVisible(True)
+        self.btn_dismiss_update.setVisible(True)
         self.update_banner.setVisible(True)
 
     def update_mode(self):

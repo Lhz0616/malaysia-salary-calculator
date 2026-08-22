@@ -74,22 +74,23 @@ jobs:
           echo "APP_VERSION=$ver" >> $env:GITHUB_ENV
           Write-Host "Releasing Tag: $tag, Version: $ver"
 
-      - name: Sync Version in pyproject.toml & installer.iss
+      - name: Sync Version in pyproject.toml, installer.iss & version.py
         if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')) && env.APP_VERSION != ''
         shell: pwsh
         run: |
           $ver = "$env:APP_VERSION"
-          Write-Host "Updating pyproject.toml and installer.iss to version $ver..."
+          Write-Host "Updating pyproject.toml, installer.iss and src/version.py to version $ver..."
 
           (Get-Content pyproject.toml) -replace 'version\s*=\s*"[^"]+"', ("version = `"{0}`"" -f $ver) | Set-Content pyproject.toml
           (Get-Content installer.iss) -replace '#define MyAppVersion\s+"[^"]+"', ("#define MyAppVersion `"{0}`"" -f $ver) | Set-Content installer.iss
+          (Get-Content src/version.py) -replace '__version__\s*=\s*"[^"]+"', ("__version__ = `"{0}`"" -f $ver) | Set-Content src/version.py
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pyproject.toml installer.iss
+          git add pyproject.toml installer.iss src/version.py
           $status = git status --porcelain
           if ($status) {
-            git commit -m "chore: sync version to $ver in pyproject.toml and installer.iss [skip ci]"
+            git commit -m "chore: sync version to $ver in pyproject.toml, installer.iss, and version.py [skip ci]"
             git push origin HEAD:${{ github.ref_name }}
           }
 

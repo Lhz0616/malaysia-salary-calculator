@@ -34,13 +34,15 @@ The system is **modular, data-driven, and configurable**. Statutory rates live i
 salary_calculator/
 ├── src/
 │   ├── main.py                          # QApplication bootstrap -> MainWindow
+│   ├── version.py                       # Application __version__ source of truth
 │   ├── core/
 │   │   ├── payroll_engine.py            # PayrollEngine, PayrollInput, PayrollResult — master pipeline & all statutory calculations
 │   │   ├── config_loader.py             # get_resource_path(), load/save config, parse_contribution_range()
-│   │   ├── decimal_utils.py             # to_decimal(), CENTS / FOUR_PLACES quantization constants
-│   │   └── update_checker.py            # Background QThread for GitHub release checks
+│   │   └── decimal_utils.py             # to_decimal(), CENTS / FOUR_PLACES quantization constants
 │   ├── services/
-│   │   └── payslip_exporter.py          # HTML payslip renderer + PDF export (PayslipExporter)
+│   │   ├── payslip_exporter.py          # HTML payslip renderer + PDF export (PayslipExporter)
+│   │   ├── update_checker.py            # Background QThread for GitHub release checks
+│   │   └── update_downloader.py         # Background QThread for downloading and applying updates
 │   ├── ui/
 │   │   ├── main_window.py               # MainWindow — inputs, results, theme loading
 │   │   └── dialogs/

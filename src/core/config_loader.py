@@ -6,27 +6,43 @@ from decimal import Decimal
 
 def get_resource_path(relative_path: str) -> str:
     """
-    Resolve a resource path relative to the directory of the launched program
-    (the .exe in packaged mode, or the script in dev), so data folders shipped
-    next to it (./src/data, ./data, ./.data) are found without relying on
-    PyInstaller's _MEIPASS temp folder.
+    Resolve a resource path relative to:
+    1. PyInstaller bundled directory (sys._MEIPASS for --onedir embedded assets)
+    2. Launched program directory (os.path.dirname(sys.argv[0]) / sys.executable)
+    3. Project source root directory (in development mode)
     """
-    # Directory of the launched program (robust to the current working dir).
     candidates = []
+
+    # 1. PyInstaller extracted temp folder (for embedded assets / styles / icons)
+    if hasattr(sys, "_MEIPASS"):
+        candidates.append(getattr(sys, "_MEIPASS"))
+        candidates.append(os.path.join(getattr(sys, "_MEIPASS"), "src"))
+
+    # 2. Directory of the launched program (.exe location)
     if getattr(sys, "argv", None) and sys.argv:
         candidates.append(os.path.dirname(os.path.abspath(sys.argv[0])))
+    if getattr(sys, "executable", None):
+        candidates.append(os.path.dirname(os.path.abspath(sys.executable)))
 
-    # Fallback: resolve relative to this file (two levels up to project root).
+    # 3. Fallback: resolve relative to this source file
     current_dir = os.path.dirname(os.path.abspath(__file__))
     candidates.append(os.path.abspath(os.path.join(current_dir, "..", "..")))
+    candidates.append(os.path.abspath(os.path.join(current_dir, "..")))
+
+    # Prepare relative path variations (with and without 'src/' prefix)
+    rel_paths = [relative_path]
+    if relative_path.startswith("src/") or relative_path.startswith("src\\"):
+        rel_paths.append(relative_path[4:])
+    else:
+        rel_paths.append(os.path.join("src", relative_path))
 
     for base_path in candidates:
-        path = os.path.join(base_path, relative_path)
-        if os.path.exists(path):
-            return path
+        for rel in rel_paths:
+            path = os.path.join(base_path, rel)
+            if os.path.exists(path):
+                return os.path.normpath(path)
 
-    # No existing match; return the first candidate's path so callers can report it.
-    return os.path.join(candidates[0], relative_path)
+    return os.path.normpath(os.path.join(candidates[0] if candidates else "", relative_path))
 
 _DATA_DIRS = ["src/data", "data", ".data"]
 
