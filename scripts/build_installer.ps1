@@ -5,8 +5,15 @@ $ErrorActionPreference = "Stop"
 Write-Host "==> 1. Syncing dependencies with uv..." -ForegroundColor Cyan
 uv sync --all-groups
 
+if ($env:APP_VERSION) {
+    Write-Host "--> Synchronizing APP_VERSION ($env:APP_VERSION) to version.py, pyproject.toml, and installer.iss..." -ForegroundColor Cyan
+    (Get-Content pyproject.toml) -replace 'version\s*=\s*"[^"]+"', ("version = `"{0}`"" -f $env:APP_VERSION) | Set-Content pyproject.toml
+    (Get-Content installer.iss) -replace '#define MyAppVersion\s+"[^"]+"', ("#define MyAppVersion `"{0}`"" -f $env:APP_VERSION) | Set-Content installer.iss
+    (Get-Content src/version.py) -replace '__version__\s*=\s*"[^"]+"', ("__version__ = `"{0}`"" -f $env:APP_VERSION) | Set-Content src/version.py
+}
+
 Write-Host "==> 2. Building executable with PyInstaller & UPX..." -ForegroundColor Cyan
-uv run pyinstaller --noconfirm --onefile --windowed `
+uv run pyinstaller --noconfirm --onedir --windowed `
     --name "MalaysianSalaryCalculator" `
     --icon "src/icon/app_icon.ico" `
     --add-data "src/assets;assets" `
@@ -15,7 +22,8 @@ uv run pyinstaller --noconfirm --onefile --windowed `
     src/main.py
 
 $distDir = "dist"
-$dataTargetDir = Join-Path $distDir ".data"
+$appDir = Join-Path $distDir "MalaysianSalaryCalculator"
+$dataTargetDir = Join-Path $appDir ".data"
 
 Write-Host "==> 3. Copying src/data JSON files to .data directory alongside .exe..." -ForegroundColor Cyan
 if (Test-Path $dataTargetDir) {
@@ -57,13 +65,15 @@ if ($isccPath) {
     $zipPath = Join-Path $distDir "MalaysianSalaryCalculator-Windows.zip"
     if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
 
-    $filesToZip = Get-ChildItem -Path $distDir | Where-Object { $_.Name -ne "MalaysianSalaryCalculator-Windows.zip" } | Select-Object -ExpandProperty FullName
+    $filesToZip = Get-ChildItem -Path $appDir | Select-Object -ExpandProperty FullName
     Compress-Archive -Path $filesToZip -DestinationPath $zipPath
     Write-Host "==> ZIP Package created at $zipPath" -ForegroundColor Green
 }
 
 Write-Host "==> 5. Creating standalone ZIP package..." -ForegroundColor Cyan
-if (!(Test-Path "Output")) { New-Item -ItemType Directory -Path "Output" -Force | Out-Null }
-Compress-Archive -Path "dist/*" -DestinationPath "Output/MalaysianSalaryCalculator-Windows.zip" -Force
+if (-not (Test-Path "Output")) { New-Item -ItemType Directory -Path "Output" -Force | Out-Null }
+$outputZip = "Output/MalaysianSalaryCalculator-Windows.zip"
+if (Test-Path $outputZip) { Remove-Item $outputZip -Force }
+Compress-Archive -Path "$appDir/*" -DestinationPath $outputZip
 
 Write-Host "Done!" -ForegroundColor Green

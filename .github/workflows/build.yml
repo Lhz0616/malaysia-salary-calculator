@@ -76,23 +76,23 @@ jobs:
           "APP_VERSION=$ver" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           Write-Host "Releasing Tag: $tag, Version: $ver"
 
-      - name: Sync Version in pyproject.toml & installer.iss
-        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && steps.release_info.outputs.app_version != ''
+      - name: Sync Version in pyproject.toml, installer.iss & version.py
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')) && env.APP_VERSION != ''
         shell: pwsh
         run: |
-          $ver = "${{ steps.release_info.outputs.app_version }}"
-          Write-Host "Updating pyproject.toml and installer.iss to version $ver..."
+          $ver = "$env:APP_VERSION"
+          Write-Host "Updating pyproject.toml, installer.iss and src/version.py to version $ver..."
 
           (Get-Content pyproject.toml) -replace 'version\s*=\s*"[^"]+"', ("version = `"{0}`"" -f $ver) | Set-Content pyproject.toml
           (Get-Content installer.iss) -replace '#define MyAppVersion\s+"[^"]+"', ("#define MyAppVersion `"{0}`"" -f $ver) | Set-Content installer.iss
+          (Get-Content src/version.py) -replace '__version__\s*=\s*"[^"]+"', ("__version__ = `"{0}`"" -f $ver) | Set-Content src/version.py
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pyproject.toml installer.iss
-          $status = (git status --porcelain).Trim()
+          git add pyproject.toml installer.iss src/version.py
+          $status = git status --porcelain
           if ($status) {
-            git commit -m "chore: sync version to $ver in pyproject.toml and installer.iss [skip ci]"
-            git pull --rebase origin ${{ github.ref_name }}
+            git commit -m "chore: sync version to $ver in pyproject.toml, installer.iss, and version.py [skip ci]"
             git push origin HEAD:${{ github.ref_name }}
           }
 

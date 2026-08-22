@@ -1,4 +1,5 @@
 import ctypes
+import logging
 import os
 import sys
 
@@ -7,6 +8,8 @@ from PySide6.QtWidgets import QApplication
 
 from core.config_loader import get_resource_path
 from ui.main_window import MainWindow
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 
 def main():
