@@ -44,7 +44,7 @@ def get_resource_path(relative_path: str) -> str:
 
     return os.path.normpath(os.path.join(candidates[0] if candidates else "", relative_path))
 
-_DATA_DIRS = ["src/data", "data", ".data"]
+_DATA_DIRS = [".data", "data", "src/data"]
 
 # Module-level cache for all loaded data/*.json files (ponytail: simple in-process cache)
 _ALL_CONFIGS: dict | None = None
@@ -52,14 +52,34 @@ _ALL_CONFIGS: dict | None = None
 
 def _resolve_data_dir() -> str:
     """
-    Returns the first existing data directory among src/data, data, .data.
-    Falls back to src/data (as resolved by get_resource_path) if none exist yet.
+    Returns the first existing data directory among .data, data, src/data.
+    Prioritizes external directories next to the executable so user modifications
+    take precedence. Falls back to bundled/dev data directories.
+    If none exist yet, returns a path to '.data' next to the executable.
     """
+    # 1. Check external data directories next to executable
+    exe_dir = None
+    if getattr(sys, "argv", None) and sys.argv:
+        exe_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    elif getattr(sys, "executable", None):
+        exe_dir = os.path.dirname(os.path.abspath(sys.executable))
+
+    if exe_dir:
+        for dirname in [".data", "data", "src/data"]:
+            ext_path = os.path.join(exe_dir, dirname)
+            if os.path.isdir(ext_path):
+                return ext_path
+
+    # 2. Check general resource paths (including _MEIPASS and dev root)
     for rel in _DATA_DIRS:
         path = get_resource_path(rel)
         if os.path.isdir(path):
             return path
-    return get_resource_path(_DATA_DIRS[0])
+
+    # 3. Default target directory for saving configs
+    if exe_dir:
+        return os.path.join(exe_dir, ".data")
+    return get_resource_path(".data")
 
 
 def load_all_configs() -> dict:
@@ -117,8 +137,7 @@ def save_all_config(configs: dict | None = None) -> None:
         configs = get_configs()
 
     data_dir = _resolve_data_dir()
-    if not os.path.isdir(data_dir):
-        raise FileNotFoundError(f"Data directory not found: {data_dir}")
+    os.makedirs(data_dir, exist_ok=True)
 
     for stem, data in configs.items():
         abs_path = os.path.join(data_dir, f"{stem}.json")

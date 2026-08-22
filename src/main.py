@@ -6,6 +6,7 @@ import sys
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 
+from core.config_loader import get_resource_path
 from ui.main_window import MainWindow
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -28,8 +29,7 @@ def main():
     app.setOrganizationName("Demo Corp")
 
     # Set application window icon
-    src_dir = os.path.dirname(os.path.abspath(__file__))
-    icon_path = os.path.join(src_dir, "icon", "app_icon.ico")
+    icon_path = get_resource_path("icon/app_icon.ico")
     if os.path.exists(icon_path):
         app.setWindowIcon(QIcon(icon_path))
 

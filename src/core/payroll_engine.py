@@ -26,10 +26,21 @@ class PayrollInput:
     is_part_timer: bool = False
     total_working_hours: Decimal = Decimal("0.00")
     hourly_rate: Decimal = Decimal("0.00")
+    part_time_shifts: tuple[tuple[Decimal, Decimal], ...] = ()
 
     @classmethod
     def from_dict(cls, data: dict) -> "PayrollInput":
         """Convenience factory to create PayrollInput from raw float/int/str dict values."""
+        raw_shifts = data.get("part_time_shifts", [])
+        parsed_shifts = []
+        for item in raw_shifts:
+            if isinstance(item, (list, tuple)) and len(item) >= 2:
+                parsed_shifts.append((to_decimal(item[0]), to_decimal(item[1])))
+            elif isinstance(item, dict):
+                parsed_shifts.append(
+                    (to_decimal(item.get("hours", 0.0)), to_decimal(item.get("days", 0.0)))
+                )
+
         return cls(
             monthly_salary=to_decimal(data.get("monthly_salary", 0.0)),
             overtime_weekday_hours=to_decimal(data.get("overtime_weekday_hours", 0.0)),
@@ -55,6 +66,7 @@ class PayrollInput:
             is_part_timer=bool(data.get("is_part_timer", False)),
             total_working_hours=to_decimal(data.get("total_working_hours", 0.0)),
             hourly_rate=to_decimal(data.get("hourly_rate", 0.0)),
+            part_time_shifts=tuple(parsed_shifts),
         )
 
 
@@ -185,18 +197,65 @@ class PayrollEngine:
     def calculate(self, inp: PayrollInput) -> dict:
         """Executes full payroll calculation and returns structured breakdown dict."""
         if inp.is_part_timer:
-            nett = (
-                inp.total_working_hours * inp.hourly_rate
-            ) + inp.taxable_additional_income
-            nett_val = float(nett.quantize(CENTS, ROUND_HALF_UP))
+            if inp.part_time_shifts:
+                total_hours = sum(
+                    (h * d for h, d in inp.part_time_shifts), Decimal("0.00")
+                )
+                shifts_breakdown = [
+                    {
+                        "hours": float(h),
+                        "days": float(d),
+                        "subtotal_hours": float((h * d).quantize(Decimal("0.01"), ROUND_HALF_UP)),
+                    }
+                    for h, d in inp.part_time_shifts
+                ]
+            else:
+                total_hours = inp.total_working_hours
+                shifts_breakdown = [
+                    {
+                        "hours": float(total_hours),
+                        "days": 1.0,
+                        "subtotal_hours": float(total_hours),
+                    }
+                ]
+
+            base_wages = (total_hours * inp.hourly_rate).quantize(CENTS, ROUND_HALF_UP)
+            gross = (base_wages + inp.taxable_additional_income).quantize(CENTS, ROUND_HALF_UP)
+            nett_val = float(gross)
+            base_wages_val = float(base_wages)
+            total_hours_val = float(total_hours.quantize(Decimal("0.01"), ROUND_HALF_UP))
+            hourly_rate_val = float(inp.hourly_rate.quantize(CENTS, ROUND_HALF_UP))
+            taxable_add_val = float(inp.taxable_additional_income.quantize(CENTS, ROUND_HALF_UP))
+
             return {
                 "is_part_timer": True,
-                "nett_salary": nett_val,
                 "gross_salary": nett_val,
+                "nett_salary": nett_val,
+                "rates": {
+                    "hourly_rate": hourly_rate_val,
+                },
+                "additions": {
+                    "base_wages": base_wages_val,
+                    "taxable_additional_income": taxable_add_val,
+                    "nontaxable_additional_income": 0.0,
+                },
+                "deductions": {
+                    "total_deductions": 0.0,
+                },
+                "statutory": {
+                    "epf_employee": 0.0,
+                    "epf_employer": 0.0,
+                    "socso_employee": 0.0,
+                    "socso_employer": 0.0,
+                    "eis_employee": 0.0,
+                    "eis_employer": 0.0,
+                    "pcb": 0.0,
+                },
                 "inputs": {
-                    "total_working_hours": float(inp.total_working_hours),
-                    "hourly_rate": float(inp.hourly_rate),
-                    "taxable_additional_income": float(inp.taxable_additional_income),
+                    "total_working_hours": total_hours_val,
+                    "hourly_rate": hourly_rate_val,
+                    "taxable_additional_income": taxable_add_val,
+                    "part_time_shifts": shifts_breakdown,
                     "month": inp.month,
                     "year": inp.year,
                 },

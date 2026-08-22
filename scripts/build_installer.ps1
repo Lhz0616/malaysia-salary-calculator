@@ -18,6 +18,7 @@ uv run pyinstaller --noconfirm --onedir --windowed `
     --icon "src/icon/app_icon.ico" `
     --add-data "src/assets;assets" `
     --add-data "src/icon;icon" `
+    --add-data "src/data;data" `
     src/main.py
 
 $distDir = "dist"

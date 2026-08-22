@@ -34,5 +34,40 @@ class TestPayslipExporter(unittest.TestCase):
         self.assertIn("SOCSO Contribution", html)
         self.assertIn("EIS Contribution", html)
 
+    def test_render_part_timer_html_structure(self):
+        inp = PayrollInput(
+            is_part_timer=True,
+            part_time_shifts=(
+                (Decimal("8.0"), Decimal("5.0")),
+                (Decimal("4.0"), Decimal("3.0")),
+            ),
+            hourly_rate=Decimal("15.00"),
+            taxable_additional_income=Decimal("50.00"),
+            month=8,
+            year=2026,
+        )
+        res = self.engine.calculate(inp)
+        html = PayslipExporter.render_html(res, company_name="MALAYSIA RETAIL SDN BHD")
+        self.assertIn("MALAYSIA RETAIL SDN BHD", html)
+        self.assertIn("Part-Time Official Pay Slip", html)
+        self.assertIn("Part-Timer (Hourly)", html)
+        self.assertIn("RM 15.00 / hr", html)
+        self.assertIn("Working Hours (Day × Hour)", html)
+        self.assertIn("Entry 1", html)
+        self.assertIn("8.00 hrs", html)
+        self.assertIn("5.0 days", html)
+        self.assertIn("40.00 hrs", html)
+        self.assertIn("Entry 2", html)
+        self.assertIn("4.00 hrs", html)
+        self.assertIn("3.0 days", html)
+        self.assertIn("12.00 hrs", html)
+        self.assertIn("TOTAL WORKING HOURS", html)
+        self.assertIn("52.00 hrs", html)
+        self.assertIn("Base Wages", html)
+        self.assertIn("780.00", html)
+        self.assertIn("Additional Income", html)
+        self.assertIn("50.00", html)
+        self.assertIn("830.00", html)
+
 if __name__ == "__main__":
     unittest.main()
