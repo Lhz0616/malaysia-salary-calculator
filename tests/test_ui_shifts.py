@@ -1,7 +1,6 @@
 import os
 import sys
 import unittest
-from decimal import Decimal
 
 # Set offscreen platform for headless test
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
@@ -10,6 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..",
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QApplication
+
 from ui.main_window import MainWindow
 
 app = QApplication.instance() or QApplication(sys.argv)
