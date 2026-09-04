@@ -8,7 +8,7 @@ QWidget {
     color: #1E293B;
 }
 
-QScrollArea, QScrollArea > QWidget, QAbstractScrollArea::viewport, #inputScroll, #inputWidget {
+QScrollArea, QScrollArea > QWidget, QAbstractScrollArea::viewport, #mainScroll, #scrollContent, #inputScroll, #inputWidget {
     background-color: transparent;
     border: none;
 }

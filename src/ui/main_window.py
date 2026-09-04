@@ -1,9 +1,9 @@
 import datetime
 import logging
 import os
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import ROUND_HALF_UP, Decimal
 
-from PySide6.QtCore import Qt, QUrl
+from PySide6.QtCore import QSize, Qt, QUrl
 from PySide6.QtGui import (
     QColor,
     QDesktopServices,
@@ -14,6 +14,7 @@ from PySide6.QtGui import (
 )
 from PySide6.QtWidgets import (
     QApplication,
+    QBoxLayout,
     QButtonGroup,
     QCheckBox,
     QComboBox,
@@ -38,6 +39,82 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
+
+
+class WordWrapRadioButton(QRadioButton):
+    """
+    QRadioButton subclass that supports multi-line text wrapping.
+    Overrides heightForWidth, sizeHint, and minimumSizeHint so layout managers
+    allocate proper vertical space without clipping or enforcing rigid widths.
+    """
+    def __init__(self, text: str = "", parent=None):
+        super().__init__("", parent)
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(26, 2, 2, 2)
+        layout.setSpacing(0)
+        self.label = QLabel(text, self)
+        self.label.setWordWrap(True)
+        self.label.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
+        layout.addWidget(self.label)
+
+    def setText(self, text: str):
+        self.label.setText(text)
+
+    def text(self) -> str:
+        return self.label.text()
+
+    def hasHeightForWidth(self) -> bool:
+        return True
+
+    def heightForWidth(self, width: int) -> int:
+        lbl_w = max(10, width - 28)
+        return max(24, self.label.heightForWidth(lbl_w) + 4)
+
+    def sizeHint(self) -> QSize:
+        s = self.label.sizeHint()
+        return QSize(s.width() + 28, max(24, s.height() + 4))
+
+    def minimumSizeHint(self) -> QSize:
+        return QSize(40, 24)
+
+
+class WordWrapCheckBox(QCheckBox):
+    """
+    QCheckBox subclass that supports multi-line text wrapping.
+    Overrides heightForWidth, sizeHint, and minimumSizeHint so layout managers
+    allocate proper vertical space without clipping or enforcing rigid widths.
+    """
+    def __init__(self, text: str = "", parent=None):
+        super().__init__("", parent)
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(26, 2, 2, 2)
+        layout.setSpacing(0)
+        self.label = QLabel(text, self)
+        self.label.setWordWrap(True)
+        self.label.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
+        layout.addWidget(self.label)
+
+    def setText(self, text: str):
+        self.label.setText(text)
+
+    def text(self) -> str:
+        return self.label.text()
+
+    def hasHeightForWidth(self) -> bool:
+        return True
+
+    def heightForWidth(self, width: int) -> int:
+        lbl_w = max(10, width - 28)
+        return max(24, self.label.heightForWidth(lbl_w) + 4)
+
+    def sizeHint(self) -> QSize:
+        s = self.label.sizeHint()
+        return QSize(s.width() + 28, max(24, s.height() + 4))
+
+    def minimumSizeHint(self) -> QSize:
+        return QSize(40, 24)
 
 from core.config_loader import get_resource_path
 from core.payroll_engine import PayrollEngine, PayrollInput
@@ -114,7 +191,8 @@ class MainWindow(QMainWindow):
         """
         mode_name = mode.lower() if mode else "dark"
         style_path = get_resource_path(f"assets/styles/{mode_name}.qss")
-        assets_dir = get_resource_path("assets").replace("\\", "/")
+        check_svg = get_resource_path("assets/check_dark.svg")
+        assets_dir = os.path.dirname(check_svg).replace("\\", "/")
 
         try:
             with open(style_path, "r", encoding="utf-8") as f:
@@ -125,12 +203,12 @@ class MainWindow(QMainWindow):
         except Exception as e:
             logging.error(f"Failed to apply theme '{mode}' from {style_path}: {e}")
 
+    BREAKPOINT_WIDTH = 768
+
     def setup_ui(self):
+        self.setMinimumSize(320, 400)
+
         # --- TOP HEADER BAR ---
-        header_layout = QHBoxLayout()
-        header_layout.setContentsMargins(0, 0, 0, 10)
-        header_layout.setSpacing(8)
-        
         self.app_title_lbl = QLabel("Malaysian Salary Calculator")
         self.app_title_lbl.setObjectName("appTitle")
         
@@ -147,19 +225,34 @@ class MainWindow(QMainWindow):
         self.btn_toggle_mode.setChecked(True)
         self.btn_toggle_mode.clicked.connect(self.on_mode_toggle)
         
-        header_layout.addWidget(self.app_title_lbl)
-        header_layout.addWidget(self.version_badge)
-        header_layout.addStretch()
-        header_layout.addWidget(self.btn_view_config)
-        header_layout.addWidget(self.btn_toggle_mode)
+        self.header_title_layout = QHBoxLayout()
+        self.header_title_layout.setContentsMargins(0, 0, 0, 0)
+        self.header_title_layout.setSpacing(8)
+        self.header_title_layout.addWidget(self.app_title_lbl)
+        self.header_title_layout.addWidget(self.version_badge)
+        self.header_title_layout.addStretch(1)
+
+        self.header_actions_layout = QHBoxLayout()
+        self.header_actions_layout.setContentsMargins(0, 0, 0, 0)
+        self.header_actions_layout.setSpacing(8)
+        self.header_actions_layout.addStretch(1)
+        self.header_actions_layout.addWidget(self.btn_view_config)
+        self.header_actions_layout.addWidget(self.btn_toggle_mode)
+
+        self.header_layout = QBoxLayout(QBoxLayout.Direction.LeftToRight)
+        self.header_layout.setContentsMargins(0, 0, 0, 10)
+        self.header_layout.setSpacing(8)
+        self.header_layout.addLayout(self.header_title_layout, 1)
+        self.header_layout.addLayout(self.header_actions_layout, 1)
+
+        # Root layout with pinned header and banner
+        root_widget = QWidget(self)
+        self.setCentralWidget(root_widget)
         
-        # We will wrap the main content in a VBox to include the header
-        wrapper_widget = QWidget(self)
-        self.setCentralWidget(wrapper_widget)
-        
-        wrapper_layout = QVBoxLayout(wrapper_widget)
-        wrapper_layout.setContentsMargins(12, 12, 12, 12)
-        wrapper_layout.addLayout(header_layout)
+        root_layout = QVBoxLayout(root_widget)
+        root_layout.setContentsMargins(12, 12, 12, 12)
+        root_layout.setSpacing(8)
+        root_layout.addLayout(self.header_layout)
         
         # --- UPDATE NOTIFICATION BANNER ---
         self.update_banner = QFrame(self)
@@ -198,28 +291,40 @@ class MainWindow(QMainWindow):
         banner_layout.addWidget(self.btn_download_update)
         banner_layout.addWidget(self.btn_dismiss_update)
 
-        wrapper_layout.addWidget(self.update_banner)
-        
-        # Now create the split layout
-        main_layout = QHBoxLayout()
-        main_layout.setSpacing(16)
-        wrapper_layout.addLayout(main_layout, 1)
+        root_layout.addWidget(self.update_banner)
+
+        # Outer Scroll Area wrapping the content
+        self.main_scroll = QScrollArea(root_widget)
+        self.main_scroll.setObjectName("mainScroll")
+        self.main_scroll.setWidgetResizable(True)
+        self.main_scroll.setFrameShape(QFrame.Shape.NoFrame)
+        self.main_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        root_layout.addWidget(self.main_scroll, 1)
+
+        scroll_content = QWidget(self.main_scroll)
+        scroll_content.setObjectName("scrollContent")
+        self.main_scroll.setWidget(scroll_content)
+
+        # Main layout (2 columns side-by-side on wide screens, stacked on small screens)
+        self.main_layout = QBoxLayout(QBoxLayout.Direction.LeftToRight, scroll_content)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.setSpacing(16)
         
         # --- LEFT PANEL: Input Form (Card Container) ---
-        left_card = QFrame(self)
-        left_card.setObjectName("leftCard")
-        left_card_layout = QVBoxLayout(left_card)
+        self.left_card = QFrame(scroll_content)
+        self.left_card.setObjectName("leftCard")
+        left_card_layout = QVBoxLayout(self.left_card)
         left_card_layout.setContentsMargins(12, 12, 12, 12)
 
-        input_scroll = QScrollArea(left_card)
-        input_scroll.setObjectName("inputScroll")
-        input_scroll.setWidgetResizable(True)
-        input_scroll.setFrameShape(QFrame.Shape.NoFrame)
-        input_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.input_scroll = QScrollArea(self.left_card)
+        self.input_scroll.setObjectName("inputScroll")
+        self.input_scroll.setWidgetResizable(True)
+        self.input_scroll.setFrameShape(QFrame.Shape.NoFrame)
+        self.input_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         
-        input_widget = QWidget(input_scroll)
-        input_widget.setObjectName("inputWidget")
-        input_layout = QVBoxLayout(input_widget)
+        self.input_widget = QWidget(self.input_scroll)
+        self.input_widget.setObjectName("inputWidget")
+        input_layout = QVBoxLayout(self.input_widget)
         input_layout.setContentsMargins(0, 0, 0, 0)
         input_layout.setSpacing(10)
         
@@ -229,7 +334,7 @@ class MainWindow(QMainWindow):
         input_layout.addWidget(title_label)
 
         # Employment type toggle (Part Timer vs Full Timer)
-        self.chk_part_timer = QCheckBox("Part Timer (no EPF / SOCSO / EIS / PCB)", self)
+        self.chk_part_timer = WordWrapCheckBox("Part Timer (no EPF / SOCSO / EIS / PCB)", self)
         self.chk_part_timer.setChecked(False)
         chk_layout = QHBoxLayout()
         chk_layout.setContentsMargins(10, 0, 0, 0)
@@ -238,8 +343,9 @@ class MainWindow(QMainWindow):
 
         self.input_form = QFormLayout()
         self.input_form.setSpacing(9)
-        self.input_form.setLabelAlignment(Qt.AlignmentFlag.AlignRight)
         self.input_form.setVerticalSpacing(9)
+        self.input_form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+        self.input_form.setLabelAlignment(Qt.AlignmentFlag.AlignRight)
 
         # Track which widgets belong to each mode for visibility toggling
         self.fulltimer_fields = []
@@ -258,80 +364,67 @@ class MainWindow(QMainWindow):
         self.txt_month.setValidator(month_validator)
         self.txt_month.setText(str(now.month))
         self.txt_month.setPlaceholderText("MM")
-        self.txt_month.setFixedWidth(48)
+        self.txt_month.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        self.txt_month.setMinimumWidth(38)
 
         year_validator = QIntValidator(2000, 2100, self)
         self.txt_year = QLineEdit(self)
         self.txt_year.setValidator(year_validator)
         self.txt_year.setText(str(now.year))
         self.txt_year.setPlaceholderText("YYYY")
-        self.txt_year.setFixedWidth(70)
+        self.txt_year.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        self.txt_year.setMinimumWidth(55)
 
         period_row = QHBoxLayout()
-        period_row.setSpacing(4)
-        period_row.addWidget(self.txt_month)
+        period_row.setSpacing(6)
+        period_row.addWidget(self.txt_month, 1)
         period_row.addWidget(QLabel("/"))
-        period_row.addWidget(self.txt_year)
-        period_row.addStretch(1)
+        period_row.addWidget(self.txt_year, 2)
+        period_row.addStretch(2)
         self.input_form.addRow("Period (Month/Year):", period_row)
 
+        def make_fluid_input(placeholder: str, default_val: str = "0") -> QLineEdit:
+            txt = QLineEdit(self)
+            txt.setValidator(double_validator)
+            txt.setText(default_val)
+            txt.setPlaceholderText(placeholder)
+            txt.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+            txt.setMinimumWidth(60)
+            return txt
+
         # Basic Salary Inputs
-        self.txt_base_salary = QLineEdit(self)
-        self.txt_base_salary.setValidator(double_validator)
-        self.txt_base_salary.setText("0")
-        self.txt_base_salary.setPlaceholderText("Enter base monthly wages")
+        self.txt_base_salary = make_fluid_input("Enter base monthly wages")
         self.input_form.addRow("Base Monthly Salary (RM):", self.txt_base_salary)
         self.fulltimer_fields.append(self.txt_base_salary)
 
         # Overtime inputs (multi-field)
-        self.txt_ot_weekday = QLineEdit(self)
-        self.txt_ot_weekday.setValidator(double_validator)
-        self.txt_ot_weekday.setText("0")
-        self.txt_ot_weekday.setPlaceholderText("Hours (Weekday 1.5x)")
+        self.txt_ot_weekday = make_fluid_input("Hours (Weekday 1.5x)")
         self.input_form.addRow("Overtime Weekday (Hours):", self.txt_ot_weekday)
         self.fulltimer_fields.append(self.txt_ot_weekday)
 
-        self.txt_ot_weekend = QLineEdit(self)
-        self.txt_ot_weekend.setValidator(double_validator)
-        self.txt_ot_weekend.setText("0")
-        self.txt_ot_weekend.setPlaceholderText("Hours (Weekend 2.0x)")
+        self.txt_ot_weekend = make_fluid_input("Hours (Weekend 2.0x)")
         self.input_form.addRow("Overtime Weekend (Hours):", self.txt_ot_weekend)
         self.fulltimer_fields.append(self.txt_ot_weekend)
 
-        self.txt_ot_holiday = QLineEdit(self)
-        self.txt_ot_holiday.setValidator(double_validator)
-        self.txt_ot_holiday.setText("0.0")
-        self.txt_ot_holiday.setPlaceholderText("Hours (Holiday 3.0x)")
+        self.txt_ot_holiday = make_fluid_input("Hours (Holiday 3.0x)", "0.0")
         self.input_form.addRow("Overtime Public Holiday (Hours):", self.txt_ot_holiday)
         self.fulltimer_fields.append(self.txt_ot_holiday)
 
         # Deductions
-        self.txt_late_hours = QLineEdit(self)
-        self.txt_late_hours.setValidator(double_validator)
-        self.txt_late_hours.setText("0")
-        self.txt_late_hours.setPlaceholderText("Hours late")
+        self.txt_late_hours = make_fluid_input("Hours late")
         self.input_form.addRow("Late Deduction (Hours):", self.txt_late_hours)
         self.fulltimer_fields.append(self.txt_late_hours)
 
-        self.txt_unpaid_leave = QLineEdit(self)
-        self.txt_unpaid_leave.setValidator(double_validator)
-        self.txt_unpaid_leave.setText("0")
-        self.txt_unpaid_leave.setPlaceholderText("Hours unpaid leave")
+        self.txt_unpaid_leave = make_fluid_input("Hours unpaid leave")
         self.input_form.addRow("Unpaid Leave (Hours):", self.txt_unpaid_leave)
         self.fulltimer_fields.append(self.txt_unpaid_leave)
 
         # Additions
-        self.txt_taxable_additional_income = QLineEdit(self)
-        self.txt_taxable_additional_income.setValidator(double_validator)
-        self.txt_taxable_additional_income.setText("0")
-        self.txt_taxable_additional_income.setPlaceholderText("Subject to EPF/SOCSO/EIS & PCB")
+        self.txt_taxable_additional_income = make_fluid_input("Subject to EPF/SOCSO/EIS & PCB")
         self.input_form.addRow("Taxable Additional Income (RM):", self.txt_taxable_additional_income)
         self.fulltimer_fields.append(self.txt_taxable_additional_income)
 
-        self.txt_nontax_additional_income = QLineEdit(self)
-        self.txt_nontax_additional_income.setValidator(double_validator)
-        self.txt_nontax_additional_income.setText("0")
-        self.txt_nontax_additional_income.setPlaceholderText("Added to nett only")
+        self.txt_nontax_additional_income = make_fluid_input("Added to nett only")
         self.input_form.addRow("Non-Taxable Additional Income (RM):", self.txt_nontax_additional_income)
         self.fulltimer_fields.append(self.txt_nontax_additional_income)
 
@@ -366,17 +459,11 @@ class MainWindow(QMainWindow):
         self.input_form.addRow("Working Hours (day x hour):", self.pt_shifts_container)
         self.parttimer_fields.append(self.pt_shifts_container)
 
-        self.txt_pt_rate = QLineEdit(self)
-        self.txt_pt_rate.setValidator(double_validator)
-        self.txt_pt_rate.setText("0")
-        self.txt_pt_rate.setPlaceholderText("Hourly wage")
+        self.txt_pt_rate = make_fluid_input("Hourly wage")
         self.input_form.addRow("Hourly Rate (RM):", self.txt_pt_rate)
         self.parttimer_fields.append(self.txt_pt_rate)
 
-        self.txt_pt_additional = QLineEdit(self)
-        self.txt_pt_additional.setValidator(double_validator)
-        self.txt_pt_additional.setText("0")
-        self.txt_pt_additional.setPlaceholderText("Allowances / bonuses")
+        self.txt_pt_additional = make_fluid_input("Allowances / bonuses")
         self.input_form.addRow("Additional Income (RM):", self.txt_pt_additional)
         self.parttimer_fields.append(self.txt_pt_additional)
 
@@ -389,32 +476,36 @@ class MainWindow(QMainWindow):
 
         input_layout.addLayout(self.input_form)
         
-        # --- Marital & Family Status Section & SOCSO Category Section (Side by Side) ---
-        family_socso_layout = QHBoxLayout()
-        family_socso_layout.setSpacing(10)
+        # --- Marital & Family Status Section & SOCSO Category Section (Side by Side / Responsive) ---
+        self.family_socso_layout = QBoxLayout(QBoxLayout.Direction.LeftToRight)
+        self.family_socso_layout.setSpacing(10)
 
-        family_group = QGroupBox("Marital and Family Status", self)
-        family_layout = QFormLayout(family_group)
-        family_layout.setSpacing(5)
-        family_layout.setContentsMargins(10, 8, 10, 8)
+        self.family_group = QGroupBox("Marital and Family Status", self)
+        self.family_layout = QFormLayout(self.family_group)
+        self.family_layout.setSpacing(5)
+        self.family_layout.setContentsMargins(10, 8, 10, 8)
+        self.family_layout.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
         
         self.cmb_marital = QComboBox(self)
         self.cmb_marital.addItems(["Single", "Married"])
         self.cmb_marital.setCurrentText("Single")
-        family_layout.addRow("Marital Status:", self.cmb_marital)
+        self.cmb_marital.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        self.family_layout.addRow("Marital Status:", self.cmb_marital)
         
-        self.chk_spouse_relief = QCheckBox("Spouse has no income / claim relief", self)
+        self.chk_spouse_relief = WordWrapCheckBox("Spouse has no income / claim relief", self)
         self.chk_spouse_relief.setChecked(True)
-        family_layout.addRow("Spouse Eligible:", self.chk_spouse_relief)
+        self.family_layout.addRow("Spouse Eligible:", self.chk_spouse_relief)
         
         children_validator = QIntValidator(0, 20, self)
         self.txt_children = QLineEdit(self)
         self.txt_children.setValidator(children_validator)
         self.txt_children.setText("0")
         self.txt_children.setPlaceholderText("0–20")
-        family_layout.addRow("Number of Children:", self.txt_children)
+        self.txt_children.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        self.txt_children.setMinimumWidth(50)
+        self.family_layout.addRow("Number of Children:", self.txt_children)
         
-        self.fulltimer_groups.append(family_group)
+        self.fulltimer_groups.append(self.family_group)
         
         # Enable/Disable spouse relief checkbox based on Marital status selection
         self.cmb_marital.currentTextChanged.connect(
@@ -422,14 +513,14 @@ class MainWindow(QMainWindow):
         )
         
         # --- SOCSO Category Section ---
-        socso_group = QGroupBox("SOCSO Contribution Category", self)
-        socso_layout = QVBoxLayout(socso_group)
-        socso_layout.setSpacing(4)
+        self.socso_group = QGroupBox("SOCSO Contribution Category", self)
+        socso_layout = QVBoxLayout(self.socso_group)
+        socso_layout.setSpacing(6)
         socso_layout.setContentsMargins(10, 8, 10, 8)
         
-        self.radio_socso_cat1 = QRadioButton("First Category (< 60 yrs old)", self)
+        self.radio_socso_cat1 = WordWrapRadioButton("First Category (< 60 yrs old)", self)
         self.radio_socso_cat1.setChecked(True)
-        self.radio_socso_cat2 = QRadioButton("Second Category (≥ 60 yrs old)", self)
+        self.radio_socso_cat2 = WordWrapRadioButton("Second Category (≥ 60 yrs old)", self)
         
         self.socso_bg = QButtonGroup(self)
         self.socso_bg.addButton(self.radio_socso_cat1, 1)
@@ -438,16 +529,16 @@ class MainWindow(QMainWindow):
         socso_layout.addWidget(self.radio_socso_cat1)
         socso_layout.addWidget(self.radio_socso_cat2)
 
-        self.chk_socso_injury = QCheckBox("Include Non-Employment Injury Scheme\n(LINDUNG24)", self)
+        self.chk_socso_injury = WordWrapCheckBox("Include Non-Employment Injury Scheme (LINDUNG24)", self)
         self.chk_socso_injury.setChecked(False)
         socso_layout.addWidget(self.chk_socso_injury)
         
-        self.fulltimer_groups.append(socso_group)
+        self.fulltimer_groups.append(self.socso_group)
 
-        # Add both group boxes to horizontal layout
-        family_socso_layout.addWidget(family_group, 1)
-        family_socso_layout.addWidget(socso_group, 1)
-        input_layout.addLayout(family_socso_layout)
+        # Add both group boxes to layout
+        self.family_socso_layout.addWidget(self.family_group, 1)
+        self.family_socso_layout.addWidget(self.socso_group, 1)
+        input_layout.addLayout(self.family_socso_layout)
         
         input_layout.addStretch(1)
         
@@ -471,14 +562,14 @@ class MainWindow(QMainWindow):
         self.txt_pt_rate.textChanged.connect(self.on_calculate)
         self.txt_pt_additional.textChanged.connect(self.on_calculate)
         
-        input_scroll.setWidget(input_widget)
-        left_card_layout.addWidget(input_scroll)
-        main_layout.addWidget(left_card, 1)
+        self.input_scroll.setWidget(self.input_widget)
+        left_card_layout.addWidget(self.input_scroll)
+        self.main_layout.addWidget(self.left_card, 1)
         
         # --- RIGHT PANEL: Calculation Results Dashboard (Card Container) ---
-        right_card = QFrame(self)
-        right_card.setObjectName("rightCard")
-        results_layout = QVBoxLayout(right_card)
+        self.right_card = QFrame(scroll_content)
+        self.right_card.setObjectName("rightCard")
+        results_layout = QVBoxLayout(self.right_card)
         results_layout.setContentsMargins(12, 12, 12, 12)
         results_layout.setSpacing(10)
         
@@ -512,7 +603,6 @@ class MainWindow(QMainWindow):
 
         # Build the breakdown table for the default (full timer) mode
         self.rebuild_breakdown(FULLTIMER_BREAKDOWN_ROWS)
-
         
         # Export PDF button
         self.btn_export = QPushButton("Export PDF Pay Slip", self)
@@ -520,7 +610,10 @@ class MainWindow(QMainWindow):
         self.btn_export.clicked.connect(self.on_export_pdf)
         results_layout.addWidget(self.btn_export)
         
-        main_layout.addWidget(right_card, 1)
+        self.main_layout.addWidget(self.right_card, 1)
+
+        # Apply initial responsive layout based on window width
+        self.update_responsive_layout(self.width())
 
     def rebuild_breakdown(self, rows):
         """(Re)build the payroll breakdown table from a list of (label, merged) tuples."""
@@ -592,6 +685,11 @@ class MainWindow(QMainWindow):
         for i in range(nrows):
             self.breakdown_table.setRowHeight(i, max(row_height, 42))
 
+        header_h = self.breakdown_table.horizontalHeader().height() or 40
+        total_h = header_h + sum(self.breakdown_table.rowHeight(i) for i in range(nrows)) + 15
+        self.breakdown_table.setMinimumHeight(total_h)
+        self.breakdown_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+
     def add_shift_row(self, hours: str = "0", days: str = "0"):
         """Appends a new shift (Hours/Day x Days) row."""
         row_widget = QWidget(self.pt_shift_rows_widget)
@@ -606,7 +704,8 @@ class MainWindow(QMainWindow):
         txt_hours.setValidator(double_validator)
         txt_hours.setText(str(hours))
         txt_hours.setPlaceholderText("Hrs/day")
-        txt_hours.setFixedWidth(68)
+        txt_hours.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        txt_hours.setMinimumWidth(50)
 
         lbl_mult = QLabel("×", row_widget)
         lbl_mult.setStyleSheet("font-weight: bold; color: #94A3B8;")
@@ -615,34 +714,34 @@ class MainWindow(QMainWindow):
         txt_days.setValidator(double_validator)
         txt_days.setText(str(days))
         txt_days.setPlaceholderText("Days")
-        txt_days.setFixedWidth(56)
+        txt_days.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        txt_days.setMinimumWidth(45)
 
         lbl_eq = QLabel("=", row_widget)
         lbl_eq.setStyleSheet("font-weight: bold; color: #94A3B8;")
 
         lbl_subtotal = QLabel("0.00 hrs", row_widget)
-        lbl_subtotal.setStyleSheet("font-weight: 600; min-width: 60px;")
+        lbl_subtotal.setStyleSheet("font-weight: 600;")
+        lbl_subtotal.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
 
         btn_add = QPushButton("+", row_widget)
         btn_add.setObjectName("shiftAddBtn")
-        btn_add.setFixedWidth(28)
-        btn_add.setFixedHeight(28)
+        btn_add.setFixedSize(28, 28)
         btn_add.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_add.setToolTip("Add new row (Keyboard: +)")
 
         btn_remove = QPushButton("-", row_widget)
         btn_remove.setObjectName("shiftRemoveBtn")
-        btn_remove.setFixedWidth(28)
-        btn_remove.setFixedHeight(28)
+        btn_remove.setFixedSize(28, 28)
         btn_remove.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_remove.setToolTip("Delete row (Keyboard: -)")
 
-        row_layout.addWidget(txt_hours)
+        row_layout.addWidget(txt_hours, 2)
         row_layout.addWidget(lbl_mult)
-        row_layout.addWidget(txt_days)
+        row_layout.addWidget(txt_days, 2)
         row_layout.addWidget(lbl_eq)
-        row_layout.addWidget(lbl_subtotal)
-        row_layout.addStretch()
+        row_layout.addWidget(lbl_subtotal, 2)
+        row_layout.addStretch(1)
         row_layout.addWidget(btn_add)
         row_layout.addWidget(btn_remove)
 
@@ -663,6 +762,7 @@ class MainWindow(QMainWindow):
         self.shift_rows.append(row_entry)
         self.pt_shift_rows_layout.addWidget(row_widget)
         self.update_shift_row_controls()
+        self.update_responsive_layout()
         if hasattr(self, "breakdown_table"):
             self.on_calculate()
 
@@ -675,6 +775,7 @@ class MainWindow(QMainWindow):
             self.pt_shift_rows_layout.removeWidget(row_entry["widget"])
             row_entry["widget"].deleteLater()
             self.update_shift_row_controls()
+            self.update_responsive_layout()
             self.on_calculate()
 
     def remove_last_shift_row(self):
@@ -804,7 +905,58 @@ class MainWindow(QMainWindow):
         else:
             self.rebuild_breakdown(FULLTIMER_BREAKDOWN_ROWS)
 
+        self.update_responsive_layout()
         self.on_calculate()
+
+    def update_responsive_layout(self, width: int = None):
+        """
+        Updates the layout dynamically based on window width.
+        - < 768px: Single stacked column, full-width inputs, wrapping form labels, stacked sub-panels.
+        - >= 768px: Two-column layout side-by-side, side-by-side sub-panels, right-aligned labels.
+        """
+        if width is None:
+            width = self.width()
+
+        is_narrow = width < self.BREAKPOINT_WIDTH
+
+        if is_narrow:
+            if hasattr(self, "header_layout"):
+                self.header_layout.setDirection(QBoxLayout.Direction.TopToBottom)
+            if hasattr(self, "main_layout"):
+                self.main_layout.setDirection(QBoxLayout.Direction.TopToBottom)
+                self.main_layout.setStretch(0, 0)
+                self.main_layout.setStretch(1, 0)
+            if hasattr(self, "input_form"):
+                self.input_form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapAllRows)
+                self.input_form.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
+            if hasattr(self, "family_socso_layout"):
+                self.family_socso_layout.setDirection(QBoxLayout.Direction.TopToBottom)
+            if hasattr(self, "family_layout"):
+                self.family_layout.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapAllRows)
+                self.family_layout.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
+            if hasattr(self, "input_scroll") and hasattr(self, "input_widget"):
+                self.input_scroll.setMinimumHeight(self.input_widget.sizeHint().height())
+        else:
+            if hasattr(self, "header_layout"):
+                self.header_layout.setDirection(QBoxLayout.Direction.LeftToRight)
+            if hasattr(self, "main_layout"):
+                self.main_layout.setDirection(QBoxLayout.Direction.LeftToRight)
+                self.main_layout.setStretch(0, 1)
+                self.main_layout.setStretch(1, 1)
+            if hasattr(self, "input_form"):
+                self.input_form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.DontWrapRows)
+                self.input_form.setLabelAlignment(Qt.AlignmentFlag.AlignRight)
+            if hasattr(self, "family_socso_layout"):
+                self.family_socso_layout.setDirection(QBoxLayout.Direction.LeftToRight)
+            if hasattr(self, "family_layout"):
+                self.family_layout.setRowWrapPolicy(QFormLayout.RowWrapPolicy.DontWrapRows)
+                self.family_layout.setLabelAlignment(Qt.AlignmentFlag.AlignRight)
+            if hasattr(self, "input_scroll"):
+                self.input_scroll.setMinimumHeight(0)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.update_responsive_layout(event.size().width())
 
     def on_calculate(self, show_errors=False):
         """

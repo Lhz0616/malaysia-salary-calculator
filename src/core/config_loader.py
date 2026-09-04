@@ -15,8 +15,8 @@ def get_resource_path(relative_path: str) -> str:
 
     # 1. PyInstaller extracted temp folder (for embedded assets / styles / icons)
     if hasattr(sys, "_MEIPASS"):
-        candidates.append(getattr(sys, "_MEIPASS"))
-        candidates.append(os.path.join(getattr(sys, "_MEIPASS"), "src"))
+        candidates.append(sys._MEIPASS)
+        candidates.append(os.path.join(sys._MEIPASS, "src"))
 
     # 2. Directory of the launched program (.exe location)
     if getattr(sys, "argv", None) and sys.argv:
