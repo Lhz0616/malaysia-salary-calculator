@@ -143,10 +143,10 @@ Implemented in `core/payroll_engine.PayrollEngine.calculate(PayrollInput)`. The 
 ```text
 hourly_rate_ot   = monthly_salary / (fixed_overtime_days * 8)
 hourly_rate_late = monthly_salary / (late_days_base * 8)          # uses to_decimal()
-unpaid_rate      = monthly_salary / (unpaid_days_base or *8)      # uses to_decimal()
+unpaid_rate      = monthly_salary / (unpaid_days_base * 8)        # uses to_decimal()
 ```
 
-`late_days_base` and `unpaid_days_base` come from `fixed_late_hours_days` / `fixed_unpaid_leave_days`; `"calendar_days"` is resolved to the actual days of the selected month. Unpaid leave entered as a multiple of 8 hours is treated as whole days.
+`late_days_base` and `unpaid_days_base` come from `fixed_late_hours_days` / `fixed_unpaid_leave_days`; `"calendar_days"` is resolved to the actual days of the selected month. Both late deduction and unpaid leave deduction are calculated based on hourly rate.
 
 ### Step 3: Overtime Pay (split by type)
 
