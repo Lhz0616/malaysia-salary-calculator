@@ -150,5 +150,31 @@ class TestPayrollEngine(unittest.TestCase):
         self.assertIn("nett_salary", res)
         self.assertIn("statutory", res)
 
+    def test_unpaid_leave_and_late_hours_deductions(self):
+        # Employee with RM2600 salary in September 2026 (30 days), 16 unpaid hours, 1.5 late hours
+        inp = PayrollInput(
+            monthly_salary=Decimal("2600.00"),
+            late_hours=Decimal("1.5"),
+            unpaid_leave_days=Decimal(16),
+            month=9,
+            year=2026,
+            socso_category="first_category",
+        )
+        res = self.engine.calculate(inp)
+
+        # Rate should be RM2600 / (30 * 8) = 10.83
+        self.assertEqual(res["rates"]["hourly_rate_late"], 10.83)
+        self.assertEqual(res["rates"]["unpaid_leave_rate"], 10.83)
+
+        # Late deduction: 10.83 * 1.5 = 16.25
+        self.assertEqual(res["deductions"]["late_deduction"], 16.25)
+
+        # Unpaid deduction: 10.83 * 16 = 173.28
+        self.assertEqual(res["deductions"]["unpaid_leave_deduction"], 173.28)
+
+        # Total deductions
+        self.assertEqual(res["deductions"]["total_deductions"], 189.53)
+
+
 if __name__ == "__main__":
     unittest.main()

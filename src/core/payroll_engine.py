@@ -296,20 +296,13 @@ class PayrollEngine:
             if late_days_val > 0
             else Decimal(0)
         )
-
-        if inp.unpaid_leave_days != 0 and inp.unpaid_leave_days % 8 == 0:
-            unpaid_leave_rate = (inp.monthly_salary / unpaid_days_val).quantize(
+        unpaid_leave_rate = (
+            (inp.monthly_salary / (unpaid_days_val * Decimal("8.0"))).quantize(
                 CENTS, ROUND_HALF_UP
             )
-            effective_unpaid_days = inp.unpaid_leave_days / Decimal(8)
-        elif inp.unpaid_leave_days > 0:
-            unpaid_leave_rate = (
-                inp.monthly_salary / (unpaid_days_val * Decimal("8.0"))
-            ).quantize(CENTS, ROUND_HALF_UP)
-            effective_unpaid_days = inp.unpaid_leave_days
-        else:
-            unpaid_leave_rate = Decimal(0)
-            effective_unpaid_days = Decimal(0)
+            if unpaid_days_val > 0
+            else Decimal(0)
+        )
 
         # 2. Overtime Pay
         wkday_mult = to_decimal(overtime_rates.get("weekday", 1.5))
@@ -325,7 +318,7 @@ class PayrollEngine:
         late_deduction = (hourly_rate_late * inp.late_hours).quantize(
             CENTS, ROUND_HALF_UP
         )
-        unpaid_leave_deduction = (unpaid_leave_rate * effective_unpaid_days).quantize(
+        unpaid_leave_deduction = (unpaid_leave_rate * inp.unpaid_leave_days).quantize(
             CENTS, ROUND_HALF_UP
         )
         total_deductions = late_deduction + unpaid_leave_deduction

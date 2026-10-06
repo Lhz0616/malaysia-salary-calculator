@@ -335,7 +335,7 @@ class PayslipExporter:
                 <td class="right">-</td>
             </tr>
             <tr>
-                <td>Unpaid Leave Deduction ({inputs.get('unpaid_leave_days', 0.0)} days)</td>
+                <td>Unpaid Leave Deduction ({inputs.get('unpaid_leave_days', 0.0)} hrs)</td>
                 <td class="right" style="color: #EF4444;">-{deductions.get('unpaid_leave_deduction', 0.0):,.2f}</td>
                 <td class="right">-</td>
             </tr>
